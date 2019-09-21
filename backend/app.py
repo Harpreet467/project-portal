@@ -1,15 +1,13 @@
 from flask import Flask
-from flask_cors import CORS
 
-from src.entities.entity import Base, engine
-from src.http.background_jobs import make_celery
+from src.main.model.entity import Base, engine
+from src.main.http.background_jobs import make_celery
 from src.resources.config import REDIS_URL, UPLOAD_FOLDER, MAX_CONTENT_LENGTH
 
 # generate database schema
 Base.metadata.create_all(engine)
 
 app = Flask(__name__)
-CORS(app)
 
 # Redis config with app
 app.config.update(

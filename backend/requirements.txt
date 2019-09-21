@@ -1,7 +1,4 @@
 flask
-sqlalchemy
-mysqlclient
-pyjwt
-flask_cors
-marshmallow
 celery
+Flask-Restless
+Flask-SQLAlchemy
