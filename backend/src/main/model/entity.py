@@ -1,24 +1,15 @@
 from datetime import datetime
-from sqlalchemy import create_engine, Column, String, Integer, DateTime
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker
 
-from src.resources.config import DB_URL, DB_NAME, DB_USER, DB_PASSWORD
+from src.main.model import db
 
 
-engine = create_engine(f'mysql://{DB_USER}:{DB_PASSWORD}@{DB_URL}/{DB_NAME}')
-Session = sessionmaker(bind=engine)
+class Entity(object):
+    id = db.Column(db.Integer, primary_key=True)
+    created_at = db.Column(db.DateTime)
+    updated_at = db.Column(db.DateTime)
+    last_updated_by = db.Column(db.String(255))
 
-Base = declarative_base()
-
-
-class Entity:
-    id = Column(Integer, primary_key=True)
-    created_at = Column(DateTime)
-    updated_at = Column(DateTime)
-    last_updated_by = Column(String)
-
-    def __init__(self, created_by):
+    def __init__(self, last_updated_by):
         self.created_at = datetime.now()
         self.updated_at = datetime.now()
-        self.last_updated_by = created_by
+        self.last_updated_by = last_updated_by

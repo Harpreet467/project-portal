@@ -1,4 +1,11 @@
 flask
 celery
+mysqlclient
+bcrypt
+PyJWT
 Flask-Restless
 Flask-SQLAlchemy
+Flask-Security
+Flask-Mail
+Flask-JWT
+flask-jwt-extended

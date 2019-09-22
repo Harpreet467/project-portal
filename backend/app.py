@@ -1,29 +1,61 @@
 from flask import Flask
+from flask_mail import Mail
+from flask_restless import APIManager
+from flask_security import Security
 
-from src.main.model.entity import Base, engine
+from src.main.controller import load_controller
+from src.main.dto import load_dto
+from src.main.exception import load_exception
+from src.main.http import load_http
 from src.main.http.background_jobs import make_celery
-from src.resources.config import REDIS_URL, UPLOAD_FOLDER, MAX_CONTENT_LENGTH
+from src.main.model import db, load_model, db_user_data_store
+from src.main.security import load_security
+from src.resources.config import Config
 
-# generate database schema
-Base.metadata.create_all(engine)
 
 app = Flask(__name__)
-
-# Redis config with app
-app.config.update(
-    CELERY_BROKER_URL=REDIS_URL,
-    CELERY_RESULT_BACKEND=REDIS_URL
-)
-celery = make_celery(app)
-
-# Upload Media
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-app.config['MAX_CONTENT_LENGTH'] = MAX_CONTENT_LENGTH
+app.config.from_object(Config())
 
 
-@app.route('/')
-def hello_world():
-    return 'Hello World!'
+with app.app_context():
+    # DB init
+    db.init_app(app)
+    load_model()
+    db.create_all()
+
+    # Security
+    security = Security(app, db_user_data_store())
+
+    # Background Celery
+    celery = make_celery(app)
+
+    # Mail
+    mail = Mail(app)
+
+    # REST API
+    api_manager = APIManager(app, flask_sqlalchemy_db=db)
+    load_http()
+    load_security()
+    load_exception()
+    load_controller()
+    load_dto()
+
+    # Create a user admin
+    @app.before_first_request
+    def create_admin_user():
+        # Create the Roles -- unless they already exist
+        db_user_data_store().find_or_create_role(name='admin', description='Administrator')
+        db_user_data_store().find_or_create_role(name='end-user', description='End user')
+
+        if not db_user_data_store().get_user('admin@capstone.com'):
+            db_user_data_store().create_user(
+                name='admin',
+                email='admin@capstone.com',
+                password='admin'
+            )
+            db.session.commit()
+            db_user_data_store().add_role_to_user('admin@capstone.com', 'admin')
+            db.session.commit()
 
 
 if __name__ == '__main__':
