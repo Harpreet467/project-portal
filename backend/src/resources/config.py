@@ -20,6 +20,9 @@ class Config(object):
     UPLOAD_FOLDER = '/path/to/the/uploads'
     MAX_CONTENT_LENGTH = 100 * 1024 * 1024  # 100MB
 
+    # CORS
+    CORS_HEADERS = 'application/json'
+
     # Security
     JWT_AUTH_HEADER_PREFIX = 'Bearer'
     JWT_SECRET_KEY = 'secret'

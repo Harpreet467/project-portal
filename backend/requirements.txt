@@ -8,4 +8,4 @@ Flask-SQLAlchemy
 Flask-Security
 Flask-Mail
 Flask-JWT
-flask-jwt-extended
+flask-cors

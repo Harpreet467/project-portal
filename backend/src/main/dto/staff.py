@@ -1,11 +1,13 @@
+from flask_cors import CORS
 from flask_restless.views import ValidationError
 
-from app import api_manager
+from app import api_manager, app
+from src.main.http.cros_headers import add_cors_headers
 from src.main.security.authentication import auth_func
 from src.main.model.staff import Staff as StaffModel
 from src.main.security.authorization import role_admin
 
-api_manager.create_api(
+staff_api = api_manager.create_api_blueprint(
     StaffModel,
     methods=['GET', 'POST', 'PUT', 'DELETE'],
     exclude_columns=['password'],
@@ -20,3 +22,8 @@ api_manager.create_api(
         DELETE_MANY=[auth_func, role_admin]
     )
 )
+
+staff_api.after_request(add_cors_headers)
+CORS(staff_api, resources=r'/api/*')
+app.register_blueprint(staff_api)
+

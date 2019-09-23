@@ -1,5 +1,4 @@
-from flask_jwt import jwt_required
-from flask_jwt_extended import JWTManager
+from flask_jwt import JWT, jwt_required
 from flask_security.utils import verify_password, login_user
 
 from app import app
@@ -18,7 +17,7 @@ def identity(payload):
     return user
 
 
-jwt = JWTManager(app)
+jwt = JWT(app, authenticate, identity)
 
 
 @jwt_required()

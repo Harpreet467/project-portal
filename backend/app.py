@@ -1,4 +1,5 @@
-from flask import Flask
+from flask import Flask, jsonify
+from flask_cors import CORS
 from flask_mail import Mail
 from flask_restless import APIManager
 from flask_security import Security
@@ -15,6 +16,13 @@ from src.resources.config import Config
 
 app = Flask(__name__)
 app.config.from_object(Config())
+
+
+@app.route('/')
+def index():
+    return jsonify({
+        'message': 'Welcome to Capstone Project Portal!'
+    })
 
 
 with app.app_context():
@@ -39,6 +47,9 @@ with app.app_context():
     load_exception()
     load_controller()
     load_dto()
+
+    # CORS
+    CORS(app)
 
     # Create a user admin
     @app.before_first_request
