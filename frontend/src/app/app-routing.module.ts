@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {LoginComponent} from './account/login/login.component';
-import {RegisterComponent} from './account/register/register.component';
 import {HomeComponent} from './home/home.component';
+import {AuthGuardService} from './shared/service/auth-guard.service';
+import {RoleGuardService} from './shared/service/role-guard.service';
+import {Constant} from './shared/constant';
 
 
 const routes: Routes = [
@@ -12,14 +13,21 @@ const routes: Routes = [
   },
   {
     path: 'account',
+    loadChildren: './account/account.module#AccountModule'
+  },
+  {
+    path: '',
+    canActivate: [AuthGuardService],
     children: [
       {
-        path: 'login',
-        component: LoginComponent
+        path: 'dashboard',
+        loadChildren: './protected/dashboard/dashboard.module#DashboardModule'
       },
       {
-        path: 'register',
-        component: RegisterComponent
+        path: 'staff',
+        canActivate: [RoleGuardService],
+        data: {role: Constant.ROLE_ADMIN},
+        loadChildren: './protected/staff/staff.module#StaffModule'
       }
     ]
   },

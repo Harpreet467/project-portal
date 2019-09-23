@@ -1,4 +1,6 @@
 .logo {
+  color: #ffffff;
+  text-decoration: none;
   font-size: 2rem;
   font-weight: 600;
   letter-spacing: .3rem;
@@ -6,7 +8,5 @@
 }
 
 .fill-remaining-space {
-  /* This fills the remaining space, by using flexbox.
-     Every toolbar row uses a flexbox row layout. */
   flex: 1 1 auto;
 }

@@ -6,6 +6,29 @@ body {
   background-color: #f3f3f3;
 }
 
+.main-container {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.is-mobile .mat-toolbar {
+  position: fixed;
+  z-index: 2;
+}
+
+.sidenav-container {
+  flex: 1;
+}
+
+.is-mobile .sidenav-container {
+  flex: 1 0 auto;
+}
+
 .text-center {
   text-align: center !important;
 }
@@ -24,4 +47,16 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
   min-width: 100%;
+}
+
+.bg-white {
+  background-color: #ffffff !important;
+}
+
+.text-grey {
+  color: #4b4b4b !important;
+}
+
+.font-size-1-5 {
+  font-size: 1.5rem !important;
 }

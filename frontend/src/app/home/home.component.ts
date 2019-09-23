@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {AppConfig} from '../app.config';
+import {StorageService} from '../shared/service/storage.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -7,9 +10,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private storageService: StorageService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
+    if (this.storageService.getUserToken()) {
+      this.router.navigate([AppConfig.DASHBOARD]);
+    }
   }
 
 }

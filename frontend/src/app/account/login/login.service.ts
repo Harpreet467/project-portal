@@ -12,7 +12,11 @@ export class LoginService {
   constructor(private http: HttpClient) { }
 
   login(login: LoginModel) {
-    return this.http.post(AppConfig.loginModule, login);
+    return this.http.post(AppConfig.AUTH_API, login);
+  }
+
+  getAccountDetails() {
+    return this.http.get(AppConfig.ACCOUNT_DETAILS_API);
   }
 
 }

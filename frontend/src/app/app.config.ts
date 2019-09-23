@@ -1,15 +1,22 @@
-import {environment} from '../environments/environment';
-
 export class AppConfig {
-  public static HOST_URL = environment.HOST;
+  public static API = 'api/';
 
-  public static loginModule = AppConfig.HOST_URL + 'login';
-  public static signUpModule = AppConfig.HOST_URL + 'signup';
+  // Account
+  public static AUTH_API = 'auth';
+  public static ACCOUNT_DETAILS_API = 'account-details';
+  public static LOGOUT_API = 'logout';
+
+  // Staff
+  public static STAFF_API = AppConfig.API + 'staff/';
 
   /* *********************************************************
    Frontend URLs
    ********************************************************* */
   public static ACCOUNT  = 'account/';
   public static LOGIN = AppConfig.ACCOUNT + 'login/';
+  public static DASHBOARD = 'dashboard/';
+
+  // Staff
+  public static STAFF = 'staff/';
 
 }

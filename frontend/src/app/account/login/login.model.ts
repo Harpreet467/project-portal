@@ -3,10 +3,13 @@ export class LoginModel {
   password: string;
 }
 
+export class TokenModel {
+  access_token: string;
+}
 
-export class ResponseLoginModel {
+export class AccountDetailsModel {
   id: number;
-  role: string;
-  token: string;
   name: string;
+  email: string;
+  roles: Array<string>;
 }
