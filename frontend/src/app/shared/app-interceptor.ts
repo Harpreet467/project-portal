@@ -7,6 +7,7 @@ import {MatSnackBar} from '@angular/material';
 import {ProgressBarService} from './service/progress-bar.service';
 import {tap} from 'rxjs/operators';
 import {StorageService} from './service/storage.service';
+import {Constant} from './constant';
 
 
 @Injectable()
@@ -34,19 +35,20 @@ export class AppInterceptor implements HttpInterceptor {
       .pipe(
         tap((event: HttpEvent<any>) => {
           if (event instanceof HttpResponse) {
-                this.progressBarService.hide();
-                return event;
+            this.progressBarService.hide();
+            return event;
           }
         }, (error) => {
-            this.progressBarService.hide();
+          this.progressBarService.hide();
 
-            if (error instanceof HttpErrorResponse) {
-              this.snackBar.open(error.message);
+          if (error instanceof HttpErrorResponse) {
+            console.log(error.message);
+            this.snackBar.open(error.error.description);
 
-              if (error.status === 401) {
-                this.location.back();
-              }
+            if (error.status === 401 && error.error.error !== Constant.BAD_REQUEST) {
+              this.location.back();
             }
+          }
         })
       );
   }

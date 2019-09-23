@@ -21,7 +21,20 @@ export class Staff {
   last_login_at: string;
   login_count: number;
   updated_at: string;
+  last_updated_by: string;
   roles: Array<Role>;
+
+  constructor() {
+    this.roles = new Array<Role>();
+  }
+}
+
+export class RoleModel extends PageableModel {
+  objects: Array<Role>;
+  constructor() {
+    super();
+    this.objects = new Array<Role>();
+  }
 }
 
 export class Role {

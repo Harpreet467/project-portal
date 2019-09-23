@@ -1,0 +1,70 @@
+<h1 mat-dialog-title>Detail of {{data.name}}</h1>
+
+<div mat-dialog-content>
+  <mat-nav-list>
+    <mat-list-item>
+      <mat-icon mat-list-icon>person</mat-icon>
+      <span mat-line>Name</span>
+      <span mat-line>{{data.name || 'Not available'}}</span>
+    </mat-list-item>
+
+    <mat-list-item>
+      <mat-icon mat-list-icon>email</mat-icon>
+      <span mat-line>Email</span>
+      <span mat-line>{{data.email || 'Not available'}}</span>
+    </mat-list-item>
+
+    <mat-list-item>
+      <mat-icon mat-list-icon>thumbs_up_down</mat-icon>
+      <span mat-line>Active Status</span>
+      <span mat-line>{{data.active || 'Not available'}}</span>
+    </mat-list-item>
+
+    <mat-list-item>
+      <mat-icon mat-list-icon>event</mat-icon>
+      <span mat-line>Created At</span>
+      <span mat-line>{{(data.created_at | date: 'long') || 'Not available'}}</span>
+    </mat-list-item>
+
+    <mat-list-item>
+      <mat-icon mat-list-icon>event</mat-icon>
+      <span mat-line>Last Updated At</span>
+      <span mat-line>{{(data.updated_at | date: 'long') || 'Not available'}}</span>
+    </mat-list-item>
+
+    <mat-list-item>
+      <mat-icon mat-list-icon>language</mat-icon>
+      <span mat-line>Current Login IP address</span>
+      <span mat-line>{{data.current_login_ip || 'Not available'}}</span>
+    </mat-list-item>
+
+    <mat-list-item>
+      <mat-icon mat-list-icon>calendar_today</mat-icon>
+      <span mat-line>Current Login At</span>
+      <span mat-line>{{(data.current_login_at | date: 'long') || 'Not available'}}</span>
+    </mat-list-item>
+
+    <mat-list-item>
+      <mat-icon mat-list-icon>language</mat-icon>
+      <span mat-line>Last Login IP address</span>
+      <span mat-line>{{data.last_login_ip || 'Not available'}}</span>
+    </mat-list-item>
+
+    <mat-list-item>
+      <mat-icon mat-list-icon>event</mat-icon>
+      <span mat-line>Last Login At</span>
+      <span mat-line>{{(data.last_login_at | date: 'long') || 'Not available'}}</span>
+    </mat-list-item>
+
+    <mat-list-item>
+      <mat-icon mat-list-icon>poll</mat-icon>
+      <span mat-line>Login Count</span>
+      <span mat-line>{{data.login_count || 'Not available'}}</span>
+    </mat-list-item>
+
+  </mat-nav-list>
+</div>
+
+<div mat-dialog-actions fxLayoutAlign="end">
+  <button mat-flat-button (click)="closeModal()">Cancel</button>
+</div>

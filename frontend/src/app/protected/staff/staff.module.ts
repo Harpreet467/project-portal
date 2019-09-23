@@ -7,7 +7,7 @@ import {StaffService} from './staff.service';
 import {
   MatButtonModule, MatCardModule, MatChipsModule, MatDialogModule, MatDividerModule,
   MatIconModule,
-  MatInputModule,
+  MatInputModule, MatListModule,
   MatPaginatorModule, MatSelectModule,
   MatSortModule,
   MatTableModule,
@@ -16,12 +16,15 @@ import {
 import {FlexModule} from '@angular/flex-layout';
 import { AddStaffModalComponent } from './add-staff-modal/add-staff-modal.component';
 import {FormsModule} from '@angular/forms';
+import {SpinnerModule} from '../../layout/spinner/spinner.module';
+import { ViewStaffDetailModalComponent } from './view-staff-detail-modal/view-staff-detail-modal.component';
 
 
 @NgModule({
   declarations: [
     StaffComponent,
-    AddStaffModalComponent
+    AddStaffModalComponent,
+    ViewStaffDetailModalComponent
   ],
   imports: [
     RouterModule.forChild(staffRoutes),
@@ -39,7 +42,9 @@ import {FormsModule} from '@angular/forms';
     FlexModule,
     MatDialogModule,
     FormsModule,
-    MatSelectModule
+    MatSelectModule,
+    SpinnerModule,
+    MatListModule
   ],
   providers: [
     StaffService

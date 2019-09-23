@@ -5,6 +5,8 @@ import {Staff, staffDisplayedColumns, StaffModel} from './staff.model';
 import {Constant} from '../../shared/constant';
 import {MatDialog, MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 import {AddStaffModalComponent} from './add-staff-modal/add-staff-modal.component';
+import {SpinnerService} from '../../shared/service/spinner.service';
+import {ViewStaffDetailModalComponent} from './view-staff-detail-modal/view-staff-detail-modal.component';
 
 @Component({
   selector: 'app-staff',
@@ -22,7 +24,8 @@ export class StaffComponent implements OnInit, OnDestroy {
 
   constructor(
     public dialog: MatDialog,
-    public staffService: StaffService
+    public staffService: StaffService,
+    private spinnerService: SpinnerService
   ) { }
 
   ngOnInit() {
@@ -38,11 +41,13 @@ export class StaffComponent implements OnInit, OnDestroy {
   }
 
   getStaffs() {
+    this.spinnerService.show();
     this.subscription.add(
       this.staffService.getStaffs().subscribe((res: StaffModel) => {
         this.dataSource = new MatTableDataSource(res.objects);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
+        this.spinnerService.hide();
       })
     );
   }
@@ -55,6 +60,14 @@ export class StaffComponent implements OnInit, OnDestroy {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed', result);
+      this.getStaffs();
+    });
+  }
+
+  openViewStaffModal(staff: Staff) {
+    this.dialog.open(ViewStaffDetailModalComponent, {
+      width: Constant.MODAL_WIDTH,
+      data: staff
     });
   }
 

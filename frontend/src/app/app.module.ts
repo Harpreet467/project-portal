@@ -8,7 +8,7 @@ import {
   MatButtonModule, MatCardModule,
   MatFormFieldModule, MatIconModule,
   MatInputModule, MatListModule, MatMenuModule,
-  MatProgressBarModule, MatSidenavModule, MatSnackBarModule,
+  MatProgressBarModule, MatProgressSpinnerModule, MatSidenavModule, MatSnackBarModule,
   MatToolbarModule, MatTooltipModule
 } from '@angular/material';
 import {AccountModule} from './account/account.module';
@@ -49,7 +49,8 @@ import { SidenavComponent } from './layout/sidenav/sidenav.component';
     MatMenuModule,
     MatTooltipModule,
     MatSidenavModule,
-    MatListModule
+    MatListModule,
+    MatProgressSpinnerModule
   ],
   providers: [
     {
@@ -59,7 +60,7 @@ import { SidenavComponent } from './layout/sidenav/sidenav.component';
     },
     {
       provide: MAT_SNACK_BAR_DEFAULT_OPTIONS,
-      useValue: {duration: 2500}
+      useValue: {duration: 5000}
     }
   ],
   bootstrap: [AppComponent]

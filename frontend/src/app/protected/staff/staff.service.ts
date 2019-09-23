@@ -19,7 +19,7 @@ export class StaffService {
   }
 
   updateStaff(staff: Staff) {
-    return this.http.put(AppConfig.STAFF_API, staff);
+    return this.http.put(AppConfig.STAFF_API + '/' + staff.id, staff);
   }
 
   getRoles() {

@@ -10,7 +10,7 @@ export class AppConfig {
   public static STAFF_API = AppConfig.API + 'staff';
 
   // Role
-  public static ROLE_API = AppConfig.API = 'role';
+  public static ROLE_API = AppConfig.API + 'role';
 
   /* *********************************************************
    Frontend URLs

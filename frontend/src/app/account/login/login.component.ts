@@ -17,6 +17,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   loginParam: LoginModel = new LoginModel();
   subscription: Subscription = new Subscription();
   isDisableBtn = false;
+  isLoggedIn = false;
 
   constructor(
     private sharedService: SharedService,
@@ -26,7 +27,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    if (this.storageService.getUserToken()) {
+    if (this.isLoggedIn && this.storageService.getUserToken()) {
       this.router.navigate([AppConfig.DASHBOARD]);
     }
   }
@@ -37,6 +38,8 @@ export class LoginComponent implements OnInit, OnDestroy {
       this.loginService.login(this.loginParam).subscribe((tokenModel: TokenModel) => {
         this.storageService.setUserToken(tokenModel.access_token);
         this.accountDetails();
+      }, () => {
+        this.isDisableBtn = false;
       })
     );
   }
@@ -51,6 +54,9 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.storageService.setUserRoleToken(res.role_token);
         this.sharedService.isUserLoggedIn.next(true);
         this.router.navigate([AppConfig.DASHBOARD]);
+        this.isDisableBtn = false;
+        this.isLoggedIn = true;
+      }, () => {
         this.isDisableBtn = false;
       })
     );
