@@ -1,6 +1,7 @@
 {
   "extends": "tslint:recommended",
   "rules": {
+    "variable-name": [true, "allow-snake-case"],
     "array-type": false,
     "arrow-parens": false,
     "deprecation": {

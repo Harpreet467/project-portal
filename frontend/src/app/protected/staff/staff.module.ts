@@ -4,12 +4,24 @@ import {RouterModule} from '@angular/router';
 import {staffRoutes} from './staff.route';
 import {StaffComponent} from './staff.component';
 import {StaffService} from './staff.service';
-import {MatInputModule, MatPaginatorModule, MatSortModule, MatTableModule} from '@angular/material';
+import {
+  MatButtonModule, MatCardModule, MatChipsModule, MatDialogModule, MatDividerModule,
+  MatIconModule,
+  MatInputModule,
+  MatPaginatorModule, MatSelectModule,
+  MatSortModule,
+  MatTableModule,
+  MatTooltipModule
+} from '@angular/material';
+import {FlexModule} from '@angular/flex-layout';
+import { AddStaffModalComponent } from './add-staff-modal/add-staff-modal.component';
+import {FormsModule} from '@angular/forms';
 
 
 @NgModule({
   declarations: [
-    StaffComponent
+    StaffComponent,
+    AddStaffModalComponent
   ],
   imports: [
     RouterModule.forChild(staffRoutes),
@@ -17,7 +29,17 @@ import {MatInputModule, MatPaginatorModule, MatSortModule, MatTableModule} from 
     MatInputModule,
     MatTableModule,
     MatSortModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatButtonModule,
+    MatTooltipModule,
+    MatIconModule,
+    MatChipsModule,
+    MatCardModule,
+    MatDividerModule,
+    FlexModule,
+    MatDialogModule,
+    FormsModule,
+    MatSelectModule
   ],
   providers: [
     StaffService

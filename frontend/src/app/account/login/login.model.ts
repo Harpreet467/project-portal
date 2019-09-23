@@ -12,4 +12,5 @@ export class AccountDetailsModel {
   name: string;
   email: string;
   roles: Array<string>;
+  role_token: string;
 }

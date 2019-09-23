@@ -26,6 +26,7 @@ export class AppInterceptor implements HttpInterceptor {
       url: environment.HOST + request.url,
       setHeaders: {
         Authorization: `Bearer ${this.storageService.getUserToken()}`,
+        'x-auth-token': '' + this.storageService.getUserRoleToken(),
         'Content-type': 'application/json'
       }
     });

@@ -27,11 +27,13 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.sharedService.checkLoggedIn();
-    this.sharedService.isUserLoggedIn.subscribe(value => {
-      this.isLoggedIn = value;
-      this.userName = this.storageService.getUserName();
-      this.email = this.storageService.getUserEmail();
-    });
+    this.subscription.add(
+      this.sharedService.isUserLoggedIn.subscribe(value => {
+        this.isLoggedIn = value;
+        this.userName = this.storageService.getUserName();
+        this.email = this.storageService.getUserEmail();
+      })
+    );
   }
 
   toggleSideNav() {

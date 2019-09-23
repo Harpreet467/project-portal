@@ -2,11 +2,11 @@
 
 <mat-toolbar color="primary" class="mat-elevation-z6 mat-toolbar">
 
-  <button mat-icon-button matTooltip="menu" (click)="toggleSideNav()">
+  <button *ngIf="isLoggedIn" mat-icon-button matTooltip="menu" (click)="toggleSideNav()">
     <mat-icon>menu</mat-icon>
   </button>
 
-  <a class="logo" routerLink="/">Capstone Project Portal</a>
+<!--  <a class="logo" routerLink="/">Capstone Project Portal</a>-->
 
   <span class="fill-remaining-space"></span>
 

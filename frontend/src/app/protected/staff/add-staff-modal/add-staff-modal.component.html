@@ -1,0 +1,52 @@
+<h1 mat-dialog-title>Staff</h1>
+<mat-divider></mat-divider>
+
+<div mat-dialog-content>
+  <form #staffForm="ngForm">
+    <mat-form-field>
+      <label>
+        <input type="text" matInput placeholder="Name" name="name" [(ngModel)]="staff.name" #name="ngModel" required>
+      </label>
+      <mat-error *ngIf="name.touched && name.invalid">
+        <small class="mat-text-warn" *ngIf="name?.errors.required">Name is required.</small>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <label>
+        <input type="email" matInput placeholder="Email" name="email" [(ngModel)]="staff.email" #email="ngModel" required>
+      </label>
+      <mat-error *ngIf="email.touched && email.invalid">
+        <small class="mat-text-warn" *ngIf="email?.errors.required">Email is required.</small>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <label>
+        <input type="password" matInput placeholder="Password" name="password" [(ngModel)]="staff.password" #password="ngModel" required>
+      </label>
+      <mat-error *ngIf="password.touched && password.invalid">
+        <small class="mat-text-warn" *ngIf="password?.errors.required">Password is required.</small>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-select placeholder="Select Role" name="role" [(ngModel)]="staff.roles" #role="ngModel" multiple required>
+        <mat-option *ngFor="let role of roles" [value]="role.id">{{role?.name}}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="role.touched && role.invalid">
+        <small class="mat-text-warn" *ngIf="role?.errors.required">Role is required.</small>
+      </mat-error>
+    </mat-form-field>
+
+  </form>
+</div>
+
+<div mat-dialog-actions>
+  <button mat-flat-button (click)="closeModal()">Cancel</button>
+  <button color="primary" mat-raised-button (click)="saveStaff()"
+          [ngClass]="staffForm.form.invalid ? 'cursor-not-allowed' : 'cursor-pointer'"
+          [disabled]="staffForm.form.invalid">
+    Submit
+  </button>
+</div>

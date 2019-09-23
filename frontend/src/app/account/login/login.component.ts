@@ -32,6 +32,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   login() {
+    this.isDisableBtn = true;
     this.subscription.add(
       this.loginService.login(this.loginParam).subscribe((tokenModel: TokenModel) => {
         this.storageService.setUserToken(tokenModel.access_token);
@@ -47,9 +48,10 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.storageService.setUserName(res.name);
         this.storageService.setUserEmail(res.email);
         this.storageService.setRole(res.roles.toString());
+        this.storageService.setUserRoleToken(res.role_token);
         this.sharedService.isUserLoggedIn.next(true);
         this.router.navigate([AppConfig.DASHBOARD]);
-        this.isDisableBtn = true;
+        this.isDisableBtn = false;
       })
     );
   }

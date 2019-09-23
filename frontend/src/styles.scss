@@ -6,6 +6,14 @@ body {
   background-color: #f3f3f3;
 }
 
+table {
+  width: 100%;
+}
+
+td, th {
+  width: 25%;
+}
+
 .main-container {
   display: flex;
   flex-direction: column;
@@ -33,12 +41,44 @@ body {
   text-align: center !important;
 }
 
+.w-90 {
+  width: 90% !important;
+}
+
+.m-auto {
+  margin: auto !important;
+}
+
+.mt-1 {
+  margin-top: 1rem !important;
+}
+
+.mt-2 {
+  margin-top: 2rem !important;
+}
+
+.mb-1 {
+  margin-bottom: 1rem !important;
+}
+
 .mb-2 {
   margin-bottom: 2rem !important;
 }
 
 .p-2 {
   padding: 2rem !important;
+}
+
+.pr-2 {
+  padding-right: 2rem !important;
+}
+
+.cursor-pointer {
+  cursor: pointer !important;
+}
+
+.cursor-not-allowed {
+  cursor: not-allowed !important;
 }
 
 .v-h-center {
@@ -59,4 +99,9 @@ body {
 
 .font-size-1-5 {
   font-size: 1.5rem !important;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
 }

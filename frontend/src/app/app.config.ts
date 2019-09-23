@@ -7,7 +7,10 @@ export class AppConfig {
   public static LOGOUT_API = 'logout';
 
   // Staff
-  public static STAFF_API = AppConfig.API + 'staff/';
+  public static STAFF_API = AppConfig.API + 'staff';
+
+  // Role
+  public static ROLE_API = AppConfig.API = 'role';
 
   /* *********************************************************
    Frontend URLs
