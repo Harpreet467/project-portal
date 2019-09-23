@@ -6,7 +6,8 @@ def get_security_payload(staff):
         'id': staff.id,
         'name': staff.name,
         'email': staff.email,
-        'roles': list(row.name for row in staff.roles)
+        'roles': list(row.name for row in staff.roles),
+        'role_token': staff.get_auth_token()
     })
 
 

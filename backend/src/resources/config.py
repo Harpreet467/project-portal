@@ -30,7 +30,8 @@ class Config(object):
     JWT_AUTH_HEADER_PREFIX = 'Bearer'
     JWT_SECRET_KEY = 'secret'
     JWT_AUTH_USERNAME_KEY = 'email'
-    JWT_EXPIRATION_DELTA = timedelta(minutes=10)
+    JWT_EXPIRATION_DELTA = timedelta(minutes=60)
+    SECURITY_TOKEN_AUTHENTICATION_HEADER = 'X-AUTH-TOKEN'
     SECURITY_PASSWORD_HASH = 'bcrypt'
     SECURITY_PASSWORD_SALT = 'HMAC'
     SECURITY_TRACKABLE = True
