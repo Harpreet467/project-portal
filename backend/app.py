@@ -11,11 +11,15 @@ from src.main.http import load_http
 from src.main.http.background_jobs import make_celery
 from src.main.model import db, load_model, db_user_data_store
 from src.main.security import load_security
+from src.main.service import load_service
 from src.resources.config import Config
 
 
 app = Flask(__name__)
 app.config.from_object(Config())
+
+# CORS
+CORS(app)
 
 
 @app.route('/')
@@ -47,9 +51,7 @@ with app.app_context():
     load_exception()
     load_controller()
     load_dto()
-
-    # CORS
-    CORS(app)
+    load_service()
 
     # Create a user admin
     @app.before_first_request

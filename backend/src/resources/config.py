@@ -1,4 +1,7 @@
+import os
 from datetime import timedelta
+
+BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 
 
 class Config(object):

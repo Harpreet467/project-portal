@@ -1,29 +1,14 @@
-from flask_cors import CORS
-from flask_restless.views import ValidationError
+from flask import jsonify
 
-from app import api_manager, app
-from src.main.http.cros_headers import add_cors_headers
-from src.main.security.authentication import auth_func
-from src.main.model.staff import Staff as StaffModel
-from src.main.security.authorization import role_admin
 
-staff_api = api_manager.create_api_blueprint(
-    StaffModel,
-    methods=['GET', 'POST', 'PUT', 'DELETE'],
-    exclude_columns=['password'],
-    validation_exceptions=[ValidationError],
-    preprocessors=dict(
-        POST=[auth_func, role_admin],
-        GET_SINGLE=[auth_func, role_admin],
-        GET_MANY=[auth_func, role_admin],
-        PUT_SINGLE=[auth_func, role_admin],
-        PUT_MANY=[auth_func, role_admin],
-        DELETE_SINGLE=[auth_func, role_admin],
-        DELETE_MANY=[auth_func, role_admin]
-    )
-)
+def get_security_payload(staff):
+    return jsonify({
+        'id': staff.id,
+        'name': staff.name,
+        'email': staff.email,
+        'roles': list(row.name for row in staff.roles)
+    })
 
-staff_api.after_request(add_cors_headers)
-CORS(staff_api, resources=r'/api/*')
-app.register_blueprint(staff_api)
 
+def exclude_columns():
+    return ['password']

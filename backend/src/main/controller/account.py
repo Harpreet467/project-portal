@@ -1,10 +1,19 @@
-from flask_restless import ProcessingException
+from flask_jwt import jwt_required
 
-from src.main.model import db_user_data_store
+from app import app
+from src.main.service.account import account_details as account_details_service
+from src.main.service.account import logout as logout_service
+from src.main.dto.account import logout as logout_dto
 
 
-def account_details(email):
-    user = db_user_data_store().find_user(email=email)
-    if user and email == user.email:
-        return user.get_security_payload()
-    return ProcessingException(description='Not Authorized', code=401)
+@app.route('/account-details', methods=['GET'])
+@jwt_required()
+def account_details():
+    return account_details_service()
+
+
+@app.route('/logout', methods=['GET'])
+@jwt_required()
+def logout():
+    logout_service()
+    return logout_dto()

@@ -4,6 +4,7 @@ from flask_security.utils import encrypt_password
 from src.main.model import db
 from src.main.model.entity import Entity
 from src.main.model.roles_user import roles_users
+from src.main.dto.staff import get_security_payload as get_security_payload_dto
 
 
 class Staff(Entity, db.Model, UserMixin):
@@ -19,19 +20,14 @@ class Staff(Entity, db.Model, UserMixin):
     current_login_ip = db.Column(db.String(255), nullable=True)
     login_count = db.Column(db.Integer, nullable=True)
 
-    def get_security_payload(self):
-        return {
-            'id': self.id,
-            'name': self.name,
-            'email': self.email,
-            'roles': list(row.name for row in self.roles)
-        }
-
     def __init__(self, last_updated_by='system', **kwargs):
         super().__init__(last_updated_by)
         self.password = encrypt_password(kwargs['password'])
         self.email = kwargs['email']
         self.name = kwargs['name']
+
+    def get_security_payload(self):
+        return get_security_payload_dto(self)
 
     def __repr__(self):
         return '<Staff[email=%s]>' % self.email
