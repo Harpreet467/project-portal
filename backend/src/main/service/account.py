@@ -1,5 +1,5 @@
 from flask_restless import ProcessingException
-from flask_security import logout_user
+from flask_security import logout_user, login_user
 
 from src.main.model import db_user_data_store
 from src.main.security.authentication import generate_jwt_token, get_jwt_token_refresh
@@ -8,12 +8,17 @@ from src.resources.status_code import STATUS_CODE
 
 
 def auth(param):
-    return dict(
-        access_token=generate_jwt_token(
-            param.get('email', None),
-            param.get('password', None)
-        )
-    )
+    email = param.get('email', None)
+    password = param.get('password', None)
+
+    token = dict(access_token=generate_jwt_token(email, password))
+
+    user = db_user_data_store().find_user(email=email)
+    if user and email == user.email:
+        login_user(user)
+        db_user_data_store().commit()
+
+    return token
 
 
 def account_details():

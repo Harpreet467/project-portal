@@ -17,10 +17,9 @@ def get_jwt_token_refresh():
     return jwt.refresh_jwt_token(jwt.read_token_from_header())
 
 
-def password_hash(data=None):
-    print('-------------------------')
-    print(data)
-    pass
+def password_hash_preprocessor(data=None, **kwargs):
+    if data and 'password' in data:
+        data['password'] = jwt.hash_password(data['password'])
 
 
 @auth_required

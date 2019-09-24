@@ -18,7 +18,7 @@ class Staff(Entity, db.Model, UserMixin):
     current_login_at = db.Column(db.DateTime(), nullable=True)
     last_login_ip = db.Column(db.String(255), nullable=True)
     current_login_ip = db.Column(db.String(255), nullable=True)
-    login_count = db.Column(db.Integer, nullable=True)
+    login_count = db.Column(db.Integer, nullable=True, default=0)
 
     def __init__(self, last_updated_by='system', **kwargs):
         super().__init__(last_updated_by)
