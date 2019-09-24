@@ -7,8 +7,6 @@ import {MatSnackBar} from '@angular/material';
 import {ProgressBarService} from './service/progress-bar.service';
 import {tap} from 'rxjs/operators';
 import {StorageService} from './service/storage.service';
-import {Constant} from './constant';
-import set = Reflect.set;
 
 
 @Injectable()
@@ -23,9 +21,7 @@ export class AppInterceptor implements HttpInterceptor {
   }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    setTimeout(() => {
-      this.progressBarService.show();
-    }, 10);
+    this.progressBarService.show();
 
     request = request.clone({
       url: environment.HOST + request.url,
@@ -43,12 +39,10 @@ export class AppInterceptor implements HttpInterceptor {
           }
         }, (error) => {
           this.progressBarService.hide();
+          this.snackBar.open(error.statusText);
 
           if (error instanceof HttpErrorResponse) {
-            console.log(error.message);
-            this.snackBar.open(error.error.description);
-
-            if (error.status === 401 && error.error.error !== Constant.BAD_REQUEST) {
+            if (error.status === 401 && !('error' in error.error)) {
               this.location.back();
             }
           }

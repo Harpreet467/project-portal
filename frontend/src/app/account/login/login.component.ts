@@ -6,6 +6,7 @@ import {StorageService} from '../../shared/service/storage.service';
 import {Router} from '@angular/router';
 import {AppConfig} from '../../app.config';
 import {SharedService} from '../../shared/service/shared.service';
+import {AlertService} from '../../layout/alert/alert.service';
 
 
 @Component({
@@ -22,6 +23,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   constructor(
     private sharedService: SharedService,
     private storageService: StorageService,
+    private alertService: AlertService,
     private loginService: LoginService,
     private router: Router
   ) { }
@@ -38,7 +40,8 @@ export class LoginComponent implements OnInit, OnDestroy {
       this.loginService.login(this.loginParam).subscribe((tokenModel: TokenModel) => {
         this.storageService.setUserToken(tokenModel.access_token);
         this.accountDetails();
-      }, () => {
+      }, (error) => {
+        this.alertService.error(error.error.message);
         this.isDisableBtn = false;
       })
     );

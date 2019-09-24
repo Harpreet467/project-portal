@@ -6,14 +6,14 @@
     <mat-icon>menu</mat-icon>
   </button>
 
-<!--  <a class="logo" routerLink="/">Capstone Project Portal</a>-->
+  <a class="logo" routerLink="/">Capstone Project Portal</a>
 
   <span class="fill-remaining-space"></span>
 
   <button mat-raised-button *ngIf="!isLoggedIn" [routerLink]="loginURL">Staff Login</button>
 
   <div *ngIf="isLoggedIn" fxFlex.gt-lg="10" fxFlex.gt-md="10" fxFlex.gt-sm="10" fxFlex="20" fxLayoutAlign="end">
-    <button mat-fab [matMenuTriggerFor]="menu" class="bg-white text-grey font-size-1-5 mat-elevation-z0">
+    <button mat-fab [matMenuTriggerFor]="menu" class="bg-white text-grey font-size-1-5 mat-elevation-z0" fxLayoutAlign="center center">
       <span>{{ userName | uppercase | slice: 0:1 }}</span>
     </button>
     <mat-menu #menu="matMenu">

@@ -60,7 +60,12 @@ import { SidenavComponent } from './layout/sidenav/sidenav.component';
     },
     {
       provide: MAT_SNACK_BAR_DEFAULT_OPTIONS,
-      useValue: {duration: 5000}
+      useValue: {
+        duration: 5000,
+        direction: 'center',
+        verticalPosition: 'top',
+        horizontalPosition: 'end'
+      }
     }
   ],
   bootstrap: [AppComponent]

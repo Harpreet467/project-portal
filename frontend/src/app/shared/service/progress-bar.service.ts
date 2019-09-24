@@ -13,11 +13,15 @@ export class ProgressBarService {
   }
 
   show() {
-    this.visibility.next(true);
+    setTimeout(() => {
+      this.visibility.next(true);
+    }, 0);
   }
 
   hide() {
-    this.visibility.next(false);
+    setTimeout(() => {
+      this.visibility.next(false);
+    }, 0);
   }
 
 }

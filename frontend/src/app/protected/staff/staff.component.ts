@@ -59,8 +59,9 @@ export class StaffComponent implements OnInit, OnDestroy {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed', result);
-      this.getStaffs();
+      if (result) {
+        this.getStaffs();
+      }
     });
   }
 

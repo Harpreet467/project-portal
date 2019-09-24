@@ -7,6 +7,7 @@ import {FormsModule} from '@angular/forms';
 import {LoginService} from './login/login.service';
 import {FlexModule} from '@angular/flex-layout';
 import {accountRoute} from './account.route';
+import {AlertModule} from '../layout/alert/alert.module';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import {accountRoute} from './account.route';
     MatCardModule,
     RouterModule,
     MatButtonModule,
-    FlexModule
+    FlexModule,
+    AlertModule
   ],
   providers: [
     LoginService

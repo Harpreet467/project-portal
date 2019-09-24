@@ -1,10 +1,11 @@
-import {Component, Inject, NgZone, OnDestroy, OnInit} from '@angular/core';
+import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {Role, RoleModel, Staff} from '../staff.model';
 import {StaffComponent} from '../staff.component';
 import {StaffService} from '../staff.service';
 import {Subscription} from 'rxjs';
 import {StorageService} from '../../../shared/service/storage.service';
+import {AlertService} from '../../../layout/alert/alert.service';
 
 
 @Component({
@@ -17,13 +18,14 @@ export class AddStaffModalComponent implements OnInit, OnDestroy {
   staff: Staff = new Staff();
   roles: Role[];
   isEdit = false;
+  isDisableBtn = false;
 
   constructor(
     public dialogRef: MatDialogRef<StaffComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Staff,
     public staffService: StaffService,
-    private storageService: StorageService,
-    private ngZone: NgZone
+    private alertService: AlertService,
+    private storageService: StorageService
   ) {
   }
 
@@ -46,6 +48,7 @@ export class AddStaffModalComponent implements OnInit, OnDestroy {
   }
 
   saveStaff() {
+    this.isDisableBtn = true;
     this.staff.last_updated_by = this.storageService.getUserName();
     if (this.data) {
       this.editStaff();
@@ -56,21 +59,29 @@ export class AddStaffModalComponent implements OnInit, OnDestroy {
 
   addStaff() {
     this.subscription.add(
-      this.staffService.addStaff(this.staff).subscribe((res: Staff) => {
-        this.closeModal(res);
+      this.staffService.addStaff(this.staff).subscribe(() => {
+        this.closeModal(true);
+        this.isDisableBtn = false;
+      }, (error) => {
+        this.alertService.error(error.error.message);
+        this.isDisableBtn = false;
       })
     );
   }
 
   editStaff() {
     this.subscription.add(
-      this.staffService.updateStaff(this.staff).subscribe((res: Staff) => {
-        this.closeModal(res);
+      this.staffService.updateStaff(this.staff).subscribe(() => {
+        this.closeModal();
+        this.isDisableBtn = false;
+      }, (error) => {
+        this.alertService.error(error.error.message);
+        this.isDisableBtn = false;
       })
     );
   }
 
-  closeModal(data: Staff = null) {
+  closeModal(data: boolean = false) {
     this.dialogRef.close(data);
   }
 

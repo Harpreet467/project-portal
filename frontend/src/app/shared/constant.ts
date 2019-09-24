@@ -1,6 +1,6 @@
 export class Constant {
   public static UNAUTHORIZED = 'Unauthorized';
-  public static BAD_REQUEST = 'Bad Request';
+  public static AUTHENTICATION_ERROR = 'AuthenticationError';
 
   public static ROLE_ADMIN = 'admin';
 
