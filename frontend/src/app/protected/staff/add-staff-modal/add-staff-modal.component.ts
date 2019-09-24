@@ -1,4 +1,4 @@
-import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
+import {Component, Inject, NgZone, OnDestroy, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {Role, RoleModel, Staff} from '../staff.model';
 import {StaffComponent} from '../staff.component';
@@ -22,8 +22,10 @@ export class AddStaffModalComponent implements OnInit, OnDestroy {
     public dialogRef: MatDialogRef<StaffComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Staff,
     public staffService: StaffService,
-    private storageService: StorageService
-  ) { }
+    private storageService: StorageService,
+    private ngZone: NgZone
+  ) {
+  }
 
   ngOnInit() {
     this.getRoles();

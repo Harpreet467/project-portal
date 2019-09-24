@@ -22,7 +22,8 @@
 
     <mat-form-field>
       <label>
-        <input type="password" matInput placeholder="Password" name="password" [(ngModel)]="staff.password" #password="ngModel" required>
+        <input type="password" matInput placeholder="Password" name="password" [(ngModel)]="staff.password"
+               #password="ngModel" [required]="!isEdit">
       </label>
       <mat-error *ngIf="password.touched && password.invalid">
         <small class="mat-text-warn" *ngIf="password?.errors.required">Password is required.</small>

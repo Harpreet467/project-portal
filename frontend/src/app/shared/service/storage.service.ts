@@ -26,14 +26,6 @@ export class StorageService {
     return this.localStorageService.retrieve('token');
   }
 
-  setUserRoleToken(token: string) {
-    this.localStorageService.store('role-token', token);
-  }
-
-  getUserRoleToken() {
-    return this.localStorageService.retrieve('role-token');
-  }
-
   setUserId(id: number) {
     this.localStorageService.store('id', id);
   }
@@ -56,6 +48,10 @@ export class StorageService {
 
   getUserEmail() {
     return this.localStorageService.retrieve('email');
+  }
+
+  clearStorage() {
+    this.localStorageService.clear();
   }
 
 }

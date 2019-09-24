@@ -8,6 +8,7 @@ import {ProgressBarService} from './service/progress-bar.service';
 import {tap} from 'rxjs/operators';
 import {StorageService} from './service/storage.service';
 import {Constant} from './constant';
+import set = Reflect.set;
 
 
 @Injectable()
@@ -18,16 +19,18 @@ export class AppInterceptor implements HttpInterceptor {
     private snackBar: MatSnackBar,
     private progressBarService: ProgressBarService,
     private location: Location
-  ) {}
+  ) {
+  }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    this.progressBarService.show();
+    setTimeout(() => {
+      this.progressBarService.show();
+    }, 10);
 
     request = request.clone({
       url: environment.HOST + request.url,
       setHeaders: {
         Authorization: `Bearer ${this.storageService.getUserToken()}`,
-        'x-auth-token': '' + this.storageService.getUserRoleToken(),
         'Content-type': 'application/json'
       }
     });

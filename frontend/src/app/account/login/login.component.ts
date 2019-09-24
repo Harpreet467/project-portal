@@ -47,12 +47,9 @@ export class LoginComponent implements OnInit, OnDestroy {
   accountDetails() {
     this.subscription.add(
       this.loginService.getAccountDetails().subscribe((res: AccountDetailsModel) => {
-        this.storageService.setUserId(res.id);
-        this.storageService.setUserName(res.name);
-        this.storageService.setUserEmail(res.email);
-        this.storageService.setRole(res.roles.toString());
-        this.storageService.setUserRoleToken(res.role_token);
+        this.setUserData(res);
         this.sharedService.isUserLoggedIn.next(true);
+        this.setRoleFlags();
         this.router.navigate([AppConfig.DASHBOARD]);
         this.isDisableBtn = false;
         this.isLoggedIn = true;
@@ -60,6 +57,17 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.isDisableBtn = false;
       })
     );
+  }
+
+  setUserData(data: AccountDetailsModel) {
+    this.storageService.setUserId(data.id);
+    this.storageService.setUserName(data.name);
+    this.storageService.setUserEmail(data.email);
+    this.storageService.setRole(data.roles.toString());
+  }
+
+  setRoleFlags() {
+    this.sharedService.checkAdminRole();
   }
 
   ngOnDestroy(): void {
