@@ -4,7 +4,7 @@ import {StaffService} from './staff.service';
 import {Staff, staffDisplayedColumns, StaffModel} from './staff.model';
 import {Constant} from '../../shared/constant';
 import {MatDialog, MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
-import {AddStaffModalComponent} from './add-staff-modal/add-staff-modal.component';
+import {SaveStaffModalComponent} from './save-staff-modal/save-staff-modal.component';
 import {SpinnerService} from '../../shared/service/spinner.service';
 import {ViewStaffDetailModalComponent} from './view-staff-detail-modal/view-staff-detail-modal.component';
 
@@ -53,7 +53,7 @@ export class StaffComponent implements OnInit, OnDestroy {
   }
 
   openAddStaffModal(staff: Staff = null) {
-    const dialogRef = this.dialog.open(AddStaffModalComponent, {
+    const dialogRef = this.dialog.open(SaveStaffModalComponent, {
       width: Constant.MODAL_WIDTH,
       data: staff
     });

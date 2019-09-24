@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 import {StaffComponent} from './staff.component';
-import {AddStaffModalComponent} from './add-staff-modal/add-staff-modal.component';
+import {SaveStaffModalComponent} from './save-staff-modal/save-staff-modal.component';
 import {ViewStaffDetailModalComponent} from './view-staff-detail-modal/view-staff-detail-modal.component';
 
 export const staffRoutes: Routes = [
@@ -10,7 +10,7 @@ export const staffRoutes: Routes = [
   },
   {
     path: 'add',
-    component: AddStaffModalComponent
+    component: SaveStaffModalComponent
   },
   {
     path: 'view',

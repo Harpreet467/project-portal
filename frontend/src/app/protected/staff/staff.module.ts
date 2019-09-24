@@ -14,7 +14,7 @@ import {
   MatTooltipModule
 } from '@angular/material';
 import {FlexModule} from '@angular/flex-layout';
-import { AddStaffModalComponent } from './add-staff-modal/add-staff-modal.component';
+import { SaveStaffModalComponent } from './save-staff-modal/save-staff-modal.component';
 import {FormsModule} from '@angular/forms';
 import {SpinnerModule} from '../../layout/spinner/spinner.module';
 import { ViewStaffDetailModalComponent } from './view-staff-detail-modal/view-staff-detail-modal.component';
@@ -23,7 +23,7 @@ import { ViewStaffDetailModalComponent } from './view-staff-detail-modal/view-st
 @NgModule({
   declarations: [
     StaffComponent,
-    AddStaffModalComponent,
+    SaveStaffModalComponent,
     ViewStaffDetailModalComponent
   ],
   imports: [

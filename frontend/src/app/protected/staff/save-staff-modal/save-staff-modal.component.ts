@@ -10,10 +10,10 @@ import {AlertService} from '../../../layout/alert/alert.service';
 
 @Component({
   selector: 'app-add-staff-modal',
-  templateUrl: './add-staff-modal.component.html',
-  styleUrls: ['./add-staff-modal.component.scss']
+  templateUrl: './save-staff-modal.component.html',
+  styleUrls: ['./save-staff-modal.component.scss']
 })
-export class AddStaffModalComponent implements OnInit, OnDestroy {
+export class SaveStaffModalComponent implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
   staff: Staff = new Staff();
   roles: Role[];
