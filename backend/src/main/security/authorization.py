@@ -1,4 +1,4 @@
-from flask_security import roles_required
+from flask_praetorian import roles_required
 
 
 @roles_required('admin')

@@ -1,6 +1,7 @@
 from flask import Flask, jsonify
 from flask_cors import CORS
 from flask_mail import Mail
+from flask_praetorian import Praetorian
 from flask_restless import APIManager
 from flask_security import Security
 
@@ -20,6 +21,9 @@ app.config.from_object(Config())
 
 # CORS
 CORS(app)
+
+# JWT
+jwt = Praetorian()
 
 
 @app.route('/')
@@ -46,6 +50,8 @@ with app.app_context():
 
     # REST API
     api_manager = APIManager(app, flask_sqlalchemy_db=db)
+
+    # Load all the modules
     load_http()
     load_security()
     load_exception()
@@ -58,7 +64,9 @@ with app.app_context():
     def create_admin_user():
         # Create the Roles -- unless they already exist
         db_user_data_store().find_or_create_role(name='admin', description='Administrator')
-        db_user_data_store().find_or_create_role(name='end-user', description='End user')
+        db_user_data_store().find_or_create_role(name='first-level', description='Only can see the proposal')
+        db_user_data_store().find_or_create_role(name='second-level', description='Can edit and comment')
+        db_user_data_store().find_or_create_role(name='third-level', description='Can Approve or Reject')
 
         if not db_user_data_store().get_user('admin@capstone.com'):
             db_user_data_store().create_user(

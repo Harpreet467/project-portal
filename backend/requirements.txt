@@ -8,4 +8,7 @@ Flask-SQLAlchemy
 Flask-Security
 Flask-Mail
 Flask-JWT
+Flask-Migrate
+Flask-Script
 flask-cors
+flask-praetorian

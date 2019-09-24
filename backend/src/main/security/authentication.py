@@ -1,25 +1,28 @@
-from flask_jwt import JWT, jwt_required
-from flask_security.utils import verify_password, login_user
+from flask_praetorian import auth_required
 
-from app import app
-from src.main.model import db_user_data_store
-
-
-def authenticate(username, password):
-    user = db_user_data_store().find_user(email=username)
-    if user and username == user.email and verify_password(password, user.password):
-        login_user(user)
-        return user
+from app import app, jwt
+from src.main.model.staff import Staff
 
 
-def identity(payload):
-    user = db_user_data_store().find_user(id=payload['identity'])
-    return user
+jwt.init_app(app, Staff)
 
 
-jwt = JWT(app, authenticate, identity)
+def generate_jwt_token(email, password):
+    return jwt.encode_jwt_token(
+            jwt.authenticate(email, password)
+        )
 
 
-@jwt_required()
+def get_jwt_token_refresh():
+    return jwt.refresh_jwt_token(jwt.read_token_from_header())
+
+
+def password_hash(data=None):
+    print('-------------------------')
+    print(data)
+    pass
+
+
+@auth_required
 def auth_func(**kwargs):
     pass

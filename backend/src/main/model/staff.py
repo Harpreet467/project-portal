@@ -1,6 +1,6 @@
 from flask_security import UserMixin
-from flask_security.utils import encrypt_password
 
+from app import jwt
 from src.main.model import db
 from src.main.model.entity import Entity
 from src.main.model.roles_user import roles_users
@@ -22,12 +22,31 @@ class Staff(Entity, db.Model, UserMixin):
 
     def __init__(self, last_updated_by='system', **kwargs):
         super().__init__(last_updated_by)
-        self.password = encrypt_password(kwargs['password'])
         self.email = kwargs['email']
         self.name = kwargs['name']
+        self.password = jwt.hash_password(kwargs['password'])
 
     def get_security_payload(self):
         return get_security_payload_dto(self)
+
+    @property
+    def rolenames(self):
+        return list(row.name for row in self.roles)
+
+    @classmethod
+    def lookup(cls, username):
+        return cls.query.filter_by(email=username).one_or_none()
+
+    @classmethod
+    def identify(cls, id):
+        return cls.query.get(id)
+
+    @property
+    def identity(self):
+        return self.id
+
+    def is_valid(self):
+        return self.active
 
     def __repr__(self):
         return '<Staff[email=%s]>' % self.email

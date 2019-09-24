@@ -1,5 +1,4 @@
 import os
-from datetime import timedelta
 
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 
@@ -27,10 +26,9 @@ class Config(object):
     CORS_HEADERS = 'application/json'
 
     # Security
-    JWT_AUTH_HEADER_PREFIX = 'Bearer'
-    JWT_SECRET_KEY = 'secret'
-    JWT_AUTH_USERNAME_KEY = 'email'
-    JWT_EXPIRATION_DELTA = timedelta(minutes=60)
+    PRAETORIAN_HASH_SCHEME = 'bcrypt'
+    JWT_ACCESS_LIFESPAN = {'minutes': 60}
+    JWT_REFRESH_LIFESPAN = {'days': 1}
     SECURITY_TOKEN_AUTHENTICATION_HEADER = 'X-AUTH-TOKEN'
     SECURITY_PASSWORD_HASH = 'bcrypt'
     SECURITY_PASSWORD_SALT = 'HMAC'
