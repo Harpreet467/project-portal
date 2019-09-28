@@ -1,14 +1,11 @@
 <mat-nav-list>
-  <mat-list-item [routerLink]="dashboardUrl">
-    <mat-icon mat-list-icon>home</mat-icon>
-    <h6 mat-line class="pr-2">Dashboard</h6>
-  </mat-list-item>
-  <mat-list-item *ngIf="isAdmin" [routerLink]="staffUrl">
-    <mat-icon mat-list-icon>people</mat-icon>
-    <h6 mat-line class="pr-2">Staffs</h6>
-  </mat-list-item>
-  <mat-list-item [routerLink]="null">
-    <mat-icon mat-list-icon>bubble_chart</mat-icon>
-    <h6 mat-line class="pr-2">Projects</h6>
-  </mat-list-item>
+  <ng-container *ngFor="let menuItem of getMenuItems(); trackBy: trackByFn">
+    <mat-list-item
+      *ngIf="menuItem.visibility"
+      [routerLink]="menuItem.value"
+      routerLinkActive="active">
+        <mat-icon mat-list-icon>{{menuItem.icon}}</mat-icon>
+        <h6 mat-line class="pr-2">{{menuItem.name}}</h6>
+    </mat-list-item>
+  </ng-container>
 </mat-nav-list>

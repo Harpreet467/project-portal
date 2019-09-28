@@ -1,0 +1,15 @@
+<mat-card class="mat-elevation-z1 m-auto w-90 mt-2 p-2">
+  <mat-card-header fxLayout="row" fxLayoutAlign="space-between center" class="mb-1">
+    <mat-card-title class="m-auto"> System Profiler </mat-card-title>
+    <button color="primary" mat-icon-button matTooltip="login info" (click)="openInfo()"><mat-icon>info</mat-icon></button>
+  </mat-card-header>
+
+  <mat-divider></mat-divider>
+
+  <app-alert></app-alert>
+
+  <iframe
+    [src]="systemProfilerAPI | safe"
+    style="width: 100%; height: 400px; border: 0">
+  </iframe>
+</mat-card>

@@ -1,6 +1,9 @@
 <h1 mat-dialog-title>{{isEdit? 'Edit ' : 'Add New '}} Staff</h1>
 
 <div mat-dialog-content>
+
+  <app-alert></app-alert>
+
   <form #staffForm="ngForm">
     <mat-form-field>
       <label>

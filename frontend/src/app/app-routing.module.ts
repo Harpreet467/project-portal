@@ -28,6 +28,12 @@ const routes: Routes = [
         canActivate: [RoleGuardService],
         data: {role: Constant.ROLE_ADMIN},
         loadChildren: './protected/staff/staff.module#StaffModule'
+      },
+      {
+        path: 'system-profiler',
+        canActivate: [RoleGuardService],
+        data: {role: Constant.ROLE_ADMIN},
+        loadChildren: './protected/system-profiler/system-profiler.module#SystemProfilerModule'
       }
     ]
   },

@@ -12,6 +12,9 @@ export class AppConfig {
   // Role
   public static ROLE_API = AppConfig.API + 'role';
 
+  // System Profile
+  public static SYSTEM_PROFILE_API = 'system-profiler';
+
   /* *********************************************************
    Frontend URLs
    ********************************************************* */
@@ -21,5 +24,8 @@ export class AppConfig {
 
   // Staff
   public static STAFF = 'staff/';
+
+  // System Profile
+  public static SYSTEM_PROFILE = 'system-profiler/';
 
 }

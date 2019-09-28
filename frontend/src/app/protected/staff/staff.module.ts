@@ -18,6 +18,7 @@ import { SaveStaffModalComponent } from './save-staff-modal/save-staff-modal.com
 import {FormsModule} from '@angular/forms';
 import {SpinnerModule} from '../../layout/spinner/spinner.module';
 import { ViewStaffDetailModalComponent } from './view-staff-detail-modal/view-staff-detail-modal.component';
+import {AlertModule} from '../../layout/alert/alert.module';
 
 
 @NgModule({
@@ -44,7 +45,8 @@ import { ViewStaffDetailModalComponent } from './view-staff-detail-modal/view-st
     FormsModule,
     MatSelectModule,
     SpinnerModule,
-    MatListModule
+    MatListModule,
+    AlertModule
   ],
   providers: [
     StaffService
