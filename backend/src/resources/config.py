@@ -14,9 +14,12 @@ class Config(object):
     DB_NAME = 'project-portal'
     DB_USER = 'root'
     DB_PASSWORD = 'root'
+    SQLALCHEMY_DATABASE_URI = f'mysql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}'
 
     # Redis Configuration
     REDIS_URL = 'redis://localhost:6379'
+    CELERY_BROKER_URL = REDIS_URL
+    CELERY_RESULT_BACKEND = REDIS_URL
 
     # File upload
     UPLOAD_FOLDER = '/path/to/the/uploads'
@@ -41,15 +44,3 @@ class Config(object):
     MAIL_USE_SSL = True
     MAIL_USERNAME = ''
     MAIL_PASSWORD = ''
-
-    @property
-    def SQLALCHEMY_DATABASE_URI(self):
-        return f'mysql://{self.DB_USER}:{self.DB_PASSWORD}@{self.DB_HOST}:{self.DB_PORT}/{self.DB_NAME}'
-
-    @property
-    def CELERY_BROKER_URL(self):
-        return self.REDIS_URL
-
-    @property
-    def CELERY_RESULT_BACKEND(self):
-        return self.REDIS_URL

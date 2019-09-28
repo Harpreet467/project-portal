@@ -12,3 +12,4 @@ Flask-Migrate
 Flask-Script
 flask-cors
 flask-praetorian
+flask_monitoringdashboard

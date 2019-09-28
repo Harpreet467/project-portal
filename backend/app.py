@@ -1,6 +1,7 @@
 from flask import Flask, jsonify
 from flask_cors import CORS
 from flask_mail import Mail
+import flask_monitoringdashboard as dashboard
 from flask_praetorian import Praetorian
 from flask_restless import APIManager
 from flask_security import Security
@@ -13,8 +14,7 @@ from src.main.http.background_jobs import make_celery
 from src.main.model import db, load_model, db_user_data_store
 from src.main.security import load_security
 from src.main.service import load_service
-from src.resources.config import Config
-
+from src.resources.config import Config, BASE_DIR
 
 app = Flask(__name__)
 app.config.from_object(Config())
@@ -58,6 +58,10 @@ with app.app_context():
     load_controller()
     load_dto()
     load_service()
+
+    # System Profiler Monitor
+    dashboard.config.init_from(file=BASE_DIR + '/profiler-config.cfg')
+    dashboard.bind(app)
 
     # Create a user admin
     @app.before_first_request
