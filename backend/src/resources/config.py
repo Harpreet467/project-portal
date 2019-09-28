@@ -30,7 +30,7 @@ class Config(object):
 
     # Security
     PRAETORIAN_HASH_SCHEME = 'bcrypt'
-    JWT_ACCESS_LIFESPAN = {'minutes': 60}
+    JWT_ACCESS_LIFESPAN = {'minutes': 15}
     JWT_REFRESH_LIFESPAN = {'days': 1}
     SECURITY_TOKEN_AUTHENTICATION_HEADER = 'X-AUTH-TOKEN'
     SECURITY_PASSWORD_HASH = 'bcrypt'

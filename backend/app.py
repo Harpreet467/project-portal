@@ -1,10 +1,11 @@
 from flask import Flask, jsonify
 from flask_cors import CORS
 from flask_mail import Mail
-import flask_monitoringdashboard as dashboard
 from flask_praetorian import Praetorian
 from flask_restless import APIManager
 from flask_security import Security
+
+import flask_monitoringdashboard as dashboard
 
 from src.main.controller import load_controller
 from src.main.dto import load_dto
