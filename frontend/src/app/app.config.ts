@@ -1,31 +1,32 @@
 export class AppConfig {
-  public static API = 'api/';
+  public static readonly API = 'api/';
 
   // Account
-  public static AUTH_API = 'auth';
-  public static ACCOUNT_DETAILS_API = 'account-details';
-  public static LOGOUT_API = 'logout';
+  public static readonly AUTH_API = 'auth';
+  public static readonly ACCOUNT_DETAILS_API = 'account-details';
+  public static readonly REFRESH_TOKEN_API = 'refresh-token';
+  public static readonly LOGOUT_API = 'logout';
 
   // Staff
-  public static STAFF_API = AppConfig.API + 'staff';
+  public static readonly STAFF_API = AppConfig.API + 'staff';
 
   // Role
-  public static ROLE_API = AppConfig.API + 'role';
+  public static readonly ROLE_API = AppConfig.API + 'role';
 
   // System Profile
-  public static SYSTEM_PROFILE_API = 'system-profiler';
+  public static readonly SYSTEM_PROFILE_API = 'system-profiler';
 
   /* *********************************************************
    Frontend URLs
    ********************************************************* */
-  public static ACCOUNT  = 'account/';
-  public static LOGIN = AppConfig.ACCOUNT + 'login/';
-  public static DASHBOARD = 'dashboard/';
+  public static readonly ACCOUNT  = 'account/';
+  public static readonly LOGIN = AppConfig.ACCOUNT + 'login/';
+  public static readonly DASHBOARD = 'dashboard/';
 
   // Staff
-  public static STAFF = 'staff/';
+  public static readonly STAFF = 'staff/';
 
   // System Profile
-  public static SYSTEM_PROFILE = 'system-profiler/';
+  public static readonly SYSTEM_PROFILE = 'system-profiler/';
 
 }

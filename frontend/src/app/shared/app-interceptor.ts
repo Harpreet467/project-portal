@@ -1,22 +1,20 @@
-import {HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse} from '@angular/common/http';
+import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse} from '@angular/common/http';
 import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs';
-import {Location} from '@angular/common';
+import {Observable, throwError} from 'rxjs';
 import {environment} from '../../environments/environment';
-import {MatSnackBar} from '@angular/material';
 import {ProgressBarService} from './service/progress-bar.service';
-import {tap} from 'rxjs/operators';
-import {StorageService} from './service/storage.service';
+import {catchError, tap} from 'rxjs/operators';
+import {ErrorHandleService} from './service/error-handle.service';
+import {AuthService} from './service/auth.service';
 
 
 @Injectable()
 export class AppInterceptor implements HttpInterceptor {
 
   constructor(
-    private storageService: StorageService,
-    private snackBar: MatSnackBar,
+    private authService: AuthService,
     private progressBarService: ProgressBarService,
-    private location: Location
+    private errorHandleService: ErrorHandleService
   ) {
   }
 
@@ -26,10 +24,11 @@ export class AppInterceptor implements HttpInterceptor {
     request = request.clone({
       url: environment.HOST + request.url,
       setHeaders: {
-        Authorization: `Bearer ${this.storageService.getUserToken()}`,
         'Content-type': 'application/json'
       }
     });
+    request = this.authService.addAuthenticationToken(request);
+
     return next.handle(request)
       .pipe(
         tap((event: HttpEvent<any>) => {
@@ -38,14 +37,11 @@ export class AppInterceptor implements HttpInterceptor {
             return event;
           }
         }, (error) => {
+          return throwError(error);
+        }),
+        catchError((error) => {
           this.progressBarService.hide();
-          this.snackBar.open(error.statusText);
-
-          if (error instanceof HttpErrorResponse) {
-            if (error.status === 401 && !('error' in error.error)) {
-              this.location.back();
-            }
-          }
+          return this.errorHandleService.errorAction(error, request, next);
         })
       );
   }

@@ -32,11 +32,15 @@ export class SharedService {
     }
   }
 
+  shutRoleFlags() {
+    this.isUserLoggedIn.next(false);
+    this.isAdminRole.next(false);
+  }
+
   logout() {
     this.storageService.clearStorage();
     this.router.navigate([AppConfig.LOGIN]);
-    this.isUserLoggedIn.next(false);
-    this.isAdminRole.next(false);
+    this.shutRoleFlags();
     return this.http.get(AppConfig.LOGOUT_API);
   }
 
