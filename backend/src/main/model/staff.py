@@ -8,7 +8,7 @@ from src.main.dto.staff import get_security_payload as get_security_payload_dto
 
 
 class Staff(Entity, db.Model, UserMixin):
-    email = db.Column(db.String(80), unique=True)
+    email = db.Column(db.String(255), unique=True)
     name = db.Column(db.String(80))
     password = db.Column(db.String(60))
     active = db.Column(db.Boolean, default=True)

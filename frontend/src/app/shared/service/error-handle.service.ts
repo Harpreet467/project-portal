@@ -9,7 +9,6 @@ import {AuthService} from './auth.service';
 import {TokenModel} from '../../account/login/login.model';
 import {switchMap} from 'rxjs/operators';
 import {throwError} from 'rxjs';
-import {AppInterceptor} from '../app-interceptor';
 
 
 @Injectable({

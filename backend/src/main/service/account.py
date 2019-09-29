@@ -1,10 +1,8 @@
-from flask_restless import ProcessingException
 from flask_security import logout_user, login_user
 
+from src.main.exception.exception import handle401
 from src.main.model import db_user_data_store
 from src.main.security.authentication import generate_jwt_token, get_jwt_token_refresh
-from src.resources.constant import CONSTANT
-from src.resources.status_code import STATUS_CODE
 
 
 def auth(param):
@@ -28,7 +26,7 @@ def account_details():
     user = db_user_data_store().find_user(email=email)
     if user and email == user.email:
         return user.get_security_payload()
-    return ProcessingException(description=CONSTANT.NOT_AUTHORIZED, code=STATUS_CODE.ER_401)
+    return handle401()
 
 
 def refresh_token():

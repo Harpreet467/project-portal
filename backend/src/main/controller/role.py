@@ -6,6 +6,7 @@ from src.main.http.cros_headers import add_cors_headers
 from src.main.security.authentication import auth_func
 from src.main.model.role import Role
 
+
 role_api = api_manager.create_api_blueprint(
     Role,
     methods=['GET', 'POST', 'PUT', 'DELETE'],

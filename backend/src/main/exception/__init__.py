@@ -1,2 +1,2 @@
 def load_exception():
-    import src.main.exception.unauthorized
+    import src.main.exception.exception

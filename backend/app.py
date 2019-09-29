@@ -15,6 +15,7 @@ from src.main.http.background_jobs import make_celery
 from src.main.model import db, load_model, db_user_data_store
 from src.main.security import load_security
 from src.main.service import load_service
+from src.main.util import load_utils
 from src.resources.config import Config, BASE_DIR
 
 app = Flask(__name__)
@@ -54,6 +55,7 @@ with app.app_context():
 
     # Load all the modules
     load_http()
+    load_utils()
     load_security()
     load_exception()
     load_controller()

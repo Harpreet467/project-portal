@@ -7,6 +7,7 @@ from src.main.security.authentication import auth_func, password_hash_preprocess
 from src.main.model.staff import Staff as StaffModel
 from src.main.security.authorization import role_admin
 
+
 staff_api = api_manager.create_api_blueprint(
     StaffModel,
     methods=['GET', 'POST', 'PUT', 'DELETE'],

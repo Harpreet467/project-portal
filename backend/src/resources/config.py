@@ -22,8 +22,9 @@ class Config(object):
     CELERY_RESULT_BACKEND = REDIS_URL
 
     # File upload
-    UPLOAD_FOLDER = '/path/to/the/uploads'
+    UPLOAD_FOLDER = BASE_DIR + '/../../storage/uploads'
     MAX_CONTENT_LENGTH = 100 * 1024 * 1024  # 100MB
+    ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif', 'zip', 'doc', 'docx', 'ppt', 'pptx', 'xls', 'tar'}
 
     # CORS
     CORS_HEADERS = 'application/json'
