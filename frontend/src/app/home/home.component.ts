@@ -9,6 +9,7 @@ import {Router} from '@angular/router';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+  project_proposal_url = AppConfig.PROJECT_PROPOSAL;
 
   constructor(
     private storageService: StorageService,
