@@ -9,8 +9,10 @@ def load_model():
     import src.main.model.role
     import src.main.model.staff
     import src.main.model.roles_user
+    import src.main.model.project_category
     import src.main.model.proposal_author
     import src.main.model.project
+    import src.main.model.project_to_category
 
 
 def db_user_data_store():

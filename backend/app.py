@@ -13,6 +13,7 @@ from src.main.exception import load_exception
 from src.main.http import load_http
 from src.main.http.background_jobs import make_celery
 from src.main.model import db, load_model, db_user_data_store
+from src.main.model.project_category import ProjectCategory
 from src.main.security import load_security
 from src.main.service import load_service
 from src.main.util import load_utils
@@ -74,6 +75,11 @@ with app.app_context():
         db_user_data_store().find_or_create_role(name='first-level', description='Only can see the proposal')
         db_user_data_store().find_or_create_role(name='second-level', description='Can edit and comment')
         db_user_data_store().find_or_create_role(name='third-level', description='Can Approve or Reject')
+
+        # Create Category
+        # project_category = ProjectCategory(name="IT", description='IT related projects')
+        # db.session.add(project_category)
+        # db.session.commit()
 
         if not db_user_data_store().get_user('admin@capstone.com'):
             db_user_data_store().create_user(
