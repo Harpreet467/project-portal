@@ -41,10 +41,13 @@
             </label>
           </mat-form-field>
           <div>
-            <button mat-button matStepperNext
-                    (click)="saveProposalAuthor()"
+            <button mat-button
+                    (click)="saveProposalAuthor(stepper)"
                     [ngClass]="proposalAuthorFrom.form.invalid ? 'cursor-not-allowed' : 'cursor-pointer'"
-                    [disabled]="proposalAuthorFrom.form.invalid">Next</button>
+                    [disabled]="proposalAuthorFrom.form.invalid">
+              Next
+              <app-spinner *ngIf="spinnerService.visibility | async"></app-spinner>
+            </button>
           </div>
         </form>
       </div>
@@ -86,10 +89,13 @@
             </mat-error>
           </mat-form-field>
           <div>
-            <button mat-button matStepperNext
-                    (click)="saveProject()"
+            <button mat-button
+                    (click)="saveProject(stepper)"
                     [ngClass]="projectFrom.form.invalid ? 'cursor-not-allowed' : 'cursor-pointer'"
-                    [disabled]="projectFrom.form.invalid">Next</button>
+                    [disabled]="projectFrom.form.invalid">
+              Next
+              <app-spinner *ngIf="spinnerService.visibility | async"></app-spinner>
+            </button>
           </div>
         </form>
       </div>
@@ -100,7 +106,7 @@
       <ng-template matStepLabel>Upload files</ng-template>
       You are now done.
       <div>
-        <button mat-button >Submit</button>
+        <button mat-button (click)="fileUpload()">Done</button>
       </div>
     </mat-step>
   </mat-horizontal-stepper>

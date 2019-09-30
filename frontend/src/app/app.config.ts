@@ -26,6 +26,9 @@ export class AppConfig {
   /* *********************************************************
    Frontend URLs
    ********************************************************* */
+  public static readonly HOME = 'home';
+
+  // Account
   public static readonly ACCOUNT  = 'account/';
   public static readonly LOGIN = AppConfig.ACCOUNT + 'login/';
   public static readonly DASHBOARD = 'dashboard/';

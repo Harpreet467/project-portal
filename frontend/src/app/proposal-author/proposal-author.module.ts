@@ -15,6 +15,7 @@ import {
 } from '@angular/material';
 import {FlexModule} from '@angular/flex-layout';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {SpinnerModule} from '../layout/spinner/spinner.module';
 
 
 
@@ -34,7 +35,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     MatInputModule,
     MatButtonModule,
     FormsModule,
-    MatSelectModule
+    MatSelectModule,
+    SpinnerModule
   ],
   providers: [
     ProposalAuthorService
