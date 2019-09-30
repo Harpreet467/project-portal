@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {AppConfig} from '../app.config';
 import {ProjectModel, ProposalAuthorModel} from './proposal-author.model';
+import {toFormData} from '../layout/file-upload/file-upload.utils';
 
 
 @Injectable({
@@ -20,7 +21,13 @@ export class ProposalAuthorService {
   }
 
   uploadProjectFile(id: number, data) {
-    return this.http.patch(AppConfig.PROJECT_UPLOAD_API + id, data);
+    return this.http.patch(
+      AppConfig.PROJECT_UPLOAD_API + id,
+      toFormData(data), {
+        reportProgress: true,
+        observe: 'events'
+      }
+    );
   }
 
   getProjectCategory() {

@@ -6,6 +6,7 @@
   <mat-divider></mat-divider>
 
   <mat-horizontal-stepper linear #stepper>
+
     <mat-step [completed]="proposalAuthorStep" [editable]="false">
       <div fxLayout="row column" fxLayoutAlign="space-evenly center">
         <form #proposalAuthorFrom="ngForm">
@@ -52,6 +53,7 @@
         </form>
       </div>
     </mat-step>
+
     <mat-step [completed]="projectStep" [editable]="false">
       <div fxLayout="row column" fxLayoutAlign="space-evenly center">
         <form #projectFrom="ngForm">
@@ -68,7 +70,7 @@
           <mat-form-field appearance="outline">
             <mat-label>Description</mat-label>
             <label>
-              <input matInput placeholder="Description" name="description" [(ngModel)]="projectModel.description" #description="ngModel" required>
+              <textarea matInput placeholder="Description" name="description" [(ngModel)]="projectModel.description" #description="ngModel" required></textarea>
             </label>
             <mat-error *ngIf="description.touched && description.invalid">
               <small class="mat-text-warn" *ngIf="description?.errors.required">Description is required.</small>
@@ -100,15 +102,20 @@
         </form>
       </div>
     </mat-step>
+
     <mat-step [optional]="true">
-      <form>
+      <form [formGroup]="uploadFile">
+        <ng-template matStepLabel>Upload files</ng-template>
+        <app-file-upload formControlName="file" [progress]="progress"></app-file-upload>
+        <ng-container *ngIf="hasError('file', 'requiredFileType')">
+          <app-alert></app-alert>Only Supported file format.
+          🤡</ng-container>
       </form>
-      <ng-template matStepLabel>Upload files</ng-template>
-      You are now done.
       <div>
         <button mat-button (click)="fileUpload()">Done</button>
       </div>
     </mat-step>
+
   </mat-horizontal-stepper>
 
 </mat-card>

@@ -20,6 +20,7 @@ export class ProjectModel {
   title: string;
   description: string;
   file_name: string;
+  file: File;
   category: Array<Category>;
   status: string;
 

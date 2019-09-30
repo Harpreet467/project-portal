@@ -6,6 +6,10 @@ import {SpinnerService} from '../shared/service/spinner.service';
 import {MatSnackBar, MatStepper} from '@angular/material';
 import {Router} from '@angular/router';
 import {AppConfig} from '../app.config';
+import {toResponseBody, uploadProgress} from '../layout/file-upload/file-upload.utils';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {requiredFileType} from '../layout/file-upload/upload-file-validators';
+import {AlertService} from '../layout/alert/alert.service';
 
 
 @Component({
@@ -19,12 +23,18 @@ export class ProposalAuthorComponent implements OnInit, OnDestroy {
   projectModel: ProjectModel = new ProjectModel();
   categories: Category[];
 
+  progress = 0;
   proposalAuthorStep = false;
   projectStep = false;
+
+  uploadFile = new FormGroup({
+    file: new FormControl(null, [Validators.required, requiredFileType('png')])
+  });
 
   constructor(
     private spinnerService: SpinnerService,
     private proposalAuthorService: ProposalAuthorService,
+    private alertService: AlertService,
     private snackBar: MatSnackBar,
     private router: Router
   ) { }
@@ -60,7 +70,8 @@ export class ProposalAuthorComponent implements OnInit, OnDestroy {
   saveProject(stepper: MatStepper) {
     this.spinnerService.show();
     this.subscription.add(
-      this.proposalAuthorService.createProject(this.projectModel).subscribe(() => {
+      this.proposalAuthorService.createProject(this.projectModel).subscribe((res: ProjectModel) => {
+        this.projectModel.id = res.id;
         this.projectStep = true;
         this.spinnerService.hide();
         setTimeout(() => {
@@ -71,6 +82,35 @@ export class ProposalAuthorComponent implements OnInit, OnDestroy {
   }
 
   fileUpload() {
+    if (this.uploadFile.valid) {
+      this.spinnerService.show();
+      this.subscription.add(
+        this.proposalAuthorService.uploadProjectFile(this.projectModel.id, this.uploadFile.value)
+          .pipe(
+            uploadProgress(progress => (this.progress = progress)),
+            toResponseBody()
+          )
+          .subscribe(() => {
+            this.progress = 0;
+            this.spinnerService.hide();
+            this.successFn();
+          })
+      );
+    } else {
+      this.successFn();
+    }
+  }
+
+  hasError(field: string, error: string) {
+    const control = this.uploadFile.get(field);
+    const isError = control.dirty && control.hasError(error);
+    if (isError) {
+      this.alertService.error('Only Supported file format.');
+    }
+    return isError;
+  }
+
+  successFn() {
     this.snackBar.open('Successfully submitted');
     this.router.navigate([AppConfig.HOME]);
   }

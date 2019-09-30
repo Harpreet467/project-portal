@@ -16,6 +16,8 @@ import {
 import {FlexModule} from '@angular/flex-layout';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {SpinnerModule} from '../layout/spinner/spinner.module';
+import {AlertModule} from '../layout/alert/alert.module';
+import {FileUploadModule} from '../layout/file-upload/file-upload.module';
 
 
 
@@ -36,7 +38,9 @@ import {SpinnerModule} from '../layout/spinner/spinner.module';
     MatButtonModule,
     FormsModule,
     MatSelectModule,
-    SpinnerModule
+    SpinnerModule,
+    AlertModule,
+    FileUploadModule
   ],
   providers: [
     ProposalAuthorService
