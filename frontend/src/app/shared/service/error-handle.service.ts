@@ -34,7 +34,7 @@ export class ErrorHandleService {
           break;
 
         case 401:
-          return this.handle401Error(request, next);
+          return this.handle401Error(request, next, error);
       }
     }
     return throwError(error);
@@ -44,8 +44,10 @@ export class ErrorHandleService {
     this.location.back();
   }
 
-  handle401Error(request: HttpRequest<any>, next: HttpHandler) {
-    if (request.url.includes(AppConfig.REFRESH_TOKEN_API) || !this.storageService.getUserToken()) {
+  handle401Error(request: HttpRequest<any>, next: HttpHandler, error: HttpErrorResponse) {
+    if (request.url.includes(AppConfig.AUTH_API)) {
+      return throwError(error);
+    } else if (request.url.includes(AppConfig.REFRESH_TOKEN_API) || !this.storageService.getUserToken()) {
       this.sharedService.logout();
     } else {
       this.snackBar.dismiss();
