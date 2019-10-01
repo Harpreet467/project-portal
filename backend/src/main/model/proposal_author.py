@@ -14,5 +14,5 @@ class ProposalAuthor(Entity, db.Model):
         super().__init__(last_updated_by)
         self.email = kwargs['email']
         self.name = kwargs['name']
-        self.phone_number = kwargs['phone_number']
-        self.organisation_name = kwargs['organisation_name']
+        self.phone_number = kwargs.get('phone_number', None)
+        self.organisation_name = kwargs.get('organisation_name', None)

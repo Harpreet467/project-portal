@@ -1,0 +1,121 @@
+<mat-card class="mat-elevation-z1 m-auto w-90 mt-2 p-2">
+  <mat-card-header fxLayout="row" fxLayoutAlign="space-between center" class="mb-1">
+    <mat-card-title class="m-auto">Project Proposal</mat-card-title>
+  </mat-card-header>
+
+  <mat-divider></mat-divider>
+
+  <mat-horizontal-stepper linear #stepper>
+
+    <mat-step [completed]="proposalAuthorStep" [editable]="false">
+      <div fxLayout="row column" fxLayoutAlign="space-evenly center">
+        <form #proposalAuthorFrom="ngForm">
+          <ng-template matStepLabel>Fill out your details</ng-template>
+          <mat-form-field appearance="outline">
+            <mat-label>Name</mat-label>
+            <label>
+              <input matInput placeholder="name" name="name" [(ngModel)]="proposalAuthorModel.name" #name="ngModel" required>
+            </label>
+            <mat-error *ngIf="name.touched && name.invalid">
+              <small class="mat-text-warn" *ngIf="name?.errors.required">Name is required.</small>
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Email</mat-label>
+            <label>
+              <input matInput placeholder="email" name="email" [(ngModel)]="proposalAuthorModel.email" #email="ngModel" required>
+            </label>
+            <mat-error *ngIf="email.touched && email.invalid">
+              <small class="mat-text-warn" *ngIf="email?.errors.required">Email is required.</small>
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Phone Number</mat-label>
+            <label>
+              <input matInput placeholder="phone_number" name="phone_number" [(ngModel)]="proposalAuthorModel.phone_number">
+            </label>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Organisation Name</mat-label>
+            <label>
+              <input matInput placeholder="organisation_name" name="organisation_name" [(ngModel)]="proposalAuthorModel.organisation_name">
+            </label>
+          </mat-form-field>
+          <div>
+            <button mat-button
+                    (click)="saveProposalAuthor(stepper)"
+                    [ngClass]="proposalAuthorFrom.form.invalid ? 'cursor-not-allowed' : 'cursor-pointer'"
+                    [disabled]="proposalAuthorFrom.form.invalid">
+              Next
+              <app-spinner *ngIf="spinnerService.visibility | async"></app-spinner>
+            </button>
+          </div>
+        </form>
+      </div>
+    </mat-step>
+
+    <mat-step [completed]="projectStep" [editable]="false">
+      <div fxLayout="row column" fxLayoutAlign="space-evenly center">
+        <form #projectFrom="ngForm">
+          <ng-template matStepLabel>Fill out your project proposal</ng-template>
+          <mat-form-field appearance="outline">
+            <mat-label>Title</mat-label>
+            <label>
+              <input matInput placeholder="Title" name="title" [(ngModel)]="projectModel.title" #title="ngModel" required>
+            </label>
+            <mat-error *ngIf="title.touched && title.invalid">
+              <small class="mat-text-warn" *ngIf="title?.errors.required">Title is required.</small>
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Description</mat-label>
+            <label>
+              <textarea matInput placeholder="Description" name="description" [(ngModel)]="projectModel.description" #description="ngModel" required></textarea>
+            </label>
+            <mat-error *ngIf="description.touched && description.invalid">
+              <small class="mat-text-warn" *ngIf="description?.errors.required">Description is required.</small>
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Category</mat-label>
+            <mat-select placeholder="Select Category" name="category" [(ngModel)]="projectModel.category"
+                        #category="ngModel" multiple required>
+              <mat-option *ngFor="let category of categories" [value]="category">
+                {{category?.name}} &nbsp;
+                <i>({{category?.description}})</i>
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="category.touched && category.invalid">
+              <small class="mat-text-warn" *ngIf="category?.errors.required">Category is required.</small>
+            </mat-error>
+          </mat-form-field>
+          <div>
+            <button mat-button
+                    (click)="saveProject(stepper)"
+                    [ngClass]="projectFrom.form.invalid ? 'cursor-not-allowed' : 'cursor-pointer'"
+                    [disabled]="projectFrom.form.invalid">
+              Next
+              <app-spinner *ngIf="spinnerService.visibility | async"></app-spinner>
+            </button>
+          </div>
+        </form>
+      </div>
+    </mat-step>
+
+    <mat-step [optional]="true">
+      <form [formGroup]="uploadFile">
+        <ng-template matStepLabel>Upload files</ng-template>
+        <app-file-upload formControlName="file" [progress]="progress"></app-file-upload>
+        <ng-container *ngIf="hasError('file', 'requiredFileType')">
+          <app-alert></app-alert>Only Supported file format.
+          🤡</ng-container>
+      </form>
+      <div>
+        <button mat-button (click)="fileUpload()">Done</button>
+      </div>
+    </mat-step>
+
+  </mat-horizontal-stepper>
+
+</mat-card>

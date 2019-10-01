@@ -1,0 +1,12 @@
+<div class="file-drop-area">
+  <button mat-stroked-button color="primary" class="file-btn">Choose file</button>
+  <span class="file-msg">{{file ? file.name : 'or drag and drop file here' }}</span>
+  <input class="file-input" type="file">
+</div>
+
+<mat-progress-bar
+  class="mt-1 mb-1"
+  color="primary"
+  mode="determinate"
+  [value]="progress"
+  *ngIf="progress > 0"></mat-progress-bar>

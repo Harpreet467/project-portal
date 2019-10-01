@@ -37,12 +37,12 @@ td, th {
   flex: 1 0 auto;
 }
 
-.text-center {
-  text-align: center !important;
-}
-
 .w-90 {
   width: 90% !important;
+}
+
+.d-block {
+  display: block !important;
 }
 
 .m-auto {
@@ -103,6 +103,14 @@ td, th {
 
 .text-red {
   color: #ff3000 !important;
+}
+
+.text-center {
+  text-align: center !important;
+}
+
+.text-right {
+  text-align: right !important;
 }
 
 .font-size-1 {

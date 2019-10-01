@@ -22,10 +22,7 @@ export class AppInterceptor implements HttpInterceptor {
     this.progressBarService.show();
 
     request = request.clone({
-      url: environment.HOST + request.url,
-      setHeaders: {
-        'Content-type': 'application/json'
-      }
+      url: environment.HOST + request.url
     });
     request = this.authService.addAuthenticationToken(request);
 

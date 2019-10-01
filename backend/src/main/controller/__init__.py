@@ -4,3 +4,4 @@ def load_controller():
     import src.main.controller.staff
     import src.main.controller.proposal_author
     import src.main.controller.project
+    import src.main.controller.project_category

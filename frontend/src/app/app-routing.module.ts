@@ -16,6 +16,10 @@ const routes: Routes = [
     loadChildren: './account/account.module#AccountModule'
   },
   {
+    path: 'project-proposal',
+    loadChildren: './proposal-author/proposal-author.module#ProposalAuthorModule'
+  },
+  {
     path: '',
     canActivate: [AuthGuardService],
     children: [
