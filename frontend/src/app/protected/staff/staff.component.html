@@ -12,59 +12,60 @@
     </label>
   </mat-form-field>
 
-  <div class="spinner-container" *ngIf="spinnerService.visibility | async">
-    <app-spinner></app-spinner>
+  <div class="pos-relative">
+    <div class="table-spinner" *ngIf="spinnerService.visibility | async">
+      <app-spinner></app-spinner>
+    </div>
+
+    <mat-table class="mt-1" [dataSource]="dataSource" matSort [matSortActive]="displayedColumns[1]" matSortDirection="asc">
+      <ng-container [matColumnDef]="displayedColumns[0]">
+        <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header fxLayoutAlign="center center" fxFlex="5"> ID </mat-header-cell>
+        <mat-cell mat-cell *matCellDef="let row" fxLayoutAlign="center center" fxFlex="5"> {{row.id}} </mat-cell>
+      </ng-container>
+
+      <ng-container [matColumnDef]="displayedColumns[1]">
+        <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header fxLayoutAlign="start center" fxFlex="15"> Name </mat-header-cell>
+        <mat-cell mat-cell *matCellDef="let row" fxLayoutAlign="start center" fxFlex="15"> {{row.name | titlecase}} </mat-cell>
+      </ng-container>
+
+      <ng-container [matColumnDef]="displayedColumns[2]">
+        <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header fxLayoutAlign="start center" fxFlex="20"> Email </mat-header-cell>
+        <mat-cell mat-cell *matCellDef="let row" fxLayoutAlign="start center" fxFlex="20"> {{row.email}} </mat-cell>
+      </ng-container>
+
+      <ng-container [matColumnDef]="displayedColumns[3]">
+        <mat-header-cell mat-header-cell *matHeaderCellDef fxLayoutAlign="start center" fxFlex="20"> Role(s) </mat-header-cell>
+        <mat-cell mat-cell *matCellDef="let row" fxLayoutAlign="start center" fxFlex="20">
+          <mat-chip-list aria-label="roles">
+            <mat-chip disableRipple *ngFor="let role of row.roles">{{role.name}}</mat-chip>
+          </mat-chip-list>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container [matColumnDef]="displayedColumns[4]">
+        <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header fxLayoutAlign="center center" fxFlex="8"> Active </mat-header-cell>
+        <mat-cell mat-cell *matCellDef="let row" fxLayoutAlign="center center" fxFlex="8">
+          <mat-slide-toggle color="primary" [checked]="row.active" (toggleChange)="toggleStatusStaff(row)"></mat-slide-toggle>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container [matColumnDef]="displayedColumns[5]">
+        <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header fxLayoutAlign="center center" fxFlex="20"> Updated At </mat-header-cell>
+        <mat-cell mat-cell *matCellDef="let row" fxLayoutAlign="center center" fxFlex="20"> {{row.updated_at | date: 'medium'}} </mat-cell>
+      </ng-container>
+
+      <ng-container [matColumnDef]="displayedColumns[6]">
+        <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header fxLayoutAlign="center center" fxFlex="12"> Action </mat-header-cell>
+        <mat-cell mat-cell *matCellDef="let row" fxLayoutAlign="center center" fxFlex="12">
+          <button mat-icon-button matTooltip="view" (click)="openViewStaffModal(row)"><mat-icon>visibility</mat-icon></button>
+          <button mat-icon-button matTooltip="edit" (click)="openAddStaffModal(row)"><mat-icon>edit</mat-icon></button>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+
+    <mat-paginator [pageSizeOptions]="pageSize"></mat-paginator>
   </div>
-
-  <mat-table class="mt-1" [dataSource]="dataSource" matSort matSortActive="id" matSortDirection="asc">
-    <ng-container matColumnDef="id">
-      <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header fxLayoutAlign="center center" fxFlex="8"> ID </mat-header-cell>
-      <mat-cell mat-cell *matCellDef="let row" fxLayoutAlign="center center" fxFlex="8"> {{row.id}} </mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="name">
-      <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header fxLayoutAlign="start center" fxFlex="17"> Name </mat-header-cell>
-      <mat-cell mat-cell *matCellDef="let row" fxLayoutAlign="start center" fxFlex="17"> {{row.name}} </mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="email">
-      <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header fxLayoutAlign="start center" fxFlex="20"> Email </mat-header-cell>
-      <mat-cell mat-cell *matCellDef="let row" fxLayoutAlign="start center" fxFlex="20"> {{row.email}} </mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="roles">
-      <mat-header-cell mat-header-cell *matHeaderCellDef fxLayoutAlign="start center" fxFlex="20"> Role(s) </mat-header-cell>
-      <mat-cell mat-cell *matCellDef="let row" fxLayoutAlign="start center" fxFlex="20">
-        <mat-chip-list aria-label="roles">
-          <mat-chip disableRipple *ngFor="let role of row.roles">{{role.name}}</mat-chip>
-        </mat-chip-list>
-      </mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="active">
-      <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header fxLayoutAlign="center center" fxFlex="5"> Active </mat-header-cell>
-      <mat-cell mat-cell *matCellDef="let row" fxLayoutAlign="center center" fxFlex="5">
-        <mat-icon *ngIf="row.active" class="text-green">done</mat-icon>
-        <mat-icon *ngIf="!row.active" class="text-red">close</mat-icon>
-      </mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="updated_at">
-      <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header fxLayoutAlign="center center" fxFlex="20"> Updated At </mat-header-cell>
-      <mat-cell mat-cell *matCellDef="let row" fxLayoutAlign="center center" fxFlex="20"> {{row.updated_at}} </mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="action">
-      <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header fxLayoutAlign="center center" fxFlex="10"> Action </mat-header-cell>
-      <mat-cell mat-cell *matCellDef="let row" fxLayoutAlign="center center" fxFlex="10">
-        <button mat-icon-button matTooltip="view" (click)="openViewStaffModal(row)"><mat-icon>visibility</mat-icon></button>
-        <button mat-icon-button matTooltip="edit" (click)="openAddStaffModal(row)"><mat-icon>edit</mat-icon></button>
-      </mat-cell>
-    </ng-container>
-
-    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-  </mat-table>
-
-  <mat-paginator [pageSizeOptions]="pageSize"></mat-paginator>
 </mat-card>

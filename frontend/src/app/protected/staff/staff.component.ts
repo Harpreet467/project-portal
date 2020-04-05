@@ -1,9 +1,9 @@
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {Subscription} from 'rxjs';
 import {StaffService} from './staff.service';
-import {Staff, staffDisplayedColumns, StaffModel} from './staff.model';
+import {Active, Staff, staffDisplayedColumns, StaffModel} from './staff.model';
 import {Constant} from '../../shared/constant';
-import {MatDialog, MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
+import {MatDialog, MatPaginator, MatSnackBar, MatSort, MatTableDataSource} from '@angular/material';
 import {SaveStaffModalComponent} from './save-staff-modal/save-staff-modal.component';
 import {SpinnerService} from '../../shared/service/spinner.service';
 import {ViewStaffDetailModalComponent} from './view-staff-detail-modal/view-staff-detail-modal.component';
@@ -14,8 +14,8 @@ import {ViewStaffDetailModalComponent} from './view-staff-detail-modal/view-staf
   styleUrls: ['./staff.component.scss']
 })
 export class StaffComponent implements OnInit, OnDestroy {
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: false}) sort: MatSort;
 
   subscription: Subscription = new Subscription();
   dataSource: MatTableDataSource<Staff>;
@@ -25,7 +25,8 @@ export class StaffComponent implements OnInit, OnDestroy {
   constructor(
     public dialog: MatDialog,
     public staffService: StaffService,
-    private spinnerService: SpinnerService
+    private spinnerService: SpinnerService,
+    private snackBar: MatSnackBar
   ) { }
 
   ngOnInit() {
@@ -70,6 +71,17 @@ export class StaffComponent implements OnInit, OnDestroy {
       width: Constant.MODAL_WIDTH,
       data: staff
     });
+  }
+
+  toggleStatusStaff(staff: Staff) {
+    this.subscription.add(
+      this.staffService.toggleStatusStaff(staff.id, new Active(!staff.active)).subscribe(() => {
+        this.snackBar.open('Status changed Successfully!!!');
+        this.getStaffs();
+      }, () => {
+        this.getStaffs();
+      })
+    );
   }
 
   ngOnDestroy(): void {

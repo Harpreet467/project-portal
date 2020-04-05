@@ -8,7 +8,7 @@ import {
   MatButtonModule, MatCardModule, MatChipsModule, MatDialogModule, MatDividerModule,
   MatIconModule,
   MatInputModule, MatListModule,
-  MatPaginatorModule, MatSelectModule,
+  MatPaginatorModule, MatSelectModule, MatSlideToggleModule,
   MatSortModule,
   MatTableModule,
   MatTooltipModule
@@ -46,7 +46,8 @@ import {AlertModule} from '../../layout/alert/alert.module';
     MatSelectModule,
     SpinnerModule,
     MatListModule,
-    AlertModule
+    AlertModule,
+    MatSlideToggleModule
   ],
   providers: [
     StaffService

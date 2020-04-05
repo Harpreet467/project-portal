@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {AppConfig} from '../../app.config';
-import {Staff} from './staff.model';
+import {Active, Staff} from './staff.model';
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +20,10 @@ export class StaffService {
 
   updateStaff(staff: Staff) {
     return this.http.put(AppConfig.STAFF_API + '/' + staff.id, staff);
+  }
+
+  toggleStatusStaff(id: number, active: Active) {
+    return this.http.patch(AppConfig.STAFF_API + '/' + id, active);
   }
 
   getRoles() {
