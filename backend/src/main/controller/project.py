@@ -11,15 +11,15 @@ from src.main.util.file_upload import get_uploaded_file as get_uploaded_file_ser
 
 project_api = api_manager.create_api_blueprint(
     ProjectModel,
-    methods=['GET', 'POST', 'PUT', 'DELETE'],
+    methods=['GET', 'POST', 'PUT', 'PATCH'],
     validation_exceptions=[ValidationError],
     preprocessors=dict(
         GET_SINGLE=[auth_func, role_first_level],
         GET_MANY=[auth_func, role_first_level],
         PUT_SINGLE=[auth_func, role_second_level],
         PUT_MANY=[auth_func, role_second_level],
-        DELETE_SINGLE=[auth_func, role_admin],
-        DELETE_MANY=[auth_func, role_admin]
+        PATCH_SINGLE=[auth_func, role_admin],
+        PATCH_MANY=[auth_func, role_admin]
     )
 )
 
