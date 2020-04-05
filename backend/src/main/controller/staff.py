@@ -10,7 +10,7 @@ from src.main.security.authorization import role_admin
 
 staff_api = api_manager.create_api_blueprint(
     StaffModel,
-    methods=['GET', 'POST', 'PUT', 'DELETE'],
+    methods=['GET', 'POST', 'PUT', 'PATCH'],
     exclude_columns=exclude_columns(),
     validation_exceptions=[ValidationError],
     preprocessors=dict(
@@ -19,8 +19,8 @@ staff_api = api_manager.create_api_blueprint(
         GET_MANY=[auth_func, role_admin],
         PUT_SINGLE=[auth_func, role_admin, password_hash_preprocessor],
         PUT_MANY=[auth_func, role_admin, password_hash_preprocessor],
-        DELETE_SINGLE=[auth_func, role_admin],
-        DELETE_MANY=[auth_func, role_admin]
+        PATCH_SINGLE=[auth_func, role_admin],
+        PATCH_MANY=[auth_func, role_admin]
     )
 )
 
