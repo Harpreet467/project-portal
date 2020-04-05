@@ -20,7 +20,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   email: string;
 
   constructor(
-    private progressBarService: ProgressBarService,
+    public progressBarService: ProgressBarService,
     private sharedService: SharedService,
     private storageService: StorageService
   ) { }

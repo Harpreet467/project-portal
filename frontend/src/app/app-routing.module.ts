@@ -13,11 +13,11 @@ const routes: Routes = [
   },
   {
     path: 'account',
-    loadChildren: './account/account.module#AccountModule'
+    loadChildren: () => import('./account/account.module').then(m => m.AccountModule)
   },
   {
     path: 'project-proposal',
-    loadChildren: './proposal-author/proposal-author.module#ProposalAuthorModule'
+    loadChildren: () => import('./proposal-author/proposal-author.module').then(m => m.ProposalAuthorModule)
   },
   {
     path: '',
@@ -25,25 +25,25 @@ const routes: Routes = [
     children: [
       {
         path: 'dashboard',
-        loadChildren: './protected/dashboard/dashboard.module#DashboardModule'
+        loadChildren: () => import('./protected/dashboard/dashboard.module').then(m => m.DashboardModule)
       },
       {
         path: 'staff',
         canActivate: [AuthGuardService, RoleGuardService],
         data: {role: Constant.ROLE_ADMIN},
-        loadChildren: './protected/staff/staff.module#StaffModule'
+        loadChildren: () => import('./protected/staff/staff.module').then(m => m.StaffModule)
       },
       {
         path: 'project',
         canActivate: [AuthGuardService, RoleGuardService],
         data: {role: Constant.ROLE_ADMIN},
-        loadChildren: './protected/project/project.module#ProjectModule'
+        loadChildren: () => import('./protected/project/project.module').then(m => m.ProjectModule)
       },
       {
         path: 'system-profiler',
         canActivate: [AuthGuardService, RoleGuardService],
         data: {role: Constant.ROLE_ADMIN},
-        loadChildren: './protected/system-profiler/system-profiler.module#SystemProfilerModule'
+        loadChildren: () => import('./protected/system-profiler/system-profiler.module').then(m => m.SystemProfilerModule)
       }
     ]
   },

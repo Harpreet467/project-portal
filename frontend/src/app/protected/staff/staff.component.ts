@@ -3,7 +3,11 @@ import {Subscription} from 'rxjs';
 import {StaffService} from './staff.service';
 import {Active, Staff, staffDisplayedColumns, StaffModel} from './staff.model';
 import {Constant} from '../../shared/constant';
-import {MatDialog, MatPaginator, MatSnackBar, MatSort, MatTableDataSource} from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import {SaveStaffModalComponent} from './save-staff-modal/save-staff-modal.component';
 import {SpinnerService} from '../../shared/service/spinner.service';
 import {ViewStaffDetailModalComponent} from './view-staff-detail-modal/view-staff-detail-modal.component';
@@ -14,8 +18,8 @@ import {ViewStaffDetailModalComponent} from './view-staff-detail-modal/view-staf
   styleUrls: ['./staff.component.scss']
 })
 export class StaffComponent implements OnInit, OnDestroy {
-  @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
-  @ViewChild(MatSort, {static: false}) sort: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
 
   subscription: Subscription = new Subscription();
   dataSource: MatTableDataSource<Staff>;
@@ -25,7 +29,7 @@ export class StaffComponent implements OnInit, OnDestroy {
   constructor(
     public dialog: MatDialog,
     public staffService: StaffService,
-    private spinnerService: SpinnerService,
+    public spinnerService: SpinnerService,
     private snackBar: MatSnackBar
   ) { }
 

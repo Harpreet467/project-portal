@@ -3,7 +3,8 @@ import {ProposalAuthorModel} from './proposal-author.model';
 import {Subscription} from 'rxjs';
 import {ProposalAuthorService} from './proposal-author.service';
 import {SpinnerService} from '../shared/service/spinner.service';
-import {MatSnackBar, MatStepper} from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatStepper } from '@angular/material/stepper';
 import {Router} from '@angular/router';
 import {AppConfig} from '../app.config';
 import {toResponseBody, uploadProgress} from '../layout/file-upload/file-upload.utils';
@@ -37,7 +38,7 @@ export class ProposalAuthorComponent implements OnInit, OnDestroy {
   });
 
   constructor(
-    private spinnerService: SpinnerService,
+    public spinnerService: SpinnerService,
     private proposalAuthorService: ProposalAuthorService,
     private alertService: AlertService,
     private snackBar: MatSnackBar,

@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {FileUploadComponent} from './file-upload.component';
-import {MatButtonModule, MatProgressBarModule} from '@angular/material';
+import { MatButtonModule } from '@angular/material/button';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 
 

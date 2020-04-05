@@ -1,5 +1,5 @@
 import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import {Role, RoleModel, Staff} from '../staff.model';
 import {StaffComponent} from '../staff.component';
 import {StaffService} from '../staff.service';

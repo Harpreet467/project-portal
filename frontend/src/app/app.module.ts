@@ -3,14 +3,19 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {
-  MAT_SNACK_BAR_DEFAULT_OPTIONS,
-  MatButtonModule, MatCardModule,
-  MatFormFieldModule, MatIconModule,
-  MatInputModule, MatListModule, MatMenuModule,
-  MatProgressBarModule, MatProgressSpinnerModule, MatSidenavModule, MatSnackBarModule,
-  MatToolbarModule, MatTooltipModule
-} from '@angular/material';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatListModule } from '@angular/material/list';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MAT_SNACK_BAR_DEFAULT_OPTIONS, MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import {AccountModule} from './account/account.module';
 import {HeaderComponent} from './layout/header/header.component';
 import {HomeComponent} from './home/home.component';

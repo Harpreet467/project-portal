@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {SharedService} from './shared.service';
-import {MatSnackBar} from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import {Location} from '@angular/common';
 import {HttpErrorResponse, HttpHandler, HttpRequest} from '@angular/common/http';
 import {AppConfig} from '../../app.config';

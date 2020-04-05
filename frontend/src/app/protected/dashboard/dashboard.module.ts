@@ -4,7 +4,7 @@ import {RouterModule} from '@angular/router';
 import {dashboardRoutes} from './dashboard.route';
 import {DashboardComponent} from './dashboard.component';
 import {DashboardService} from './dashboard.service';
-import {MatCardModule} from '@angular/material';
+import { MatCardModule } from '@angular/material/card';
 
 
 @NgModule({

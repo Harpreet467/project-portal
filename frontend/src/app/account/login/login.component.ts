@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     private sharedService: SharedService,
     private storageService: StorageService,
     private alertService: AlertService,
-    private spinnerService: SpinnerService,
+    public spinnerService: SpinnerService,
     private loginService: LoginService,
     private router: Router
   ) { }
