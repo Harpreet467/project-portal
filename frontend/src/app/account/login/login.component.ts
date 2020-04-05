@@ -7,6 +7,7 @@ import {Router} from '@angular/router';
 import {AppConfig} from '../../app.config';
 import {SharedService} from '../../shared/service/shared.service';
 import {AlertService} from '../../layout/alert/alert.service';
+import {SpinnerService} from '../../shared/service/spinner.service';
 
 
 @Component({
@@ -24,6 +25,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     private sharedService: SharedService,
     private storageService: StorageService,
     private alertService: AlertService,
+    private spinnerService: SpinnerService,
     private loginService: LoginService,
     private router: Router
   ) { }
@@ -35,6 +37,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   login() {
+    this.spinnerService.show();
     this.isDisableBtn = true;
     this.subscription.add(
       this.loginService.login(this.loginParam).subscribe((tokenModel: TokenModel) => {
@@ -43,6 +46,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       }, (error) => {
         this.alertService.error(error.error.message);
         this.isDisableBtn = false;
+        this.spinnerService.hide();
       })
     );
   }
@@ -56,8 +60,10 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.router.navigate([AppConfig.DASHBOARD]);
         this.isDisableBtn = false;
         this.isLoggedIn = true;
+        this.spinnerService.hide();
       }, () => {
         this.isDisableBtn = false;
+        this.spinnerService.hide();
       })
     );
   }

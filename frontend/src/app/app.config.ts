@@ -13,12 +13,15 @@ export class AppConfig {
   // Role
   public static readonly ROLE_API = AppConfig.API + 'role';
 
-  // Project
-  public static readonly PROPOSAL_AUTHOR_API = AppConfig.API + 'proposal_author';
-  public static readonly PROJECT_CATEGORY_API = AppConfig.API + 'project_category';
+  // ProjectModel
+  public static readonly PROPOSAL_AUTHOR_API = AppConfig.API + 'proposal-author';
+  public static readonly PROJECT_CATEGORY_API = AppConfig.API + 'project-category';
   public static readonly PROJECT_API = AppConfig.API + 'project';
   public static readonly PROJECT_UPLOAD_API = AppConfig.PROJECT_API + '/upload/';
   public static readonly PROJECT_DOWNLOAD_API = AppConfig.PROJECT_API + '/download/';
+
+  // Category
+  public static readonly CATEGORY_API = 'category';
 
   // System Profile
   public static readonly SYSTEM_PROFILE_API = 'system-profiler';
@@ -36,8 +39,12 @@ export class AppConfig {
   // Staff
   public static readonly STAFF = 'staff/';
 
-  // Project
+  // ProjectModel
   public static readonly PROJECT_PROPOSAL = 'project-proposal';
+  public static readonly PROJECT = 'project';
+
+  // Category
+  public static readonly CATEGORY = 'category';
 
   // System Profile
   public static readonly SYSTEM_PROFILE = 'system-profiler/';

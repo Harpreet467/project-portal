@@ -39,10 +39,24 @@ export class SidenavComponent implements OnInit, OnDestroy {
         visibility: this.isAdmin
       },
       {
+        name: 'Project Authors',
+        type: 'link',
+        value: AppConfig.PROJECT,
+        icon: 'assignment_ind',
+        visibility: true
+      },
+      {
         name: 'Projects',
         type: 'link',
-        value: null,
-        icon: 'bubble_chart',
+        value: AppConfig.PROJECT,
+        icon: 'assignment',
+        visibility: true
+      },
+      {
+        name: 'Category',
+        type: 'link',
+        value: AppConfig.CATEGORY,
+        icon: 'category',
         visibility: true
       },
       {

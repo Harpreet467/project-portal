@@ -23,6 +23,10 @@ export class AlertService {
     });
   }
 
+  close() {
+    this.subject.next();
+  }
+
   success(message: string, keepAfterNavigationChange = false) {
     this.keepAfterNavigationChange = keepAfterNavigationChange;
     this.subject.next(new AlertModel(ALERT_TYPE.SUCCESS, message));

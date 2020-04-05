@@ -21,7 +21,10 @@
           </label>
         </mat-form-field>
 
-        <button mat-raised-button color="primary" (click)="login()" [disabled]="isDisableBtn">Login</button>
+        <button mat-raised-button color="primary" (click)="login()" [disabled]="isDisableBtn">
+          Login
+          <app-spinner *ngIf="spinnerService.visibility | async" class="d-inline-block ml-1" [diameter]="15"></app-spinner>
+        </button>
       </div>
 
     </mat-card-content>

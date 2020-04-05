@@ -29,13 +29,19 @@ const routes: Routes = [
       },
       {
         path: 'staff',
-        canActivate: [RoleGuardService],
+        canActivate: [AuthGuardService, RoleGuardService],
         data: {role: Constant.ROLE_ADMIN},
         loadChildren: './protected/staff/staff.module#StaffModule'
       },
       {
+        path: 'project',
+        canActivate: [AuthGuardService, RoleGuardService],
+        data: {role: Constant.ROLE_ADMIN},
+        loadChildren: './protected/project/project.module#ProjectModule'
+      },
+      {
         path: 'system-profiler',
-        canActivate: [RoleGuardService],
+        canActivate: [AuthGuardService, RoleGuardService],
         data: {role: Constant.ROLE_ADMIN},
         loadChildren: './protected/system-profiler/system-profiler.module#SystemProfilerModule'
       }

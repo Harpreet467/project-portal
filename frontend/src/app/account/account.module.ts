@@ -8,6 +8,7 @@ import {LoginService} from './login/login.service';
 import {FlexModule} from '@angular/flex-layout';
 import {accountRoute} from './account.route';
 import {AlertModule} from '../layout/alert/alert.module';
+import {SpinnerModule} from '../layout/spinner/spinner.module';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import {AlertModule} from '../layout/alert/alert.module';
     RouterModule,
     MatButtonModule,
     FlexModule,
-    AlertModule
+    AlertModule,
+    SpinnerModule
   ],
   providers: [
     LoginService
