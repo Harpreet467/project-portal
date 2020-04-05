@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {AppConfig} from '../app.config';
-import {ProjectModel, ProposalAuthorModel} from './proposal-author.model';
+import {ProposalAuthorModel} from './proposal-author.model';
 import {toFormData} from '../layout/file-upload/file-upload.utils';
+import {Project} from '../protected/project/project.model';
 
 
 @Injectable({
@@ -16,8 +17,8 @@ export class ProposalAuthorService {
     return this.http.post(AppConfig.PROPOSAL_AUTHOR_API, proposalAuthorModel);
   }
 
-  createProject(projectModel: ProjectModel) {
-    return this.http.post(AppConfig.PROJECT_API, projectModel);
+  createProject(project: Project) {
+    return this.http.post(AppConfig.PROJECT_API, project);
   }
 
   uploadProjectFile(id: number, data) {
