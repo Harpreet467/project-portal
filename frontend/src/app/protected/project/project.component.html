@@ -1,1 +1,67 @@
-<p>project works!</p>
+<mat-card class="mat-elevation-z1 m-auto w-90 mt-2 p-2">
+  <mat-card-header fxLayout="row" fxLayoutAlign="space-between center" class="mb-1">
+    <mat-card-title class="m-auto">Projects</mat-card-title>
+  </mat-card-header>
+
+  <mat-divider></mat-divider>
+
+  <mat-form-field class="mt-1">
+    <label>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+    </label>
+  </mat-form-field>
+
+  <div class="pos-relative">
+    <div class="table-spinner" *ngIf="spinnerService.visibility | async">
+      <app-spinner></app-spinner>
+    </div>
+
+    <mat-table class="mt-1" [dataSource]="dataSource" matSort [matSortActive]="displayedColumns[5]" matSortDirection="desc">
+      <ng-container [matColumnDef]="displayedColumns[0]">
+        <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header fxLayoutAlign="center center" fxFlex="5"> ID </mat-header-cell>
+        <mat-cell mat-cell *matCellDef="let row" fxLayoutAlign="center center" fxFlex="5"> {{row.id}} </mat-cell>
+      </ng-container>
+
+      <ng-container [matColumnDef]="displayedColumns[1]">
+        <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header fxLayoutAlign="start center" fxFlex="15"> Title </mat-header-cell>
+        <mat-cell mat-cell *matCellDef="let row" fxLayoutAlign="start center" fxFlex="15"> {{row.title}} </mat-cell>
+      </ng-container>
+
+      <ng-container [matColumnDef]="displayedColumns[2]">
+        <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header fxLayoutAlign="start center" fxFlex="30"> Description </mat-header-cell>
+        <mat-cell mat-cell *matCellDef="let row" fxLayoutAlign="start center" fxFlex="30"> {{row.description}} </mat-cell>
+      </ng-container>
+
+      <ng-container [matColumnDef]="displayedColumns[3]">
+        <mat-header-cell mat-header-cell *matHeaderCellDef fxLayoutAlign="start center" fxFlex="20"> Category </mat-header-cell>
+        <mat-cell mat-cell *matCellDef="let row" fxLayoutAlign="start center" fxFlex="20">
+          <mat-chip-list aria-label="roles">
+            <mat-chip disableRipple *ngFor="let role of row.category">{{role.name}}</mat-chip>
+          </mat-chip-list>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container [matColumnDef]="displayedColumns[4]">
+        <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header fxLayoutAlign="start center" fxFlex="10"> Status </mat-header-cell>
+        <mat-cell mat-cell *matCellDef="let row" fxLayoutAlign="start center" fxFlex="10"> {{row.status}} </mat-cell>
+      </ng-container>
+
+      <ng-container [matColumnDef]="displayedColumns[5]">
+        <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header fxLayoutAlign="start center" fxFlex="10"> Updated At </mat-header-cell>
+        <mat-cell mat-cell *matCellDef="let row" fxLayoutAlign="start center" fxFlex="10"> {{row.updated_at | date}} </mat-cell>
+      </ng-container>
+
+      <ng-container [matColumnDef]="displayedColumns[6]">
+        <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header fxLayoutAlign="center center" fxFlex="10"> Action </mat-header-cell>
+        <mat-cell mat-cell *matCellDef="let row" fxLayoutAlign="center center" fxFlex="10">
+          <button mat-icon-button matTooltip="{{row.file_name}}" (click)="downloadFile(row)"><mat-icon>get_app</mat-icon></button>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+
+    <mat-paginator [pageSizeOptions]="pageSize"></mat-paginator>
+  </div>
+</mat-card>
