@@ -1,0 +1,37 @@
+<h1 mat-dialog-title>{{isEdit? 'Edit ' : 'Add New '}} Staff</h1>
+
+<div mat-dialog-content>
+
+  <app-alert></app-alert>
+
+  <form #categoryForm="ngForm">
+    <mat-form-field>
+      <label>
+        <input type="text" matInput placeholder="Name" name="name" [(ngModel)]="category.name" #name="ngModel" required>
+      </label>
+      <mat-error *ngIf="name.touched && name.invalid">
+        <small class="mat-text-warn" *ngIf="name?.errors.required">Name is required.</small>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <label>
+        <textarea matInput placeholder="Description" name="description" [(ngModel)]="category.description" #description="ngModel" required>
+        </textarea>
+      </label>
+      <mat-error *ngIf="description.touched && description.invalid">
+        <small class="mat-text-warn" *ngIf="description?.errors.required">Description is required.</small>
+      </mat-error>
+    </mat-form-field>
+
+  </form>
+</div>
+
+<div mat-dialog-actions fxLayoutAlign="end">
+  <button mat-flat-button (click)="closeModal()">Cancel</button>
+  <button color="primary" mat-raised-button (click)="saveCategory()"
+          [ngClass]="categoryForm.form.invalid ? 'cursor-not-allowed' : 'cursor-pointer'"
+          [disabled]="categoryForm.form.invalid || isDisableBtn">
+    Submit
+  </button>
+</div>
