@@ -1,9 +1,9 @@
 import {Routes} from '@angular/router';
-import {ProposalAuthorComponent} from './proposal-author.component';
+import {ProjectProposalComponent} from './project-proposal.component';
 
 export const proposalAuthorRoutes: Routes = [
   {
     path: '',
-    component: ProposalAuthorComponent
+    component: ProjectProposalComponent
   }
 ];

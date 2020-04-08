@@ -17,7 +17,7 @@ const routes: Routes = [
   },
   {
     path: 'project-proposal',
-    loadChildren: () => import('./proposal-author/proposal-author.module').then(m => m.ProposalAuthorModule)
+    loadChildren: () => import('./project-proposal/project-proposal.module').then(m => m.ProjectProposalModule)
   },
   {
     path: '',

@@ -1,4 +1,4 @@
-import {Project} from '../protected/project/project.model';
+import {Project} from '../project/project.model';
 
 export class ProposalAuthorModel {
   id: number;

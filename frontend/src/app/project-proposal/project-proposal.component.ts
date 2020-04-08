@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {ProposalAuthorModel} from './proposal-author.model';
+import {ProposalAuthorModel} from '../protected/proposal-author/proposal-author.model';
 import {Subscription} from 'rxjs';
-import {ProposalAuthorService} from './proposal-author.service';
+import {ProposalAuthorService} from '../protected/proposal-author/proposal-author.service';
 import {SpinnerService} from '../shared/service/spinner.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatStepper } from '@angular/material/stepper';
@@ -19,10 +19,10 @@ import {CategoryService} from '../protected/category/category.service';
 
 @Component({
   selector: 'app-proposal-author',
-  templateUrl: './proposal-author.component.html',
-  styleUrls: ['./proposal-author.component.scss']
+  templateUrl: './project-proposal.component.html',
+  styleUrls: ['./project-proposal.component.scss']
 })
-export class ProposalAuthorComponent implements OnInit, OnDestroy {
+export class ProjectProposalComponent implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
   proposalAuthorModel: ProposalAuthorModel = new ProposalAuthorModel();
   project: Project = new Project();

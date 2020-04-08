@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {RouterModule} from '@angular/router';
-import {proposalAuthorRoutes} from './proposal-author.route';
-import {ProposalAuthorService} from './proposal-author.service';
-import {ProposalAuthorComponent} from './proposal-author.component';
+import {proposalAuthorRoutes} from './project-proposal.route';
+import {ProposalAuthorService} from '../protected/proposal-author/proposal-author.service';
+import {ProjectProposalComponent} from './project-proposal.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
@@ -21,7 +21,7 @@ import {FileUploadModule} from '../layout/file-upload/file-upload.module';
 
 @NgModule({
   declarations: [
-    ProposalAuthorComponent
+    ProjectProposalComponent
   ],
   imports: [
     RouterModule.forChild(proposalAuthorRoutes),
@@ -44,4 +44,4 @@ import {FileUploadModule} from '../layout/file-upload/file-upload.module';
     ProposalAuthorService
   ]
 })
-export class ProposalAuthorModule { }
+export class ProjectProposalModule { }

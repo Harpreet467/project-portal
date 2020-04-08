@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {AppConfig} from '../app.config';
+import {AppConfig} from '../../app.config';
 import {ProposalAuthorModel} from './proposal-author.model';
-import {toFormData} from '../layout/file-upload/file-upload.utils';
-import {Project} from '../protected/project/project.model';
+import {toFormData} from '../../layout/file-upload/file-upload.utils';
+import {Project} from '../project/project.model';
 
 
 @Injectable({

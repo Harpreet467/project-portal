@@ -1,6 +1,6 @@
 import {Category} from '../category/category.model';
 import {PageableModel} from '../../shared/model/pageable.model';
-import {ProposalAuthorModel} from '../../proposal-author/proposal-author.model';
+import {ProposalAuthorModel} from '../proposal-author/proposal-author.model';
 
 
 export class ProjectModel extends PageableModel {
