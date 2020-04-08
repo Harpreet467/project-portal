@@ -14,6 +14,7 @@ import {AlertService} from '../layout/alert/alert.service';
 import {Constant} from '../shared/constant';
 import {Category, CategoryModel} from '../protected/category/category.model';
 import {Project} from '../protected/project/project.model';
+import {CategoryService} from '../protected/category/category.service';
 
 
 @Component({
@@ -40,6 +41,7 @@ export class ProposalAuthorComponent implements OnInit, OnDestroy {
   constructor(
     public spinnerService: SpinnerService,
     private proposalAuthorService: ProposalAuthorService,
+    private categoryService: CategoryService,
     private alertService: AlertService,
     private snackBar: MatSnackBar,
     private router: Router
@@ -52,7 +54,7 @@ export class ProposalAuthorComponent implements OnInit, OnDestroy {
   getProjectCategory() {
     this.spinnerService.show();
     this.subscription.add(
-      this.proposalAuthorService.getProjectCategory().subscribe((res: CategoryModel) => {
+      this.categoryService.getActiveCategories().subscribe((res: CategoryModel) => {
         this.categories = res.objects;
         this.spinnerService.hide();
       })

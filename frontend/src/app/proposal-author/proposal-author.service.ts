@@ -31,8 +31,4 @@ export class ProposalAuthorService {
     );
   }
 
-  getProjectCategory() {
-    return this.http.get(AppConfig.PROJECT_CATEGORY_API);
-  }
-
 }
