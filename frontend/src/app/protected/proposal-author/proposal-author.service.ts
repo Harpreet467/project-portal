@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {AppConfig} from '../../app.config';
-import {ProposalAuthorModel} from './proposal-author.model';
+import {ProposalAuthor} from './proposal-author.model';
 import {toFormData} from '../../layout/file-upload/file-upload.utils';
 import {Project} from '../project/project.model';
 
@@ -13,8 +13,12 @@ export class ProposalAuthorService {
 
   constructor(private http: HttpClient) { }
 
-  createProposal(proposalAuthorModel: ProposalAuthorModel) {
-    return this.http.post(AppConfig.PROPOSAL_AUTHOR_API, proposalAuthorModel);
+  getProposalAuthor() {
+    return this.http.get(AppConfig.PROPOSAL_AUTHOR_API);
+  }
+
+  createProposal(proposalAuthor: ProposalAuthor) {
+    return this.http.post(AppConfig.PROPOSAL_AUTHOR_API, proposalAuthor);
   }
 
   createProject(project: Project) {

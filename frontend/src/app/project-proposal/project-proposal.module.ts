@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {RouterModule} from '@angular/router';
-import {proposalAuthorRoutes} from './project-proposal.route';
+import {projectProposalRoutes} from './project-proposal.route';
 import {ProposalAuthorService} from '../protected/proposal-author/proposal-author.service';
 import {ProjectProposalComponent} from './project-proposal.component';
 import { MatButtonModule } from '@angular/material/button';
@@ -24,7 +24,7 @@ import {FileUploadModule} from '../layout/file-upload/file-upload.module';
     ProjectProposalComponent
   ],
   imports: [
-    RouterModule.forChild(proposalAuthorRoutes),
+    RouterModule.forChild(projectProposalRoutes),
     CommonModule,
     MatCardModule,
     MatStepperModule,

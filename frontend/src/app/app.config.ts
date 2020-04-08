@@ -41,6 +41,7 @@ export class AppConfig {
 
   // ProjectModel
   public static readonly PROJECT_PROPOSAL = 'project-proposal';
+  public static readonly PROPOSAL_AUTHOR = 'proposal-author';
   public static readonly PROJECT = 'project';
 
   // Category

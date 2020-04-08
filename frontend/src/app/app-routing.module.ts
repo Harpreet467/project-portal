@@ -34,6 +34,12 @@ const routes: Routes = [
         loadChildren: () => import('./protected/staff/staff.module').then(m => m.StaffModule)
       },
       {
+        path: 'proposal-author',
+        canActivate: [AuthGuardService, RoleGuardService],
+        data: {role: Constant.ROLE_ADMIN},
+        loadChildren: () => import('./protected/proposal-author/proposal-author.module').then(m => m.ProposalAuthorModule)
+      },
+      {
         path: 'project',
         canActivate: [AuthGuardService, RoleGuardService],
         data: {role: Constant.ROLE_ADMIN},

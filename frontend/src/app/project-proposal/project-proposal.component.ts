@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {ProposalAuthorModel} from '../protected/proposal-author/proposal-author.model';
+import {ProposalAuthor} from '../protected/proposal-author/proposal-author.model';
 import {Subscription} from 'rxjs';
 import {ProposalAuthorService} from '../protected/proposal-author/proposal-author.service';
 import {SpinnerService} from '../shared/service/spinner.service';
@@ -24,7 +24,7 @@ import {CategoryService} from '../protected/category/category.service';
 })
 export class ProjectProposalComponent implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
-  proposalAuthorModel: ProposalAuthorModel = new ProposalAuthorModel();
+  proposalAuthorModel: ProposalAuthor = new ProposalAuthor();
   project: Project = new Project();
   categories: Category[];
 
@@ -65,7 +65,7 @@ export class ProjectProposalComponent implements OnInit, OnDestroy {
     this.spinnerService.show();
     this.proposalAuthorStep = true;
     this.subscription.add(
-      this.proposalAuthorService.createProposal(this.proposalAuthorModel).subscribe((res: ProposalAuthorModel) => {
+      this.proposalAuthorService.createProposal(this.proposalAuthorModel).subscribe((res: ProposalAuthor) => {
         this.project.proposal_author = res.id;
         this.spinnerService.hide();
         stepper.next();

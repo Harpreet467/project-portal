@@ -1,0 +1,63 @@
+<mat-card class="mat-elevation-z1 m-auto w-90 mt-2 p-2">
+  <mat-card-header fxLayout="row" fxLayoutAlign="space-between center" class="mb-1">
+    <mat-card-title class="m-auto">Proposal Authors</mat-card-title>
+  </mat-card-header>
+
+  <mat-divider></mat-divider>
+
+  <mat-form-field class="mt-1">
+    <label>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+    </label>
+  </mat-form-field>
+
+  <div class="pos-relative">
+    <div class="table-spinner" *ngIf="spinnerService.visibility | async">
+      <app-spinner></app-spinner>
+    </div>
+
+    <mat-table class="mt-1" [dataSource]="dataSource" matSort [matSortActive]="displayedColumns[5]" matSortDirection="desc">
+      <ng-container [matColumnDef]="displayedColumns[0]">
+        <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header fxLayoutAlign="center center" fxFlex="5"> ID </mat-header-cell>
+        <mat-cell mat-cell *matCellDef="let row" fxLayoutAlign="center center" fxFlex="5"> {{row.id}} </mat-cell>
+      </ng-container>
+
+      <ng-container [matColumnDef]="displayedColumns[1]">
+        <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header fxLayoutAlign="start center" fxFlex="15"> Name </mat-header-cell>
+        <mat-cell mat-cell *matCellDef="let row" fxLayoutAlign="start center" fxFlex="15"> {{row.name}} </mat-cell>
+      </ng-container>
+
+      <ng-container [matColumnDef]="displayedColumns[2]">
+        <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header fxLayoutAlign="start center" fxFlex="20"> Email </mat-header-cell>
+        <mat-cell mat-cell *matCellDef="let row" fxLayoutAlign="start center" fxFlex="20"> {{row.email}} </mat-cell>
+      </ng-container>
+
+      <ng-container [matColumnDef]="displayedColumns[3]">
+        <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header fxLayoutAlign="start center" fxFlex="10"> Phone Number </mat-header-cell>
+        <mat-cell mat-cell *matCellDef="let row" fxLayoutAlign="start center" fxFlex="10"> {{row.phone_number}} </mat-cell>
+      </ng-container>
+
+      <ng-container [matColumnDef]="displayedColumns[4]">
+        <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header fxLayoutAlign="start center" fxFlex="20"> Organisation </mat-header-cell>
+        <mat-cell mat-cell *matCellDef="let row" fxLayoutAlign="start center" fxFlex="20"> {{row.organisation_name}} </mat-cell>
+      </ng-container>
+
+
+      <ng-container [matColumnDef]="displayedColumns[5]">
+        <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header fxLayoutAlign="start center" fxFlex="10"> Updated At </mat-header-cell>
+        <mat-cell mat-cell *matCellDef="let row" fxLayoutAlign="start center" fxFlex="10"> {{row.updated_at | date}} </mat-cell>
+      </ng-container>
+
+      <ng-container [matColumnDef]="displayedColumns[6]">
+        <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header fxLayoutAlign="center center" fxFlex="10"> Action </mat-header-cell>
+        <mat-cell mat-cell *matCellDef="let row" fxLayoutAlign="center center" fxFlex="10">
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+
+    <mat-paginator [pageSizeOptions]="pageSize"></mat-paginator>
+  </div>
+</mat-card>

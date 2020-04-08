@@ -1,6 +1,6 @@
 import {Category} from '../category/category.model';
 import {PageableModel} from '../../shared/model/pageable.model';
-import {ProposalAuthorModel} from '../proposal-author/proposal-author.model';
+import {ProposalAuthor} from '../proposal-author/proposal-author.model';
 
 
 export class ProjectModel extends PageableModel {
@@ -15,7 +15,7 @@ export class Project {
   file_name: string;
   file: File;
   category: Array<Category>;
-  proposal_authors: ProposalAuthorModel;
+  proposal_authors: ProposalAuthor;
   status: string;
   created_at: string;
   updated_at: string;

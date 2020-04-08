@@ -41,7 +41,7 @@ export class SidenavComponent implements OnInit, OnDestroy {
       {
         name: 'Project Authors',
         type: 'link',
-        value: AppConfig.PROJECT,
+        value: AppConfig.PROPOSAL_AUTHOR,
         icon: 'assignment_ind',
         visibility: true
       },
