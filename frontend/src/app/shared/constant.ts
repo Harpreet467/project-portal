@@ -11,3 +11,7 @@ export class Constant {
   public static readonly MODAL_WIDTH = '600px';
   public static readonly PAGE_SIZE_LIST = [5, 10, 25, 100];
 }
+
+export class Messages {
+  public static readonly STATUS_CHANGED_SUCCESSFULLY = 'Status changed Successfully!!!';
+}

@@ -44,14 +44,6 @@ export class Role {
   description: string;
 }
 
-export class Active {
-  active: boolean;
-
-  constructor(active) {
-    this.active = active;
-  }
-}
-
 export const staffDisplayedColumns = [
   'id',
   'name',

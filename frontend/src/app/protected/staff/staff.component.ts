@@ -1,8 +1,8 @@
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {Subscription} from 'rxjs';
 import {StaffService} from './staff.service';
-import {Active, Staff, staffDisplayedColumns, StaffModel} from './staff.model';
-import {Constant} from '../../shared/constant';
+import {Staff, staffDisplayedColumns, StaffModel} from './staff.model';
+import {Constant, Messages} from '../../shared/constant';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -11,6 +11,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import {SaveStaffModalComponent} from './save-staff-modal/save-staff-modal.component';
 import {SpinnerService} from '../../shared/service/spinner.service';
 import {ViewStaffDetailModalComponent} from './view-staff-detail-modal/view-staff-detail-modal.component';
+import {Active} from '../../shared/model/active.model';
 
 @Component({
   selector: 'app-staff',
@@ -80,7 +81,7 @@ export class StaffComponent implements OnInit, OnDestroy {
   toggleStatusStaff(staff: Staff) {
     this.subscription.add(
       this.staffService.toggleStatusStaff(staff.id, new Active(!staff.active)).subscribe(() => {
-        this.snackBar.open('Status changed Successfully!!!');
+        this.snackBar.open(Messages.STATUS_CHANGED_SUCCESSFULLY);
         this.getStaffs();
       }, () => {
         this.getStaffs();

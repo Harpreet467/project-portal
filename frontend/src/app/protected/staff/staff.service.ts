@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {AppConfig} from '../../app.config';
-import {Active, Staff} from './staff.model';
+import {Staff} from './staff.model';
+import {Active} from '../../shared/model/active.model';
 
 @Injectable({
   providedIn: 'root'
