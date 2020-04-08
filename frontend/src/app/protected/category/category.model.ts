@@ -11,3 +11,11 @@ export class Category {
   description: string;
   status: boolean;
 }
+
+export const categoryDisplayedColumns = [
+  'id',
+  'name',
+  'description',
+  'active',
+  'action'
+];

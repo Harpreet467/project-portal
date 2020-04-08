@@ -25,7 +25,6 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
 import {NgxWebstorageModule} from 'ngx-webstorage';
 import { SidenavComponent } from './layout/sidenav/sidenav.component';
-import { CategoryComponent } from './protected/category/category.component';
 
 
 @NgModule({
@@ -33,8 +32,7 @@ import { CategoryComponent } from './protected/category/category.component';
     AppComponent,
     HeaderComponent,
     HomeComponent,
-    SidenavComponent,
-    CategoryComponent
+    SidenavComponent
   ],
   imports: [
     BrowserModule,

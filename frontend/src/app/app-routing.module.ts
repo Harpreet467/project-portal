@@ -40,6 +40,12 @@ const routes: Routes = [
         loadChildren: () => import('./protected/project/project.module').then(m => m.ProjectModule)
       },
       {
+        path: 'category',
+        canActivate: [AuthGuardService, RoleGuardService],
+        data: {role: Constant.ROLE_ADMIN},
+        loadChildren: () => import('./protected/category/category.module').then(m => m.CategoryModule)
+      },
+      {
         path: 'system-profiler',
         canActivate: [AuthGuardService, RoleGuardService],
         data: {role: Constant.ROLE_ADMIN},
