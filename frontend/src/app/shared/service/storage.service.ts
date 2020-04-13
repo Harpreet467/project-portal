@@ -11,7 +11,7 @@ export class StorageService {
   ) { }
 
   setRole(roles: string) {
-    this.localStorageService.store('roles', roles);
+    this.localStorageService.store('roles', roles.split(','));
   }
 
   getRole() {

@@ -57,7 +57,7 @@ export class SidenavComponent implements OnInit, OnDestroy {
         type: 'link',
         value: AppConfig.CATEGORY,
         icon: 'category',
-        visibility: true
+        visibility: this.isAdmin
       },
       {
         name: 'System Profiler',

@@ -30,31 +30,31 @@ const routes: Routes = [
       {
         path: 'staff',
         canActivate: [AuthGuardService, RoleGuardService],
-        data: {role: Constant.ROLE_ADMIN},
+        data: {roles: [Constant.ROLE_ADMIN]},
         loadChildren: () => import('./protected/staff/staff.module').then(m => m.StaffModule)
       },
       {
         path: 'proposal-author',
         canActivate: [AuthGuardService, RoleGuardService],
-        data: {role: Constant.ROLE_ADMIN},
+        data: {roles: [Constant.ROLE_ADMIN, Constant.THIRD_LEVEL, Constant.SECOND_LEVEL, Constant.FIRST_LEVEL]},
         loadChildren: () => import('./protected/proposal-author/proposal-author.module').then(m => m.ProposalAuthorModule)
       },
       {
         path: 'project',
         canActivate: [AuthGuardService, RoleGuardService],
-        data: {role: Constant.ROLE_ADMIN},
+        data: {roles: [Constant.ROLE_ADMIN, Constant.THIRD_LEVEL, Constant.SECOND_LEVEL, Constant.FIRST_LEVEL]},
         loadChildren: () => import('./protected/project/project.module').then(m => m.ProjectModule)
       },
       {
         path: 'category',
         canActivate: [AuthGuardService, RoleGuardService],
-        data: {role: Constant.ROLE_ADMIN},
+        data: {roles: [Constant.ROLE_ADMIN]},
         loadChildren: () => import('./protected/category/category.module').then(m => m.CategoryModule)
       },
       {
         path: 'system-profiler',
         canActivate: [AuthGuardService, RoleGuardService],
-        data: {role: Constant.ROLE_ADMIN},
+        data: {roles: [Constant.ROLE_ADMIN]},
         loadChildren: () => import('./protected/system-profiler/system-profiler.module').then(m => m.SystemProfilerModule)
       }
     ]

@@ -72,7 +72,7 @@ export class SaveStaffModalComponent implements OnInit, OnDestroy {
   editStaff() {
     this.subscription.add(
       this.staffService.updateStaff(this.staff).subscribe(() => {
-        this.closeModal();
+        this.closeModal(true);
         this.isDisableBtn = false;
       }, (error) => {
         this.alertService.error(error.error.message);

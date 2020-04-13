@@ -21,7 +21,7 @@ export class RoleGuardService implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    if (this.storageService.getRole().includes(route.data.role)) {
+    if (route.data.roles.some(r=> this.storageService.getRole().includes(r))) {
       return true;
     }
     this.snackBar.open(Constant.UNAUTHORIZED);
