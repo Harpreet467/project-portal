@@ -24,7 +24,12 @@ class Staff(Entity, db.Model, UserMixin):
         super().__init__(last_updated_by)
         self.email = kwargs['email']
         self.name = kwargs['name']
-        self.password = jwt.hash_password(kwargs['password'])
+        self.password = kwargs['password']
+
+    def __setattr__(self, key, value):
+        if key == 'password':
+            value = jwt.hash_password(value)
+        super().__setattr__(key, value)
 
     def get_security_payload(self):
         return get_security_payload_dto(self)
