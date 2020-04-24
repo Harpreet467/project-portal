@@ -14,4 +14,5 @@ export class Constant {
 
 export class Messages {
   public static readonly STATUS_CHANGED_SUCCESSFULLY = 'Status changed Successfully!!!';
+  public static readonly PASSWORD_NOT_MATCHED = 'Password not matched';
 }

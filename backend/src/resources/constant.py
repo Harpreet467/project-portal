@@ -13,3 +13,12 @@ STATUS_CODE = dict(
     ER_405=405,
     ER_500=500
 )
+
+ERROR_MESSAGE = dict(
+    PASSWORD_NOT_MATCHED='Password not matched',
+    INVALID_PASSWORD='Invalid Password'
+)
+
+SUCCESS_MESSAGE = dict(
+    PASSWORD_CHANGED='Password changed'
+)

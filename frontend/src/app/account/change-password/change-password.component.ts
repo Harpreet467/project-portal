@@ -5,6 +5,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {AlertService} from "../../layout/alert/alert.service";
 import {ChangePasswordModel} from "./change-password.model";
 import {ChangePasswordService} from "./change-password.service";
+import {Messages} from "../../shared/constant";
 
 @Component({
   selector: 'app-change-password',
@@ -28,15 +29,19 @@ export class ChangePasswordComponent implements OnInit, OnDestroy {
   }
 
   changePassword() {
-    this.subscription.add(
-      this.changePasswordService.changePassword(this.changePasswordModel).subscribe(() => {
-        this.closeModal(true);
-        this.isDisableBtn = false;
-      }, (error) => {
-        this.alertService.error(error.error.message);
-        this.isDisableBtn = false;
-      })
-    );
+    if (this.changePasswordModel.new_password === this.changePasswordModel.new_password_confirm) {
+      this.subscription.add(
+        this.changePasswordService.changePassword(this.changePasswordModel).subscribe(() => {
+          this.closeModal(true);
+          this.isDisableBtn = false;
+        }, (error) => {
+          this.alertService.error(error.error.message);
+          this.isDisableBtn = false;
+        })
+      );
+    } else {
+      this.alertService.error(Messages.PASSWORD_NOT_MATCHED);
+    }
   }
 
   closeModal(data: boolean = false) {

@@ -28,10 +28,12 @@ def account_details():
     return account_details_service()
 
 
-@app.route('/change-password', methods=['POST'])
+@app.route('/change-password', methods=['PATCH'])
 @auth_required
 def change_password():
-    return change_password_service()
+    return change_password_service(
+        request.get_json(force=True)
+    )
 
 
 @app.route('/logout', methods=['GET'])
