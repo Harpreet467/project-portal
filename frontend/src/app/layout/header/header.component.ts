@@ -4,6 +4,9 @@ import {ProgressBarService} from '../../shared/service/progress-bar.service';
 import {SharedService} from '../../shared/service/shared.service';
 import {StorageService} from '../../shared/service/storage.service';
 import {Subscription} from 'rxjs';
+import {Constant} from "../../shared/constant";
+import {MatDialog} from "@angular/material/dialog";
+import {ChangePasswordComponent} from "../../account/change-password/change-password.component";
 
 @Component({
   selector: 'app-header',
@@ -22,6 +25,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   constructor(
     public progressBarService: ProgressBarService,
     private sharedService: SharedService,
+    private dialog: MatDialog,
     private storageService: StorageService
   ) { }
 
@@ -38,6 +42,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   toggleSideNav() {
     this.sideNavToggleEvent.emit();
+  }
+
+  openChangePasswordModel() {
+    this.dialog.open(ChangePasswordComponent, {
+      width: Constant.MODAL_WIDTH,
+    });
   }
 
   logout() {

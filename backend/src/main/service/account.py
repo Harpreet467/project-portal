@@ -35,6 +35,11 @@ def refresh_token():
     )
 
 
+def change_password():
+    from flask_security.views import change_password
+    return change_password()
+
+
 def logout():
     from flask_login import current_user
 

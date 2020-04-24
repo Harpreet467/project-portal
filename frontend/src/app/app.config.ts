@@ -6,6 +6,7 @@ export class AppConfig {
   public static readonly ACCOUNT_DETAILS_API = 'account-details';
   public static readonly REFRESH_TOKEN_API = 'refresh-token';
   public static readonly LOGOUT_API = 'logout';
+  public static readonly CHANGE_PASSWORD_API = 'change-password';
 
   // Staff
   public static readonly STAFF_API = AppConfig.API + 'staff';

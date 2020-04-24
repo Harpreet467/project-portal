@@ -13,3 +13,8 @@ class Entity(object):
         self.created_at = datetime.now()
         self.updated_at = datetime.now()
         self.last_updated_by = last_updated_by
+
+    def __setattr__(self, key, value):
+        if key == 'updated_at':
+            value = datetime.now()
+        super().__setattr__(key, value)

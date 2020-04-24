@@ -3,6 +3,7 @@ from flask_praetorian import auth_required
 
 from app import app
 from src.main.service.account import account_details as account_details_service
+from src.main.service.account import change_password as change_password_service
 from src.main.service.account import logout as logout_service
 from src.main.service.account import auth as auth_service
 from src.main.service.account import refresh_token as refresh_token_service
@@ -25,6 +26,12 @@ def refresh_token():
 @auth_required
 def account_details():
     return account_details_service()
+
+
+@app.route('/change-password', methods=['POST'])
+@auth_required
+def change_password():
+    return change_password_service()
 
 
 @app.route('/logout', methods=['GET'])

@@ -11,7 +11,7 @@ class Project(Entity, db.Model):
     category = db.relationship(
         'ProjectCategory', secondary=project_to_category, backref=db.backref('projects', lazy='dynamic')
     )
-    status = db.Column(db.String(50), default="PENDING")
+    status = db.Column(db.String(50), default="PROPOSED")
 
     def __init__(self, last_updated_by='system', **kwargs):
         super().__init__(last_updated_by)

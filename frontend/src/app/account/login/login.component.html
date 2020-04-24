@@ -2,30 +2,34 @@
 
   <mat-card class="mat-elevation-z2 p-2 login-card">
     <mat-card-content fxLayout="column" fxFlex="100">
-      <mat-card-title class="text-center mb-1"> Login </mat-card-title>
+      <mat-card-title class="text-center mb-1"> Login</mat-card-title>
 
       <app-alert></app-alert>
 
-      <div fxLayout="column" fxFlex="100">
-        <mat-form-field appearance="outline">
-          <mat-label>Email</mat-label>
-          <label>
-            <input matInput type="email" [(ngModel)]="loginParam.email" placeholder="Email">
-          </label>
-        </mat-form-field>
+      <form (ngSubmit)="login()">
+        <div fxLayout="column" fxFlex="100">
+          <mat-form-field appearance="outline">
+            <mat-label>Email</mat-label>
+            <label>
+              <input matInput type="email" name="email" [(ngModel)]="loginParam.email" placeholder="Email" required>
+            </label>
+          </mat-form-field>
 
-        <mat-form-field appearance="outline">
-          <mat-label>Password</mat-label>
-          <label>
-            <input matInput type="password" [(ngModel)]="loginParam.password" placeholder="Password">
-          </label>
-        </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Password</mat-label>
+            <label>
+              <input matInput type="password" name="password" [(ngModel)]="loginParam.password" placeholder="Password"
+                     required>
+            </label>
+          </mat-form-field>
 
-        <button mat-raised-button color="primary" (click)="login()" [disabled]="isDisableBtn">
-          Login
-          <app-spinner *ngIf="spinnerService.visibility | async" class="d-inline-block ml-1" [diameter]="15"></app-spinner>
-        </button>
-      </div>
+          <button mat-raised-button color="primary" (click)="login()" [disabled]="isDisableBtn">
+            Login
+            <app-spinner *ngIf="spinnerService.visibility | async" class="d-inline-block ml-1"
+                         [diameter]="15"></app-spinner>
+          </button>
+        </div>
+      </form>
 
     </mat-card-content>
   </mat-card>

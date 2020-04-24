@@ -1,10 +1,10 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 import {LoginComponent} from './login/login.component';
-import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
+import {MatButtonModule} from '@angular/material/button';
+import {MatCardModule} from '@angular/material/card';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
 import {RouterModule} from '@angular/router';
 import {FormsModule} from '@angular/forms';
 import {LoginService} from './login/login.service';
@@ -12,10 +12,13 @@ import {FlexModule} from '@angular/flex-layout';
 import {accountRoute} from './account.route';
 import {AlertModule} from '../layout/alert/alert.module';
 import {SpinnerModule} from '../layout/spinner/spinner.module';
+import {ChangePasswordComponent} from './change-password/change-password.component';
+import {MatDialogModule} from "@angular/material/dialog";
 
 @NgModule({
   declarations: [
-    LoginComponent
+    LoginComponent,
+    ChangePasswordComponent
   ],
   imports: [
     RouterModule.forChild(accountRoute),
@@ -28,10 +31,15 @@ import {SpinnerModule} from '../layout/spinner/spinner.module';
     MatButtonModule,
     FlexModule,
     AlertModule,
-    SpinnerModule
+    SpinnerModule,
+    MatDialogModule
+  ],
+  entryComponents: [
+    ChangePasswordComponent
   ],
   providers: [
     LoginService
   ]
 })
-export class AccountModule { }
+export class AccountModule {
+}
