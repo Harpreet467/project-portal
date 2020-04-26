@@ -21,6 +21,10 @@ export class ProposalAuthorService {
     return this.http.post(AppConfig.PROPOSAL_AUTHOR_API, proposalAuthor);
   }
 
+  updateProposal(proposalAuthor: ProposalAuthor) {
+    return this.http.put(AppConfig.PROPOSAL_AUTHOR_API + '/' + proposalAuthor.id, proposalAuthor);
+  }
+
   createProject(project: Project) {
     return this.http.post(AppConfig.PROJECT_API, project);
   }

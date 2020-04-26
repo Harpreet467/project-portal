@@ -15,11 +15,17 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {RouterModule} from '@angular/router';
 import {proposalAuthorRoutes} from './proposal-author.route';
+import { ViewAuthorModalComponent } from './view-author-modal/view-author-modal.component';
+import {MatDialogModule} from "@angular/material/dialog";
+import {MatListModule} from "@angular/material/list";
+import { SaveAuthorModalComponent } from './save-author-modal/save-author-modal.component';
+import {AlertModule} from "../../layout/alert/alert.module";
+import {FormsModule} from "@angular/forms";
 
 
 
 @NgModule({
-  declarations: [ProposalAuthorComponent],
+  declarations: [ProposalAuthorComponent, ViewAuthorModalComponent, SaveAuthorModalComponent],
   imports: [
     RouterModule.forChild(proposalAuthorRoutes),
     CommonModule,
@@ -34,7 +40,11 @@ import {proposalAuthorRoutes} from './proposal-author.route';
     MatButtonModule,
     MatTooltipModule,
     MatIconModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatDialogModule,
+    MatListModule,
+    AlertModule,
+    FormsModule
   ]
 })
 export class ProposalAuthorModule { }

@@ -38,7 +38,7 @@ export class AppConfig {
   public static readonly DASHBOARD = 'dashboard/';
 
   // Staff
-  public static readonly STAFF = 'staff/';
+  public static readonly STAFF = 'proposalAuthor/';
 
   // ProjectModel
   public static readonly PROJECT_PROPOSAL = 'project-proposal';

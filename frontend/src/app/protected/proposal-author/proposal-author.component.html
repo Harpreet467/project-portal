@@ -18,39 +18,40 @@
 
     <mat-table class="mt-1" [dataSource]="dataSource" matSort [matSortActive]="displayedColumns[5]" matSortDirection="desc">
       <ng-container [matColumnDef]="displayedColumns[0]">
-        <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header fxLayoutAlign="center center" fxFlex="5"> ID </mat-header-cell>
-        <mat-cell mat-cell *matCellDef="let row" fxLayoutAlign="center center" fxFlex="5"> {{row.id}} </mat-cell>
+        <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header fxLayoutAlign="center center"> ID </mat-header-cell>
+        <mat-cell mat-cell *matCellDef="let row" fxLayoutAlign="center center"> {{row.id}} </mat-cell>
       </ng-container>
 
       <ng-container [matColumnDef]="displayedColumns[1]">
-        <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header fxLayoutAlign="start center" fxFlex="15"> Name </mat-header-cell>
-        <mat-cell mat-cell *matCellDef="let row" fxLayoutAlign="start center" fxFlex="15"> {{row.name}} </mat-cell>
+        <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header fxLayoutAlign="start center"> Name </mat-header-cell>
+        <mat-cell mat-cell *matCellDef="let row" fxLayoutAlign="start center"> {{row.name}} </mat-cell>
       </ng-container>
 
       <ng-container [matColumnDef]="displayedColumns[2]">
-        <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header fxLayoutAlign="start center" fxFlex="20"> Email </mat-header-cell>
-        <mat-cell mat-cell *matCellDef="let row" fxLayoutAlign="start center" fxFlex="20"> {{row.email}} </mat-cell>
+        <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header fxLayoutAlign="start center"> Email </mat-header-cell>
+        <mat-cell mat-cell *matCellDef="let row" fxLayoutAlign="start center"> {{row.email}} </mat-cell>
       </ng-container>
 
       <ng-container [matColumnDef]="displayedColumns[3]">
-        <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header fxLayoutAlign="start center" fxFlex="10"> Phone Number </mat-header-cell>
-        <mat-cell mat-cell *matCellDef="let row" fxLayoutAlign="start center" fxFlex="10"> {{row.phone_number}} </mat-cell>
+        <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header fxLayoutAlign="start center"> Phone Number </mat-header-cell>
+        <mat-cell mat-cell *matCellDef="let row" fxLayoutAlign="start center"> {{row.phone_number}} </mat-cell>
       </ng-container>
 
       <ng-container [matColumnDef]="displayedColumns[4]">
-        <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header fxLayoutAlign="start center" fxFlex="20"> Organisation </mat-header-cell>
-        <mat-cell mat-cell *matCellDef="let row" fxLayoutAlign="start center" fxFlex="20"> {{row.organisation_name}} </mat-cell>
+        <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header fxLayoutAlign="start center"> Organisation </mat-header-cell>
+        <mat-cell mat-cell *matCellDef="let row" fxLayoutAlign="start center"> {{row.organisation_name}} </mat-cell>
       </ng-container>
 
-
       <ng-container [matColumnDef]="displayedColumns[5]">
-        <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header fxLayoutAlign="start center" fxFlex="10"> Updated At </mat-header-cell>
-        <mat-cell mat-cell *matCellDef="let row" fxLayoutAlign="start center" fxFlex="10"> {{row.updated_at | date}} </mat-cell>
+        <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header fxLayoutAlign="start center"> Updated At </mat-header-cell>
+        <mat-cell mat-cell *matCellDef="let row" fxLayoutAlign="start center"> {{row.updated_at | date}} </mat-cell>
       </ng-container>
 
       <ng-container [matColumnDef]="displayedColumns[6]">
-        <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header fxLayoutAlign="center center" fxFlex="10"> Action </mat-header-cell>
-        <mat-cell mat-cell *matCellDef="let row" fxLayoutAlign="center center" fxFlex="10">
+        <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header fxLayoutAlign="center center"> Action </mat-header-cell>
+        <mat-cell mat-cell *matCellDef="let row" fxLayoutAlign="center center">
+          <button mat-icon-button matTooltip="view" (click)="openViewAuthorModal(row)"><mat-icon>visibility</mat-icon></button>
+          <button mat-icon-button matTooltip="edit" (click)="openAddStaffModal(row)"><mat-icon>edit</mat-icon></button>
         </mat-cell>
       </ng-container>
 

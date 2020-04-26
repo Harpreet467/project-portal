@@ -16,8 +16,14 @@
 
     <mat-list-item>
       <mat-icon mat-list-icon>thumbs_up_down</mat-icon>
-      <span mat-line><b>Active Status</b></span>
-      <span mat-line>{{data.active || 'Not available'}}</span>
+      <span mat-line><b>Organisation Name</b></span>
+      <span mat-line>{{data.organisation_name || 'Not available'}}</span>
+    </mat-list-item>
+
+    <mat-list-item>
+      <mat-icon mat-list-icon>event</mat-icon>
+      <span mat-line><b>Phone Number</b></span>
+      <span mat-line>{{data.phone_number || 'Not available'}}</span>
     </mat-list-item>
 
     <mat-list-item>
@@ -33,33 +39,9 @@
     </mat-list-item>
 
     <mat-list-item>
-      <mat-icon mat-list-icon>language</mat-icon>
-      <span mat-line><b>Current Login IP address</b></span>
-      <span mat-line>{{data.current_login_ip || 'Not available'}}</span>
-    </mat-list-item>
-
-    <mat-list-item>
-      <mat-icon mat-list-icon>calendar_today</mat-icon>
-      <span mat-line><b>Current Login At</b></span>
-      <span mat-line>{{(data.current_login_at | date: 'long') || 'Not available'}}</span>
-    </mat-list-item>
-
-    <mat-list-item>
-      <mat-icon mat-list-icon>language</mat-icon>
-      <span mat-line><b>Last Login IP address</b></span>
-      <span mat-line>{{data.last_login_ip || 'Not available'}}</span>
-    </mat-list-item>
-
-    <mat-list-item>
       <mat-icon mat-list-icon>event</mat-icon>
-      <span mat-line><b>Last Login At</b></span>
-      <span mat-line>{{(data.last_login_at | date: 'long') || 'Not available'}}</span>
-    </mat-list-item>
-
-    <mat-list-item>
-      <mat-icon mat-list-icon>poll</mat-icon>
-      <span mat-line><b>Login Count</b></span>
-      <span mat-line>{{data.login_count || 'Not available'}}</span>
+      <span mat-line><b>Last Updated by</b></span>
+      <span mat-line>{{data.last_updated_by || 'Not available'}}</span>
     </mat-list-item>
 
   </mat-nav-list>

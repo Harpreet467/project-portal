@@ -1,0 +1,48 @@
+<h1 mat-dialog-title>Edit Author</h1>
+
+<div mat-dialog-content>
+
+  <app-alert></app-alert>
+
+  <form #staffForm="ngForm">
+    <mat-form-field>
+      <label>
+        <input type="text" matInput placeholder="Name" name="name" [(ngModel)]="proposalAuthor.name" #name="ngModel" required>
+      </label>
+      <mat-error *ngIf="name.touched && name.invalid">
+        <small class="mat-text-warn" *ngIf="name?.errors.required">Name is required.</small>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <label>
+        <input type="email" matInput placeholder="Email" name="email" [(ngModel)]="proposalAuthor.email" #email="ngModel" required>
+      </label>
+      <mat-error *ngIf="email.touched && email.invalid">
+        <small class="mat-text-warn" *ngIf="email?.errors.required">Email is required.</small>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <label>
+        <input type="text" matInput placeholder="Organisation Name" name="organisation" [(ngModel)]="proposalAuthor.organisation_name" #organisation_name="ngModel">
+      </label>
+    </mat-form-field>
+
+    <mat-form-field>
+      <label>
+        <input type="tel" matInput placeholder="Phone Number" name="phone_number" [(ngModel)]="proposalAuthor.phone_number" #organisation_name="ngModel">
+      </label>
+    </mat-form-field>
+
+  </form>
+</div>
+
+<div mat-dialog-actions fxLayoutAlign="end">
+  <button mat-flat-button (click)="closeModal()">Cancel</button>
+  <button color="primary" mat-raised-button (click)="saveStaff()"
+          [ngClass]="staffForm.form.invalid ? 'cursor-not-allowed' : 'cursor-pointer'"
+          [disabled]="staffForm.form.invalid || isDisableBtn">
+    Submit
+  </button>
+</div>
