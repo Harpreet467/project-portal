@@ -13,6 +13,7 @@ class Staff(Entity, db.Model, UserMixin):
     password = db.Column(db.String(60))
     active = db.Column(db.Boolean, default=True)
     roles = db.relationship('Role', secondary=roles_users, backref=db.backref('staffs', lazy='dynamic'))
+    comments = db.relationship('Comment', backref='staffs', lazy=True)
 
     last_login_at = db.Column(db.DateTime(), nullable=True)
     current_login_at = db.Column(db.DateTime(), nullable=True)

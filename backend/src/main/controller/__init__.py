@@ -5,3 +5,4 @@ def load_controller():
     import src.main.controller.proposal_author
     import src.main.controller.project
     import src.main.controller.project_category
+    import src.main.controller.comment
