@@ -48,26 +48,26 @@
           </button>
         </div>
 
-        <div class="mt-1">
+        <div class="mt-1" *ngIf="loggedInRoles.isAdmin || loggedInRoles.isThirdLevel">
           <mat-chip-list aria-label="status">
             <span class="mat-card-subtitle d-inline-block mr-1">Take Action</span>
-            <mat-chip class="approve" (click)="openCommentModal(PROJECT_STATUS.APPROVED)">
+            <mat-chip class="cursor-pointer approve" (click)="openCommentModal(PROJECT_STATUS.APPROVED)">
               <mat-icon class="mr-5px">thumb_up</mat-icon>
               Approve
             </mat-chip>
-            <mat-chip class="decline" (click)="openCommentModal(PROJECT_STATUS.DECLINED)">
+            <mat-chip class="cursor-pointer decline" (click)="openCommentModal(PROJECT_STATUS.DECLINED)">
               <mat-icon class="mr-5px">thumb_down</mat-icon>
               Decline
             </mat-chip>
-            <mat-chip class="defer" (click)="openCommentModal(PROJECT_STATUS.DEFERRED)">
+            <mat-chip class="cursor-pointer defer" (click)="openCommentModal(PROJECT_STATUS.DEFERRED)">
               <mat-icon class="mr-5px">timer</mat-icon>
               Defer
             </mat-chip>
-            <mat-chip class="withdraw" (click)="openCommentModal(PROJECT_STATUS.WITHDRAWN)">
+            <mat-chip class="cursor-pointer withdraw" (click)="openCommentModal(PROJECT_STATUS.WITHDRAWN)">
               <mat-icon class="mr-5px">undo</mat-icon>
               Withdraw
             </mat-chip>
-            <mat-chip class="skip" (click)="openCommentModal(PROJECT_STATUS.SKIPPED)">
+            <mat-chip class="cursor-pointer skip" (click)="openCommentModal(PROJECT_STATUS.SKIPPED)">
               <mat-icon class="mr-5px">fast_forward</mat-icon>
               Skip
             </mat-chip>
@@ -132,7 +132,8 @@
         <mat-card-subtitle class="font-size-20px">Comments</mat-card-subtitle>
 
         <app-alert></app-alert>
-        <form #actionForm="ngForm" (ngSubmit)="saveComment()">
+        <form #actionForm="ngForm" (ngSubmit)="saveComment()"
+              *ngIf="loggedInRoles.isAdmin || loggedInRoles.isSecondLevel || loggedInRoles.isThirdLevel">
           <mat-form-field appearance="outline">
             <mat-label>Add your comment</mat-label>
             <label>
@@ -154,7 +155,9 @@
         <mat-card class="w-100 mt-1" *ngFor="let projectComment of commentModel.objects">
           <mat-card-header>
             <div mat-card-avatar class="comment-header-image"></div>
-            <mat-card-title [matTooltip]="projectComment?.staffs.email">
+            <mat-card-title class="cursor-pointer text-link-color" [matTooltip]="projectComment?.staffs.email"
+                            [routerLink]="!loggedInRoles.isAdmin? [] : STAFF_URL"
+                            [queryParams]="!loggedInRoles.isAdmin? {} : getStaffURLForID(projectComment?.staffs.id)">
               {{projectComment?.staffs.name | titlecase}}
             </mat-card-title>
             <mat-card-subtitle matTooltip="commented at">

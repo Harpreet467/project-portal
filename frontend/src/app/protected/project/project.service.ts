@@ -20,6 +20,10 @@ export class ProjectService {
     return this.http.get(AppConfig.PROJECT_API + '/' + id);
   }
 
+  getFilteredProjects(filter: FilterModel) {
+    return this.http.get(AppConfig.PROJECT_API, {params: new HttpParams().set('q', JSON.stringify(filter))});
+  }
+
   getFilteredComments(filter: FilterModel) {
     return this.http.get(AppConfig.COMMENT_API, {params: new HttpParams().set('q', JSON.stringify(filter))});
   }

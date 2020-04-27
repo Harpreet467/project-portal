@@ -11,6 +11,8 @@ import {CategoryService} from './category.service';
 import {Status} from '../../shared/model/active.model';
 import {MatDialog} from '@angular/material/dialog';
 import {SaveCategoryModalComponent} from './save-category-modal/save-category-modal.component';
+import {Filter} from "../../shared/model/filter.model";
+import {AppConfig} from "../../app.config";
 
 @Component({
   selector: 'app-category',
@@ -25,6 +27,7 @@ export class CategoryComponent implements OnInit, OnDestroy {
   dataSource: MatTableDataSource<Category>;
   displayedColumns = categoryDisplayedColumns;
   pageSize = Constant.PAGE_SIZE_LIST;
+  PROJECT_URL = AppConfig.PROJECT;
 
   constructor(
     public categoryService: CategoryService,
@@ -79,6 +82,12 @@ export class CategoryComponent implements OnInit, OnDestroy {
         this.getCategories();
       })
     );
+  }
+
+  getProjectURLForEmail(id: number) {
+    return {q: JSON.stringify(new Filter(
+        Constant.CATEGORY, Constant.ANY, new Filter(Constant.ID, Constant.EQ, id)
+      ))};
   }
 
   ngOnDestroy(): void {

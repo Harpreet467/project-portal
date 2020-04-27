@@ -9,9 +9,12 @@ import {proposalAuthorDisplayedColumns, ProposalAuthor, ProposalAuthorModel} fro
 import {ProposalAuthorService} from './proposal-author.service';
 import {MatDialog} from "@angular/material/dialog";
 import {ViewAuthorModalComponent} from "./view-author-modal/view-author-modal.component";
-import {Staff} from "../staff/staff.model";
-import {SaveStaffModalComponent} from "../staff/save-staff-modal/save-staff-modal.component";
 import {SaveAuthorModalComponent} from "./save-author-modal/save-author-modal.component";
+import {AppConfig} from "../../app.config";
+import {Filter, FilterModel} from "../../shared/model/filter.model";
+import {ActivatedRoute, Router} from "@angular/router";
+import {SharedService} from "../../shared/service/shared.service";
+import {RolesModel} from "../../shared/model/roles.model";
 
 @Component({
   selector: 'app-proposal-author',
@@ -23,19 +26,35 @@ export class ProposalAuthorComponent implements OnInit, OnDestroy {
   @ViewChild(MatSort) sort: MatSort;
 
   subscription: Subscription = new Subscription();
+  filterModel: FilterModel = new FilterModel();
+  loggedInRoles: RolesModel = new RolesModel();
   dataSource: MatTableDataSource<ProposalAuthor>;
   displayedColumns = proposalAuthorDisplayedColumns;
   pageSize = Constant.PAGE_SIZE_LIST;
+  PROJECT_URL = AppConfig.PROJECT;
+  isFiltered = false;
 
   constructor(
     public proposalAuthorService: ProposalAuthorService,
     public spinnerService: SpinnerService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private activatedRoute: ActivatedRoute,
+    private router: Router,
+    private sharedService: SharedService
   ) {
   }
 
   ngOnInit() {
-    this.getAuthors();
+    this.sharedService.refreshGetRoles();
+    this.subscription.add(this.sharedService.getLoggedInRoles.subscribe((v: RolesModel) => {
+      this.loggedInRoles = v;
+    }));
+
+    if (this.activatedRoute.snapshot.queryParamMap.get('q')) {
+      this.isFiltered = true;
+      this.filterModel.filters.push(JSON.parse(this.activatedRoute.snapshot.queryParamMap.get('q')));
+    }
+    this.getFilteredAuthors();
   }
 
   applyFilter(filterValue: string) {
@@ -46,10 +65,17 @@ export class ProposalAuthorComponent implements OnInit, OnDestroy {
     }
   }
 
-  getAuthors() {
+  clearFilter() {
+    this.isFiltered = false;
+    this.filterModel = new FilterModel();
+    this.getFilteredAuthors();
+    this.router.navigate([AppConfig.PROPOSAL_AUTHOR]).then();
+  }
+
+  getFilteredAuthors() {
     this.spinnerService.show();
     this.subscription.add(
-      this.proposalAuthorService.getProposalAuthor().subscribe((res: ProposalAuthorModel) => {
+      this.proposalAuthorService.getFilteredProposalAuthor(this.filterModel).subscribe((res: ProposalAuthorModel) => {
         this.dataSource = new MatTableDataSource(res.objects);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
@@ -73,9 +99,15 @@ export class ProposalAuthorComponent implements OnInit, OnDestroy {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.getAuthors();
+        this.getFilteredAuthors();
       }
     });
+  }
+
+  getProjectURLForEmail(email: string) {
+    return {q: JSON.stringify(new Filter(
+      Constant.PROPOSAL_AUTHORS, Constant.HAS, new Filter(Constant.EMAIL, Constant.EQ, email)
+      ))};
   }
 
   ngOnDestroy(): void {

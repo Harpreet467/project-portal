@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Subscription} from "rxjs";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {Constant} from "../../../shared/constant";
 import {ProjectService} from "../project.service";
 import {CommentModel, Project, ProjectComment} from "../project.model";
@@ -12,6 +12,8 @@ import {ActionModalComponent} from "./action-modal/action-modal.component";
 import {Filter, FilterModel, OrderBy} from "../../../shared/model/filter.model";
 import {AlertService} from "../../../layout/alert/alert.service";
 import {StorageService} from "../../../shared/service/storage.service";
+import {RolesModel} from "../../../shared/model/roles.model";
+import {SharedService} from "../../../shared/service/shared.service";
 
 
 @Component({
@@ -21,12 +23,14 @@ import {StorageService} from "../../../shared/service/storage.service";
 })
 export class ProjectDetailsComponent implements OnInit, OnDestroy {
 
+  projectComment: ProjectComment = new ProjectComment();
   subscription: Subscription = new Subscription();
-  project: Project = new Project();
   commentModel: CommentModel = new CommentModel();
   filterModel: FilterModel = new FilterModel();
-  projectComment: ProjectComment = new ProjectComment();
+  loggedInRoles: RolesModel = new RolesModel();
+  project: Project = new Project();
   PROJECT_STATUS = Constant.PROJECT_STATUS;
+  STAFF_URL = AppConfig.STAFF;
   isDisableBtn = false;
   projectId: number;
 
@@ -36,11 +40,17 @@ export class ProjectDetailsComponent implements OnInit, OnDestroy {
     public dialog: MatDialog,
     public location: Location,
     private alertService: AlertService,
-    private storageService: StorageService
+    private storageService: StorageService,
+    private sharedService: SharedService
   ) {
   }
 
   ngOnInit(): void {
+    this.sharedService.refreshGetRoles();
+    this.subscription.add(this.sharedService.getLoggedInRoles.subscribe((v: RolesModel) => {
+      this.loggedInRoles = v;
+    }));
+
     this.subscription.add(this.activatedRoute.paramMap.subscribe((params) => {
       this.projectId = Number(params.get(Constant.ID));
       this.filterModel.filters.push(new Filter(Constant.PROJECT, Constant.EQ, this.projectId));
@@ -107,6 +117,10 @@ export class ProjectDetailsComponent implements OnInit, OnDestroy {
         this.isDisableBtn = false;
       })
     );
+  }
+
+  getStaffURLForID(id: number) {
+    return {q: JSON.stringify(new Filter(Constant.ID, Constant.EQ, id))};
   }
 
   ngOnDestroy(): void {

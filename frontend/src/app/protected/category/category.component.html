@@ -17,33 +17,52 @@
       <app-spinner></app-spinner>
     </div>
 
-    <mat-table class="mt-1" [dataSource]="dataSource" matSort [matSortActive]="displayedColumns[1]" matSortDirection="asc">
+    <mat-table class="mt-1" [dataSource]="dataSource" matSort [matSortActive]="displayedColumns[1]"
+               matSortDirection="asc">
       <ng-container [matColumnDef]="displayedColumns[0]">
-        <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header fxLayoutAlign="center center" fxFlex="10"> ID </mat-header-cell>
+        <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header fxLayoutAlign="center center" fxFlex="10">
+          ID
+        </mat-header-cell>
         <mat-cell mat-cell *matCellDef="let row" fxLayoutAlign="center center" fxFlex="10"> {{row.id}} </mat-cell>
       </ng-container>
 
       <ng-container [matColumnDef]="displayedColumns[1]">
-        <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header fxLayoutAlign="start center" fxFlex="25"> Name </mat-header-cell>
+        <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header fxLayoutAlign="start center" fxFlex="25">
+          Name
+        </mat-header-cell>
         <mat-cell mat-cell *matCellDef="let row" fxLayoutAlign="start center" fxFlex="25"> {{row.name}} </mat-cell>
       </ng-container>
 
       <ng-container [matColumnDef]="displayedColumns[2]">
-        <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header fxLayoutAlign="start center" fxFlex="40"> Description </mat-header-cell>
-        <mat-cell mat-cell *matCellDef="let row" fxLayoutAlign="start center" fxFlex="40"> {{row.description}} </mat-cell>
+        <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header fxLayoutAlign="start center" fxFlex="40">
+          Description
+        </mat-header-cell>
+        <mat-cell mat-cell *matCellDef="let row" fxLayoutAlign="start center"
+                  fxFlex="40"> {{row.description}} </mat-cell>
       </ng-container>
 
       <ng-container [matColumnDef]="displayedColumns[3]">
-        <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header fxLayoutAlign="center center" fxFlex="10"> Active </mat-header-cell>
+        <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header fxLayoutAlign="center center" fxFlex="10">
+          Active
+        </mat-header-cell>
         <mat-cell mat-cell *matCellDef="let row" fxLayoutAlign="center center" fxFlex="10">
-          <mat-slide-toggle color="primary" [checked]="row.status" (toggleChange)="toggleStatusCategory(row)"></mat-slide-toggle>
+          <mat-slide-toggle color="primary" [checked]="row.status"
+                            (toggleChange)="toggleStatusCategory(row)"></mat-slide-toggle>
         </mat-cell>
       </ng-container>
 
       <ng-container [matColumnDef]="displayedColumns[4]">
-        <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header fxLayoutAlign="center center" fxFlex="15"> Action </mat-header-cell>
+        <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header fxLayoutAlign="center center" fxFlex="15">
+          Action
+        </mat-header-cell>
         <mat-cell mat-cell *matCellDef="let row" fxLayoutAlign="center center" fxFlex="15">
-          <button mat-icon-button matTooltip="edit" (click)="openAddCategoryModal(row)"><mat-icon>edit</mat-icon></button>
+          <button mat-icon-button matTooltip="edit" (click)="openAddCategoryModal(row)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <a mat-icon-button matTooltip="projects" [routerLink]="[PROJECT_URL]"
+             [queryParams]="getProjectURLForEmail(row.id)">
+            <mat-icon>assignment</mat-icon>
+          </a>
         </mat-cell>
       </ng-container>
 

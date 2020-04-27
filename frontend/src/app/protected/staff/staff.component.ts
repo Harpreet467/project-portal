@@ -12,6 +12,9 @@ import {SaveStaffModalComponent} from './save-staff-modal/save-staff-modal.compo
 import {SpinnerService} from '../../shared/service/spinner.service';
 import {ViewStaffDetailModalComponent} from './view-staff-detail-modal/view-staff-detail-modal.component';
 import {Active} from '../../shared/model/active.model';
+import {ActivatedRoute, Router} from "@angular/router";
+import {FilterModel} from "../../shared/model/filter.model";
+import {AppConfig} from "../../app.config";
 
 @Component({
   selector: 'app-staff',
@@ -23,19 +26,27 @@ export class StaffComponent implements OnInit, OnDestroy {
   @ViewChild(MatSort) sort: MatSort;
 
   subscription: Subscription = new Subscription();
+  filterModel: FilterModel = new FilterModel();
   dataSource: MatTableDataSource<Staff>;
   displayedColumns = staffDisplayedColumns;
   pageSize = Constant.PAGE_SIZE_LIST;
+  isFiltered = false;
 
   constructor(
     public dialog: MatDialog,
     public staffService: StaffService,
     public spinnerService: SpinnerService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private activatedRoute: ActivatedRoute,
+    private router: Router
   ) { }
 
   ngOnInit() {
-    this.getStaffs();
+    if (this.activatedRoute.snapshot.queryParamMap.get('q')) {
+      this.isFiltered = true;
+      this.filterModel.filters.push(JSON.parse(this.activatedRoute.snapshot.queryParamMap.get('q')));
+    }
+    this.getFilteredStaffs();
   }
 
   applyFilter(filterValue: string) {
@@ -46,10 +57,17 @@ export class StaffComponent implements OnInit, OnDestroy {
     }
   }
 
-  getStaffs() {
+  clearFilter() {
+    this.isFiltered = false;
+    this.filterModel = new FilterModel();
+    this.getFilteredStaffs();
+    this.router.navigate([AppConfig.STAFF]).then();
+  }
+
+  getFilteredStaffs() {
     this.spinnerService.show();
     this.subscription.add(
-      this.staffService.getStaffs().subscribe((res: StaffModel) => {
+      this.staffService.getFilteredStaffs(this.filterModel).subscribe((res: StaffModel) => {
         this.dataSource = new MatTableDataSource(res.objects);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
@@ -66,7 +84,7 @@ export class StaffComponent implements OnInit, OnDestroy {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.getStaffs();
+        this.getFilteredStaffs();
       }
     });
   }
@@ -82,9 +100,9 @@ export class StaffComponent implements OnInit, OnDestroy {
     this.subscription.add(
       this.staffService.toggleStatusStaff(staff.id, new Active(!staff.active)).subscribe(() => {
         this.snackBar.open(Messages.STATUS_CHANGED_SUCCESSFULLY);
-        this.getStaffs();
+        this.getFilteredStaffs();
       }, () => {
-        this.getStaffs();
+        this.getFilteredStaffs();
       })
     );
   }

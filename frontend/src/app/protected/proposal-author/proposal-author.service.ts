@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {AppConfig} from '../../app.config';
 import {ProposalAuthor} from './proposal-author.model';
 import {toFormData} from '../../layout/file-upload/file-upload.utils';
 import {Project} from '../project/project.model';
+import {FilterModel} from "../../shared/model/filter.model";
 
 
 @Injectable({
@@ -15,6 +16,10 @@ export class ProposalAuthorService {
 
   getProposalAuthor() {
     return this.http.get(AppConfig.PROPOSAL_AUTHOR_API);
+  }
+
+  getFilteredProposalAuthor(filter: FilterModel) {
+    return this.http.get(AppConfig.PROPOSAL_AUTHOR_API, {params: new HttpParams().set('q', JSON.stringify(filter))});
   }
 
   createProposal(proposalAuthor: ProposalAuthor) {
