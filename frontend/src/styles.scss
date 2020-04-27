@@ -41,6 +41,10 @@ td, th {
   width: 90% !important;
 }
 
+.w-100 {
+  width: 100% !important;
+}
+
 .d-block {
   display: block !important;
 }
@@ -51,6 +55,10 @@ td, th {
 
 .d-none {
   display: none !important;
+}
+
+.f-left {
+  float: left !important;
 }
 
 .f-right {
@@ -85,12 +93,28 @@ td, th {
   margin-right: 1rem !important;
 }
 
+.mr-5px {
+  margin-right: 5px !important;
+}
+
 .p-2 {
   padding: 2rem !important;
 }
 
 .pr-2 {
   padding-right: 2rem !important;
+}
+
+.text-underline {
+  text-decoration: underline !important;
+}
+
+.text-link-color {
+  color: #004085;
+}
+
+.v-align-super {
+  vertical-align: super !important;
 }
 
 .cursor-pointer {
@@ -135,6 +159,10 @@ td, th {
 
 .font-size-1 {
   font-size: 1rem !important;
+}
+
+.font-size-20px {
+  font-size: 20px !important;
 }
 
 .mat-form-field {

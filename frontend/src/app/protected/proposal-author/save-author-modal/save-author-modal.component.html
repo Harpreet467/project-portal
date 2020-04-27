@@ -4,7 +4,7 @@
 
   <app-alert></app-alert>
 
-  <form #staffForm="ngForm">
+  <form #authorForm="ngForm">
     <mat-form-field>
       <label>
         <input type="text" matInput placeholder="Name" name="name" [(ngModel)]="proposalAuthor.name" #name="ngModel" required>
@@ -41,8 +41,8 @@
 <div mat-dialog-actions fxLayoutAlign="end">
   <button mat-flat-button (click)="closeModal()">Cancel</button>
   <button color="primary" mat-raised-button (click)="saveStaff()"
-          [ngClass]="staffForm.form.invalid ? 'cursor-not-allowed' : 'cursor-pointer'"
-          [disabled]="staffForm.form.invalid || isDisableBtn">
+          [ngClass]="authorForm.form.invalid ? 'cursor-not-allowed' : 'cursor-pointer'"
+          [disabled]="authorForm.form.invalid || isDisableBtn">
     Submit
   </button>
 </div>

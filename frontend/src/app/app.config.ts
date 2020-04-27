@@ -21,8 +21,8 @@ export class AppConfig {
   public static readonly PROJECT_UPLOAD_API = AppConfig.PROJECT_API + '/upload/';
   public static readonly PROJECT_DOWNLOAD_API = AppConfig.PROJECT_API + '/download/';
 
-  // Category
-  public static readonly CATEGORY_API = 'category';
+  // ProjectComment
+  public static readonly COMMENT_API = AppConfig.API + 'comment';
 
   // System Profile
   public static readonly SYSTEM_PROFILE_API = 'system-profiler';

@@ -18,12 +18,22 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatIconModule} from '@angular/material/icon';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatChipsModule} from '@angular/material/chips';
+import { ProjectDetailsComponent } from './project-details/project-details.component';
+import {MatListModule} from "@angular/material/list";
+import {DateAgoPipe} from "../../shared/pipe/date-ago.pipe";
+import { ActionModalComponent } from './project-details/action-modal/action-modal.component';
+import {MatDialogModule} from "@angular/material/dialog";
+import {AlertModule} from "../../layout/alert/alert.module";
+import {FormsModule} from "@angular/forms";
 
 
 
 @NgModule({
   declarations: [
-    ProjectComponent
+    ProjectComponent,
+    ProjectDetailsComponent,
+    DateAgoPipe,
+    ActionModalComponent
   ],
   imports: [
     RouterModule.forChild(projectRoute),
@@ -41,7 +51,11 @@ import {MatChipsModule} from '@angular/material/chips';
     MatTooltipModule,
     MatIconModule,
     MatPaginatorModule,
-    MatChipsModule
+    MatChipsModule,
+    MatListModule,
+    MatDialogModule,
+    AlertModule,
+    FormsModule
   ],
   providers: [
     ProjectService

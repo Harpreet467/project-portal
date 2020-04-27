@@ -30,7 +30,7 @@ export class ProposalAuthorComponent implements OnInit, OnDestroy {
   constructor(
     public proposalAuthorService: ProposalAuthorService,
     public spinnerService: SpinnerService,
-    public dialog: MatDialog,
+    public dialog: MatDialog
   ) {
   }
 

@@ -15,6 +15,7 @@ import {Constant} from '../shared/constant';
 import {Category, CategoryModel} from '../protected/category/category.model';
 import {Project} from '../protected/project/project.model';
 import {CategoryService} from '../protected/category/category.service';
+import {Filter, FilterModel} from "../shared/model/filter.model";
 
 
 @Component({
@@ -26,6 +27,7 @@ export class ProjectProposalComponent implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
   proposalAuthorModel: ProposalAuthor = new ProposalAuthor();
   project: Project = new Project();
+  filterModel: FilterModel = new FilterModel();
   categories: Category[];
 
   progress = 0;
@@ -45,7 +47,9 @@ export class ProjectProposalComponent implements OnInit, OnDestroy {
     private alertService: AlertService,
     private snackBar: MatSnackBar,
     private router: Router
-  ) { }
+  ) {
+    this.filterModel.filters.push(new Filter(Constant.STATUS, Constant.EQ, true));
+  }
 
   ngOnInit() {
     this.getProjectCategory();
@@ -54,7 +58,7 @@ export class ProjectProposalComponent implements OnInit, OnDestroy {
   getProjectCategory() {
     this.spinnerService.show();
     this.subscription.add(
-      this.categoryService.getActiveCategories().subscribe((res: CategoryModel) => {
+      this.categoryService.getFilteredCategories(this.filterModel).subscribe((res: CategoryModel) => {
         this.categories = res.objects;
         this.spinnerService.hide();
       })

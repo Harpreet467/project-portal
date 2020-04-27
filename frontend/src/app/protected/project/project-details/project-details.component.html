@@ -1,0 +1,177 @@
+<mat-card class="mat-elevation-z1 m-auto w-90 mt-2 p-2">
+  <mat-card-header fxLayout="row" fxLayoutAlign="space-between center" class="mb-1">
+    <mat-card-title fxLayout="row" fxLayoutAlign="start center" class="m-auto">
+      <button mat-icon-button matTooltip="projects" class="mr-1" (click)="location.back()">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+      {{project.title}}
+    </mat-card-title>
+
+    <mat-chip-list aria-label="status">
+      <mat-chip class="mr-1"
+                [ngClass]="statusClassConditions(project?.status)">{{project?.status | titlecase}}</mat-chip>
+    </mat-chip-list>
+  </mat-card-header>
+
+  <mat-divider></mat-divider>
+
+  <div fxLayout="column" fxLayoutAlign="space-around start">
+    <div fxLayout="row" fxLayoutAlign="space-between start" class="w-100 mt-1">
+      <mat-card class="mat-elevation-z0">
+        <div class="mat-card-subtitle d-inline-block">
+          <span class="mr-1" matTooltip="Deadline"><mat-icon>schedule</mat-icon></span>
+          <span class="mr-1 v-align-super" matTooltip="Deadline">
+            {{(project?.deadline | date: 'long') || 'Not available'}}
+          </span>
+
+          <span class="mr-1 ml-1" matTooltip="Category"><mat-icon>category</mat-icon></span>
+          <span class="mr-1 v-align-super" matTooltip="Category" *ngFor="let c of project?.category">
+              {{c.name}}
+            </span>
+        </div>
+
+        <div class="mt-1">
+          <span class="mat-card-subtitle">Description</span>
+          <p>{{project?.description}}</p>
+        </div>
+
+        <div class="mt-2">
+          <span class="mat-card-subtitle d-inline-block">Platform</span>
+          <span class="ml-1">{{project?.platform || 'Not available'}}</span>
+        </div>
+
+        <div>
+          <span class="mat-card-subtitle d-inline-block">Attachment</span>
+          <button mat-flat-button class="ml-1 text-link-color text-underline" (click)="downloadFile()"
+                  [disabled]="!project?.file_name">
+            {{project?.file_name || 'Not available'}}
+          </button>
+        </div>
+
+        <div class="mt-1">
+          <mat-chip-list aria-label="status">
+            <span class="mat-card-subtitle d-inline-block mr-1">Take Action</span>
+            <mat-chip class="approve" (click)="openCommentModal(PROJECT_STATUS.APPROVED)">
+              <mat-icon class="mr-5px">thumb_up</mat-icon>
+              Approve
+            </mat-chip>
+            <mat-chip class="decline" (click)="openCommentModal(PROJECT_STATUS.DECLINED)">
+              <mat-icon class="mr-5px">thumb_down</mat-icon>
+              Decline
+            </mat-chip>
+            <mat-chip class="defer" (click)="openCommentModal(PROJECT_STATUS.DEFERRED)">
+              <mat-icon class="mr-5px">timer</mat-icon>
+              Defer
+            </mat-chip>
+            <mat-chip class="withdraw" (click)="openCommentModal(PROJECT_STATUS.WITHDRAWN)">
+              <mat-icon class="mr-5px">undo</mat-icon>
+              Withdraw
+            </mat-chip>
+            <mat-chip class="skip" (click)="openCommentModal(PROJECT_STATUS.SKIPPED)">
+              <mat-icon class="mr-5px">fast_forward</mat-icon>
+              Skip
+            </mat-chip>
+          </mat-chip-list>
+        </div>
+
+        <div class="mt-2">
+          <span class="mat-card-subtitle d-inline-block mr-5px">Created at</span>
+          <span class="mr-1">{{(project?.created_at | dateAgo) || 'Not available'}}</span>
+          <span class="mat-card-subtitle d-inline-block mr-5px">Updated at</span>
+          <span class="mr-1">{{(project?.updated_at | dateAgo) || 'Not available'}}</span>
+          <span class="mat-card-subtitle d-inline-block mr-5px">Updated by</span>
+          <span class="mr-1">{{project?.last_updated_by || 'Not available'}}</span>
+        </div>
+      </mat-card>
+
+      <mat-card class="mat-elevation-z0">
+        <mat-card-subtitle class="font-size-20px">Project Author (Client)</mat-card-subtitle>
+
+        <mat-list>
+          <mat-list-item matTooltip="Name" disableRipple>
+            <mat-icon mat-list-icon>person</mat-icon>
+            <span mat-line>{{project?.proposal_authors?.name || 'Not available'}}</span>
+          </mat-list-item>
+
+          <mat-list-item matTooltip="Email address" disableRipple>
+            <mat-icon mat-list-icon>email</mat-icon>
+            <span mat-line>{{project?.proposal_authors?.email || 'Not available'}}</span>
+          </mat-list-item>
+
+          <mat-list-item matTooltip="Organisation" disableRipple>
+            <mat-icon mat-list-icon>business</mat-icon>
+            <span mat-line>{{project?.proposal_authors?.organisation_name || 'Not available'}}</span>
+          </mat-list-item>
+
+          <mat-list-item matTooltip="Phone Number" disableRipple>
+            <mat-icon mat-list-icon>call</mat-icon>
+            <span mat-line>{{project?.proposal_authors?.phone_number || 'Not available'}}</span>
+          </mat-list-item>
+
+          <mat-list-item matTooltip="Created at" disableRipple>
+            <mat-icon mat-list-icon>event</mat-icon>
+            <span mat-line>{{(project?.proposal_authors?.created_at | date: 'long') || 'Not available'}}</span>
+          </mat-list-item>
+
+          <mat-list-item matTooltip="Updated at" disableRipple>
+            <mat-icon mat-list-icon>event</mat-icon>
+            <span mat-line>{{(project?.proposal_authors?.updated_at | date: 'long') || 'Not available'}}</span>
+          </mat-list-item>
+
+          <mat-list-item matTooltip="Last updated by" disableRipple>
+            <mat-icon mat-list-icon>how_to_reg</mat-icon>
+            <span mat-line>{{project?.proposal_authors?.last_updated_by || 'Not available'}}</span>
+          </mat-list-item>
+
+        </mat-list>
+      </mat-card>
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="space-between start" class="w-100 mt-2">
+      <mat-card class="mat-elevation-z0 w-100">
+        <mat-card-subtitle class="font-size-20px">Comments</mat-card-subtitle>
+
+        <app-alert></app-alert>
+        <form #actionForm="ngForm" (ngSubmit)="saveComment()">
+          <mat-form-field appearance="outline">
+            <mat-label>Add your comment</mat-label>
+            <label>
+              <textarea matInput placeholder="Add your comment" name="comment"
+                        [(ngModel)]="projectComment.text" #comment="ngModel" required>
+              </textarea>
+            </label>
+            <mat-error *ngIf="comment.touched && comment.invalid">
+              <small class="mat-text-warn" *ngIf="comment?.errors.required">Comment is required.</small>
+            </mat-error>
+          </mat-form-field>
+          <button color="primary" mat-raised-button (click)="saveComment()"
+                  [ngClass]="actionForm.form.invalid ? 'cursor-not-allowed' : 'cursor-pointer'"
+                  [disabled]="actionForm.form.invalid || isDisableBtn">
+            Submit
+          </button>
+        </form>
+
+        <mat-card class="w-100 mt-1" *ngFor="let projectComment of commentModel.objects">
+          <mat-card-header>
+            <div mat-card-avatar class="comment-header-image"></div>
+            <mat-card-title [matTooltip]="projectComment?.staffs.email">
+              {{projectComment?.staffs.name | titlecase}}
+            </mat-card-title>
+            <mat-card-subtitle matTooltip="commented at">
+              {{(projectComment?.created_at | dateAgo) || 'Not available'}}
+            </mat-card-subtitle>
+            <mat-chip-list aria-label="status" *ngIf="projectComment?.project_status">
+              <mat-chip class="mr-1" [ngClass]="statusClassConditions(projectComment?.project_status)">
+                {{projectComment?.project_status | titlecase}}
+              </mat-chip>
+            </mat-chip-list>
+          </mat-card-header>
+          <mat-card-content>
+            <p>{{projectComment?.text}}</p>
+          </mat-card-content>
+        </mat-card>
+      </mat-card>
+    </div>
+  </div>
+
+</mat-card>

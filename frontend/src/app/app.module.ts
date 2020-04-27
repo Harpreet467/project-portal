@@ -68,8 +68,8 @@ import { SidenavComponent } from './layout/sidenav/sidenav.component';
       useValue: {
         duration: 5000,
         direction: 'center',
-        verticalPosition: 'top',
-        horizontalPosition: 'end'
+        verticalPosition: 'bottom',
+        horizontalPosition: 'center'
       }
     }
   ],

@@ -1,0 +1,37 @@
+.mat-list-base .mat-list-item.mat-list-item-with-avatar {
+  height: 36px !important;
+}
+
+.proposal, .approve, .decline, .defer, .withdraw, .skip {
+  color: #f3f3f3 !important;
+}
+
+.proposal {
+  background-color: #fbc02d;
+}
+
+.approve {
+  background-color: #2e7d32;
+}
+
+.decline {
+  background-color: #b71c1c;
+}
+
+.defer {
+  background-color: #e65100;
+}
+
+.withdraw {
+  background-color: #4a148c;
+}
+
+.skip {
+  background-color: #616161;
+}
+
+.comment-header-image {
+  background-image: url('../../../../assets/image/user-avatar.png');
+  background-size: cover;
+}
+
