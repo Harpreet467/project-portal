@@ -70,7 +70,7 @@ export class SidenavComponent implements OnInit, OnDestroy {
   }
 
   getAdminRole() {
-    this.sharedService.checkAdminRole();
+    this.sharedService.checkRoles();
     this.subscription.add(
       this.sharedService.isAdminRole.subscribe(value => {
         this.isAdmin = value;

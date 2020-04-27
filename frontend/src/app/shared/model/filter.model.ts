@@ -11,9 +11,9 @@ export class FilterModel {
 export class Filter {
   name: string;
   op: string;
-  val: string | number | boolean;
+  val: string | number | boolean | Filter;
 
-  constructor(name: string, op: string, val: string | number | boolean) {
+  constructor(name: string, op: string, val: string | number | boolean | Filter) {
     this.name = name;
     this.op = op;
     this.val = val;

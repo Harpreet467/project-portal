@@ -13,5 +13,5 @@ class Comment(Entity, db.Model):
         super().__init__(last_updated_by)
         self.text = kwargs['text']
         self.project = kwargs['project']
-        self.project_status = kwargs['project_status'] if 'project_status' in kwargs else None
+        self.project_status = kwargs.get('project_status', None)
         self.commented_by = kwargs['commented_by']

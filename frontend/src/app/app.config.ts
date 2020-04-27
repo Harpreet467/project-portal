@@ -38,17 +38,17 @@ export class AppConfig {
   public static readonly DASHBOARD = 'dashboard/';
 
   // Staff
-  public static readonly STAFF = 'proposalAuthor/';
+  public static readonly STAFF = '/staff/';
 
   // ProjectModel
-  public static readonly PROJECT_PROPOSAL = 'project-proposal';
-  public static readonly PROPOSAL_AUTHOR = 'proposal-author';
-  public static readonly PROJECT = 'project';
+  public static readonly PROJECT_PROPOSAL = '/project-proposal';
+  public static readonly PROPOSAL_AUTHOR = '/proposal-author';
+  public static readonly PROJECT = '/project';
 
   // Category
-  public static readonly CATEGORY = 'category';
+  public static readonly CATEGORY = '/category';
 
   // System Profile
-  public static readonly SYSTEM_PROFILE = 'system-profiler/';
+  public static readonly SYSTEM_PROFILE = '/system-profiler/';
 
 }

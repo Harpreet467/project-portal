@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import {HomeComponent} from './home/home.component';
 import {AuthGuardService} from './shared/service/auth-guard.service';
 import {RoleGuardService} from './shared/service/role-guard.service';
-import {Constant} from './shared/constant';
+import {Roles} from './shared/constant';
 
 
 const routes: Routes = [
@@ -30,31 +30,31 @@ const routes: Routes = [
       {
         path: 'staff',
         canActivate: [AuthGuardService, RoleGuardService],
-        data: {roles: [Constant.ROLE_ADMIN]},
+        data: {roles: [Roles.ROLE_ADMIN]},
         loadChildren: () => import('./protected/staff/staff.module').then(m => m.StaffModule)
       },
       {
         path: 'proposal-author',
         canActivate: [AuthGuardService, RoleGuardService],
-        data: {roles: [Constant.ROLE_ADMIN, Constant.THIRD_LEVEL, Constant.SECOND_LEVEL, Constant.FIRST_LEVEL]},
+        data: {roles: [Roles.ROLE_ADMIN, Roles.THIRD_LEVEL, Roles.SECOND_LEVEL, Roles.FIRST_LEVEL]},
         loadChildren: () => import('./protected/proposal-author/proposal-author.module').then(m => m.ProposalAuthorModule)
       },
       {
         path: 'project',
         canActivate: [AuthGuardService, RoleGuardService],
-        data: {roles: [Constant.ROLE_ADMIN, Constant.THIRD_LEVEL, Constant.SECOND_LEVEL, Constant.FIRST_LEVEL]},
+        data: {roles: [Roles.ROLE_ADMIN, Roles.THIRD_LEVEL, Roles.SECOND_LEVEL, Roles.FIRST_LEVEL]},
         loadChildren: () => import('./protected/project/project.module').then(m => m.ProjectModule)
       },
       {
         path: 'category',
         canActivate: [AuthGuardService, RoleGuardService],
-        data: {roles: [Constant.ROLE_ADMIN]},
+        data: {roles: [Roles.ROLE_ADMIN]},
         loadChildren: () => import('./protected/category/category.module').then(m => m.CategoryModule)
       },
       {
         path: 'system-profiler',
         canActivate: [AuthGuardService, RoleGuardService],
-        data: {roles: [Constant.ROLE_ADMIN]},
+        data: {roles: [Roles.ROLE_ADMIN]},
         loadChildren: () => import('./protected/system-profiler/system-profiler.module').then(m => m.SystemProfilerModule)
       }
     ]
