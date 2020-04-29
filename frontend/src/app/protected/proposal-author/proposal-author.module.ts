@@ -21,30 +21,32 @@ import {MatListModule} from "@angular/material/list";
 import { SaveAuthorModalComponent } from './save-author-modal/save-author-modal.component';
 import {AlertModule} from "../../layout/alert/alert.module";
 import {FormsModule} from "@angular/forms";
+import {MatMenuModule} from "@angular/material/menu";
 
 
 
 @NgModule({
   declarations: [ProposalAuthorComponent, ViewAuthorModalComponent, SaveAuthorModalComponent],
-  imports: [
-    RouterModule.forChild(proposalAuthorRoutes),
-    CommonModule,
-    MatCardModule,
-    FlexModule,
-    MatDividerModule,
-    MatFormFieldModule,
-    SpinnerModule,
-    MatInputModule,
-    MatTableModule,
-    MatSortModule,
-    MatButtonModule,
-    MatTooltipModule,
-    MatIconModule,
-    MatPaginatorModule,
-    MatDialogModule,
-    MatListModule,
-    AlertModule,
-    FormsModule
-  ]
+    imports: [
+        RouterModule.forChild(proposalAuthorRoutes),
+        CommonModule,
+        MatCardModule,
+        FlexModule,
+        MatDividerModule,
+        MatFormFieldModule,
+        SpinnerModule,
+        MatInputModule,
+        MatTableModule,
+        MatSortModule,
+        MatButtonModule,
+        MatTooltipModule,
+        MatIconModule,
+        MatPaginatorModule,
+        MatDialogModule,
+        MatListModule,
+        AlertModule,
+        FormsModule,
+        MatMenuModule
+    ]
 })
 export class ProposalAuthorModule { }

@@ -22,6 +22,7 @@ import { SaveCategoryModalComponent } from './save-category-modal/save-category-
 import {AlertModule} from '../../layout/alert/alert.module';
 import {MatDialogModule} from '@angular/material/dialog';
 import {FormsModule} from '@angular/forms';
+import {MatMenuModule} from "@angular/material/menu";
 
 
 
@@ -30,27 +31,28 @@ import {FormsModule} from '@angular/forms';
     CategoryComponent,
     SaveCategoryModalComponent
   ],
-  imports: [
-    RouterModule.forChild(categoryRoute),
-    CommonModule,
-    MatCardModule,
-    MatDividerModule,
-    MatFormFieldModule,
-    SpinnerModule,
-    MatTableModule,
-    MatSortModule,
-    MatInputModule,
-    MatButtonModule,
-    FlexModule,
-    MatChipsModule,
-    MatSlideToggleModule,
-    MatTooltipModule,
-    MatPaginatorModule,
-    MatIconModule,
-    AlertModule,
-    MatDialogModule,
-    FormsModule
-  ],
+    imports: [
+        RouterModule.forChild(categoryRoute),
+        CommonModule,
+        MatCardModule,
+        MatDividerModule,
+        MatFormFieldModule,
+        SpinnerModule,
+        MatTableModule,
+        MatSortModule,
+        MatInputModule,
+        MatButtonModule,
+        FlexModule,
+        MatChipsModule,
+        MatSlideToggleModule,
+        MatTooltipModule,
+        MatPaginatorModule,
+        MatIconModule,
+        AlertModule,
+        MatDialogModule,
+        FormsModule,
+        MatMenuModule
+    ],
   providers: [
     CategoryService
   ]

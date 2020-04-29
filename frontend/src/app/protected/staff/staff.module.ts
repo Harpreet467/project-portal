@@ -24,6 +24,7 @@ import {FormsModule} from '@angular/forms';
 import {SpinnerModule} from '../../layout/spinner/spinner.module';
 import { ViewStaffDetailModalComponent } from './view-staff-detail-modal/view-staff-detail-modal.component';
 import {AlertModule} from '../../layout/alert/alert.module';
+import {MatMenuModule} from "@angular/material/menu";
 
 
 @NgModule({
@@ -32,28 +33,29 @@ import {AlertModule} from '../../layout/alert/alert.module';
     SaveStaffModalComponent,
     ViewStaffDetailModalComponent
   ],
-  imports: [
-    RouterModule.forChild(staffRoutes),
-    CommonModule,
-    MatInputModule,
-    MatTableModule,
-    MatSortModule,
-    MatPaginatorModule,
-    MatButtonModule,
-    MatTooltipModule,
-    MatIconModule,
-    MatChipsModule,
-    MatCardModule,
-    MatDividerModule,
-    FlexModule,
-    MatDialogModule,
-    FormsModule,
-    MatSelectModule,
-    SpinnerModule,
-    MatListModule,
-    AlertModule,
-    MatSlideToggleModule
-  ],
+    imports: [
+        RouterModule.forChild(staffRoutes),
+        CommonModule,
+        MatInputModule,
+        MatTableModule,
+        MatSortModule,
+        MatPaginatorModule,
+        MatButtonModule,
+        MatTooltipModule,
+        MatIconModule,
+        MatChipsModule,
+        MatCardModule,
+        MatDividerModule,
+        FlexModule,
+        MatDialogModule,
+        FormsModule,
+        MatSelectModule,
+        SpinnerModule,
+        MatListModule,
+        AlertModule,
+        MatSlideToggleModule,
+        MatMenuModule
+    ],
   providers: [
     StaffService
   ]

@@ -30,7 +30,7 @@ export class SaveAuthorModalComponent implements OnInit, OnDestroy {
     this.proposalAuthor = this.data;
   }
 
-  saveStaff() {
+  saveAuthor() {
     this.isDisableBtn = true;
     this.proposalAuthor.last_updated_by = this.storageService.getUserName();
     this.subscription.add(

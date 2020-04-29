@@ -11,7 +11,7 @@ import {MatDialog} from "@angular/material/dialog";
 import {ViewAuthorModalComponent} from "./view-author-modal/view-author-modal.component";
 import {SaveAuthorModalComponent} from "./save-author-modal/save-author-modal.component";
 import {AppConfig} from "../../app.config";
-import {Filter, FilterModel} from "../../shared/model/filter.model";
+import {Filter, FilterModel, OrderBy} from "../../shared/model/filter.model";
 import {ActivatedRoute, Router} from "@angular/router";
 import {SharedService} from "../../shared/service/shared.service";
 import {RolesModel} from "../../shared/model/roles.model";
@@ -42,6 +42,7 @@ export class ProposalAuthorComponent implements OnInit, OnDestroy {
     private router: Router,
     private sharedService: SharedService
   ) {
+    this.filterModel.order_by.push(new OrderBy());
   }
 
   ngOnInit() {
@@ -68,6 +69,7 @@ export class ProposalAuthorComponent implements OnInit, OnDestroy {
   clearFilter() {
     this.isFiltered = false;
     this.filterModel = new FilterModel();
+    this.filterModel.order_by.push(new OrderBy());
     this.getFilteredAuthors();
     this.router.navigate([AppConfig.PROPOSAL_AUTHOR]).then();
   }
@@ -91,7 +93,7 @@ export class ProposalAuthorComponent implements OnInit, OnDestroy {
     });
   }
 
-  openAddStaffModal(proposalAuthor: ProposalAuthor = null) {
+  openAuthorModal(proposalAuthor: ProposalAuthor = null) {
     const dialogRef = this.dialog.open(SaveAuthorModalComponent, {
       width: Constant.MODAL_WIDTH,
       data: proposalAuthor

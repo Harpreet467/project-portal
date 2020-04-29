@@ -40,7 +40,7 @@
 
 <div mat-dialog-actions fxLayoutAlign="end">
   <button mat-flat-button (click)="closeModal()">Cancel</button>
-  <button color="primary" mat-raised-button (click)="saveStaff()"
+  <button color="primary" mat-raised-button (click)="saveAuthor()"
           [ngClass]="authorForm.form.invalid ? 'cursor-not-allowed' : 'cursor-pointer'"
           [disabled]="authorForm.form.invalid || isDisableBtn">
     Submit
