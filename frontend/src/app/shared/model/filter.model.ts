@@ -1,3 +1,5 @@
+import {Constant} from "../constant";
+
 export class FilterModel {
   filters: Array<Filter>;
   order_by: Array<OrderBy>;
@@ -24,7 +26,7 @@ export class OrderBy {
   field: string;
   direction: 'asc' | 'desc';
 
-  constructor(field: string, direction: 'asc' | 'desc') {
+  constructor(field: string = Constant.UPDATED_AT, direction: 'asc' | 'desc' = Constant.DESC) {
     this.field = field;
     this.direction = direction;
   }

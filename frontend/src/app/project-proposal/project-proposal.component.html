@@ -90,6 +90,48 @@
               <small class="mat-text-warn" *ngIf="category?.errors.required">Category is required.</small>
             </mat-error>
           </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Target Platform and language</mat-label>
+            <label>
+              <input matInput placeholder="Platform" name="platform" [(ngModel)]="project.platform" #platform="ngModel">
+            </label>
+          </mat-form-field>
+          <div fxLayout="row">
+            <mat-form-field appearance="outline" class="mr-1">
+              <mat-label>Required completion date</mat-label>
+              <label for="deadline"></label>
+              <input id="deadline" matInput [matDatepicker]="fDate" (focus)="fDate.open()" (click)="fDate.open()" name="deadline" [(ngModel)]="project.deadline">
+              <mat-datepicker-toggle matSuffix [for]="fDate"></mat-datepicker-toggle>
+              <mat-datepicker #fDate></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Availability</mat-label>
+              <label>
+                <input matInput placeholder="Weekdays, business hours" name="availability" [(ngModel)]="project.availability">
+              </label>
+            </mat-form-field>
+          </div>
+
+          <div fxLayout="row">
+            <mat-form-field appearance="outline" class="mr-1">
+              <mat-label>City</mat-label>
+              <label>
+                <input matInput placeholder="City" name="city" [(ngModel)]="project.city" #city="ngModel" required>
+              </label>
+              <mat-error *ngIf="city.touched && city.invalid">
+                <small class="mat-text-warn" *ngIf="city?.errors.required">City is required.</small>
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Country</mat-label>
+              <label>
+                <input matInput placeholder="Country" name="country" [(ngModel)]="project.country" #country="ngModel" required>
+              </label>
+              <mat-error *ngIf="country.touched && country.invalid">
+                <small class="mat-text-warn" *ngIf="country?.errors.required">Country is required.</small>
+              </mat-error>
+            </mat-form-field>
+          </div>
           <div>
             <button mat-stroked-button color="primary" class="f-right"
                     (click)="saveProject(stepper)"

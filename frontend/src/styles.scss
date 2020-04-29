@@ -10,8 +10,8 @@ table {
   width: 100%;
 }
 
-td, th {
-  width: 25%;
+th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
+  padding: 0 10px;
 }
 
 .main-container {
@@ -43,6 +43,14 @@ td, th {
 
 .w-100 {
   width: 100% !important;
+}
+
+.w-auto {
+  width: auto !important;
+}
+
+.w-max-content {
+  width: max-content !important;
 }
 
 .d-block {
@@ -103,6 +111,10 @@ td, th {
 
 .pr-2 {
   padding-right: 2rem !important;
+}
+
+.overflow-auto {
+  overflow: auto !important;
 }
 
 .text-underline {
