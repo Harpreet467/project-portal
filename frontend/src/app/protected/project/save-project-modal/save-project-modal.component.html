@@ -1,0 +1,97 @@
+<h1 mat-dialog-title>Edit Project</h1>
+
+<div mat-dialog-content>
+
+  <app-alert></app-alert>
+
+  <form #projectForm="ngForm">
+    <mat-form-field>
+      <mat-label>Title</mat-label>
+      <label>
+        <input matInput placeholder="Title" name="title" [(ngModel)]="project.title" #title="ngModel" required>
+      </label>
+      <mat-error *ngIf="title.touched && title.invalid">
+        <small class="mat-text-warn" *ngIf="title?.errors.required">Title is required.</small>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Description</mat-label>
+      <label>
+        <textarea matInput placeholder="Description" name="description" [(ngModel)]="project.description"
+                  #description="ngModel" required></textarea>
+      </label>
+      <mat-error *ngIf="description.touched && description.invalid">
+        <small class="mat-text-warn" *ngIf="description?.errors.required">Description is required.</small>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Category</mat-label>
+      <mat-select placeholder="Select Category" name="category" [(ngModel)]="project.category"
+                  [compareWith]="compareFn" #category="ngModel" multiple required>
+        <mat-option *ngFor="let category of categories" [value]="category">
+          {{category?.name}} &nbsp;
+          <i>({{category?.description}})</i>
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="category.touched && category.invalid">
+        <small class="mat-text-warn" *ngIf="category?.errors.required">Category is required.</small>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Target Platform and language</mat-label>
+      <label>
+        <input matInput placeholder="Platform" name="platform" [(ngModel)]="project.platform">
+      </label>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Required completion date</mat-label>
+      <label for="deadline"></label>
+      <input id="deadline" matInput [matDatepicker]="fDate" (focus)="fDate.open()" (click)="fDate.open()"
+             name="deadline" [(ngModel)]="project.deadline">
+      <mat-datepicker-toggle matSuffix [for]="fDate"></mat-datepicker-toggle>
+      <mat-datepicker #fDate></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Availability</mat-label>
+      <label>
+        <input matInput placeholder="Weekdays, business hours" name="availability" [(ngModel)]="project.availability">
+      </label>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>City</mat-label>
+      <label>
+        <input matInput placeholder="City" name="city" [(ngModel)]="project.city" #city="ngModel" required>
+      </label>
+      <mat-error *ngIf="city.touched && city.invalid">
+        <small class="mat-text-warn" *ngIf="city?.errors.required">City is required.</small>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Country</mat-label>
+      <label>
+        <input matInput placeholder="Country" name="country" [(ngModel)]="project.country" #country="ngModel"
+               required>
+      </label>
+      <mat-error *ngIf="country.touched && country.invalid">
+        <small class="mat-text-warn" *ngIf="country?.errors.required">Country is required.</small>
+      </mat-error>
+    </mat-form-field>
+
+  </form>
+</div>
+
+<div mat-dialog-actions fxLayoutAlign="end">
+  <button mat-flat-button (click)="closeModal()">Cancel</button>
+  <button color="primary" mat-raised-button (click)="saveProject()"
+          [ngClass]="projectForm.form.invalid ? 'cursor-not-allowed' : 'cursor-pointer'"
+          [disabled]="projectForm.form.invalid || isDisableBtn">
+    Submit
+  </button>
+</div>

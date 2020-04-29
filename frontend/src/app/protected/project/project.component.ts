@@ -10,7 +10,13 @@ import {Project, projectDisplayedColumns, ProjectModel} from './project.model';
 import {AppConfig} from '../../app.config';
 import {environment} from '../../../environments/environment';
 import {ActivatedRoute, Router} from "@angular/router";
-import {Filter, FilterModel} from "../../shared/model/filter.model";
+import {Filter, FilterModel, OrderBy} from "../../shared/model/filter.model";
+import {RolesModel} from "../../shared/model/roles.model";
+import {SharedService} from "../../shared/service/shared.service";
+import {ProposalAuthor} from "../proposal-author/proposal-author.model";
+import {SaveAuthorModalComponent} from "../proposal-author/save-author-modal/save-author-modal.component";
+import {MatDialog} from "@angular/material/dialog";
+import {SaveProjectModalComponent} from "./save-project-modal/save-project-modal.component";
 
 @Component({
   selector: 'app-project',
@@ -23,6 +29,7 @@ export class ProjectComponent implements OnInit, OnDestroy {
 
   subscription: Subscription = new Subscription();
   filterModel: FilterModel = new FilterModel();
+  loggedInRoles: RolesModel = new RolesModel();
   dataSource: MatTableDataSource<Project>;
   displayedColumns = projectDisplayedColumns;
   pageSize = Constant.PAGE_SIZE_LIST;
@@ -33,10 +40,19 @@ export class ProjectComponent implements OnInit, OnDestroy {
     public projectService: ProjectService,
     public spinnerService: SpinnerService,
     private activatedRoute: ActivatedRoute,
-    private router: Router
-  ) { }
+    public dialog: MatDialog,
+    private router: Router,
+    private sharedService: SharedService
+  ) {
+    this.filterModel.order_by.push(new OrderBy());
+  }
 
   ngOnInit() {
+    this.sharedService.refreshGetRoles();
+    this.subscription.add(this.sharedService.getLoggedInRoles.subscribe((v: RolesModel) => {
+      this.loggedInRoles = v;
+    }));
+
     if (this.activatedRoute.snapshot.queryParamMap.get('q')) {
       this.isFiltered = true;
       this.filterModel.filters.push(JSON.parse(this.activatedRoute.snapshot.queryParamMap.get('q')));
@@ -55,6 +71,7 @@ export class ProjectComponent implements OnInit, OnDestroy {
   clearFilter() {
     this.isFiltered = false;
     this.filterModel = new FilterModel();
+    this.filterModel.order_by.push(new OrderBy());
     this.getFilteredProjects();
     this.router.navigate([AppConfig.PROJECT]).then();
   }
@@ -79,6 +96,17 @@ export class ProjectComponent implements OnInit, OnDestroy {
     return {q: JSON.stringify(new Filter(
         Constant.PROJECTS, Constant.ANY, new Filter(Constant.ID, Constant.EQ, id)
       ))};
+  }
+
+  openProjectModal(project: Project = null) {
+    this.dialog.open(SaveProjectModalComponent, {
+      width: Constant.MODAL_WIDTH,
+      data: project
+    }).afterClosed().subscribe(result => {
+      if (result) {
+        this.getFilteredProjects();
+      }
+    });
   }
 
   ngOnDestroy(): void {

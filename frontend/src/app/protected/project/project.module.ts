@@ -25,6 +25,11 @@ import { ActionModalComponent } from './project-details/action-modal/action-moda
 import {MatDialogModule} from "@angular/material/dialog";
 import {AlertModule} from "../../layout/alert/alert.module";
 import {FormsModule} from "@angular/forms";
+import { SaveProjectModalComponent } from './save-project-modal/save-project-modal.component';
+import {MatSelectModule} from "@angular/material/select";
+import {MatDatepickerModule} from "@angular/material/datepicker";
+import {MatNativeDateModule} from "@angular/material/core";
+import {MatMenuModule} from "@angular/material/menu";
 
 
 
@@ -33,7 +38,8 @@ import {FormsModule} from "@angular/forms";
     ProjectComponent,
     ProjectDetailsComponent,
     DateAgoPipe,
-    ActionModalComponent
+    ActionModalComponent,
+    SaveProjectModalComponent
   ],
   imports: [
     RouterModule.forChild(projectRoute),
@@ -55,7 +61,11 @@ import {FormsModule} from "@angular/forms";
     MatListModule,
     MatDialogModule,
     AlertModule,
-    FormsModule
+    FormsModule,
+    MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatMenuModule
   ],
   providers: [
     ProjectService

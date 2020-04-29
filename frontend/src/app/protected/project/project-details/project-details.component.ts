@@ -14,6 +14,7 @@ import {AlertService} from "../../../layout/alert/alert.service";
 import {StorageService} from "../../../shared/service/storage.service";
 import {RolesModel} from "../../../shared/model/roles.model";
 import {SharedService} from "../../../shared/service/shared.service";
+import {SaveProjectModalComponent} from "../save-project-modal/save-project-modal.component";
 
 
 @Component({
@@ -121,6 +122,17 @@ export class ProjectDetailsComponent implements OnInit, OnDestroy {
 
   getStaffURLForID(id: number) {
     return {q: JSON.stringify(new Filter(Constant.ID, Constant.EQ, id))};
+  }
+
+  openProjectModal() {
+    this.dialog.open(SaveProjectModalComponent, {
+      width: Constant.MODAL_WIDTH,
+      data: this.project
+    }).afterClosed().subscribe(result => {
+      if (result) {
+        this.getProjectDetails();
+      }
+    });
   }
 
   ngOnDestroy(): void {

@@ -17,8 +17,11 @@ export class Project {
   file: File;
   category: Array<Category>;
   proposal_authors: ProposalAuthor;
-  deadline: string;
+  deadline: string | Date;
+  availability: string;
   platform: string;
+  city: string;
+  country: string;
   status: string;
   created_at: string;
   updated_at: string;

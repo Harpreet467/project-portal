@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {AppConfig} from '../../app.config';
-import {ProjectComment} from "./project.model";
+import {Project, ProjectComment} from "./project.model";
 import {FilterModel} from "../../shared/model/filter.model";
 
 
@@ -22,6 +22,10 @@ export class ProjectService {
 
   getFilteredProjects(filter: FilterModel) {
     return this.http.get(AppConfig.PROJECT_API, {params: new HttpParams().set('q', JSON.stringify(filter))});
+  }
+
+  updateProject(project: Project) {
+    return this.http.put(AppConfig.PROJECT_API + '/' + project.id, project);
   }
 
   getFilteredComments(filter: FilterModel) {

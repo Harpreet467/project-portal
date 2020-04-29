@@ -5,10 +5,14 @@
         <mat-icon>arrow_back</mat-icon>
       </button>
       {{project.title}}
+      <button mat-icon-button class="ml-1" matTooltip="edit" (click)="openProjectModal()"
+              *ngIf="loggedInRoles.isAdmin || loggedInRoles.isSecondLevel || loggedInRoles.isThirdLevel">
+        <mat-icon>edit</mat-icon>
+      </button>
     </mat-card-title>
 
     <mat-chip-list aria-label="status">
-      <mat-chip class="mr-1"
+      <mat-chip disableRipple class="mr-1"
                 [ngClass]="statusClassConditions(project?.status)">{{project?.status | titlecase}}</mat-chip>
     </mat-chip-list>
   </mat-card-header>
@@ -21,12 +25,12 @@
         <div class="mat-card-subtitle d-inline-block">
           <span class="mr-1" matTooltip="Deadline"><mat-icon>schedule</mat-icon></span>
           <span class="mr-1 v-align-super" matTooltip="Deadline">
-            {{(project?.deadline | date: 'long') || 'Not available'}}
+            {{(project?.deadline | date: 'short') || 'Not available'}}
           </span>
 
           <span class="mr-1 ml-1" matTooltip="Category"><mat-icon>category</mat-icon></span>
           <span class="mr-1 v-align-super" matTooltip="Category" *ngFor="let c of project?.category">
-              {{c.name}}
+                {{c.name}}
             </span>
         </div>
 
@@ -36,6 +40,16 @@
         </div>
 
         <div class="mt-2">
+          <span class="mat-card-subtitle d-inline-block">Location</span>
+          <span class="ml-1">{{project?.city || 'Not available'}}, {{project?.country || 'Not available'}}</span>
+        </div>
+
+        <div>
+          <span class="mat-card-subtitle d-inline-block">Availability</span>
+          <span class="ml-1">{{project?.availability || 'Not available'}}</span>
+        </div>
+
+        <div>
           <span class="mat-card-subtitle d-inline-block">Platform</span>
           <span class="ml-1">{{project?.platform || 'Not available'}}</span>
         </div>
@@ -173,6 +187,10 @@
             <p>{{projectComment?.text}}</p>
           </mat-card-content>
         </mat-card>
+
+        <div *ngIf="commentModel?.objects?.length === 0">
+          <h3 class="mat-card-subtitle text-center"> No comments.</h3>
+        </div>
       </mat-card>
     </div>
   </div>
