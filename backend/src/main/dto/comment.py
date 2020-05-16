@@ -8,5 +8,12 @@ def exclude_columns():
         'staffs.current_login_at',
         'staffs.last_login_ip',
         'staffs.current_login_ip',
-        'staffs.login_count'
+        'staffs.login_count',
+        'students.phone_number',
+        'students.description',
+        'students.city',
+        'students.country',
+        'students.is_in_team',
+        'students.project',
+        'students.comments',
     ]

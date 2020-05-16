@@ -11,4 +11,4 @@ def get_security_payload(staff):
 
 
 def exclude_columns():
-    return ['password']
+    return ['password', 'comments']

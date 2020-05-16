@@ -5,7 +5,7 @@ from flask import send_from_directory
 from werkzeug.utils import secure_filename
 
 from app import app
-from src.main.exception.exception import handle500, handle400
+from src.main.exception.exception import handle500, handle400, handle404
 
 
 def allowed_file(filename):
@@ -30,4 +30,4 @@ def get_uploaded_file(filename):
         return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
     except Exception as e:
         print(e)
-        return handle400()
+        return handle404()
