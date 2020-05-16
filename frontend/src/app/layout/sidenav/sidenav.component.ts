@@ -53,6 +53,13 @@ export class SidenavComponent implements OnInit, OnDestroy {
         visibility: true
       },
       {
+        name: 'Students',
+        type: 'link',
+        value: AppConfig.STUDENT,
+        icon: 'school',
+        visibility: true
+      },
+      {
         name: 'Category',
         type: 'link',
         value: AppConfig.CATEGORY,

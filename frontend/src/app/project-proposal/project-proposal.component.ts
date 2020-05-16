@@ -128,7 +128,7 @@ export class ProjectProposalComponent implements OnInit, OnDestroy {
 
   successFn() {
     this.snackBar.open('Successfully submitted');
-    this.router.navigate([AppConfig.HOME]);
+    this.router.navigate([AppConfig.HOME]).then();
   }
 
   ngOnDestroy(): void {

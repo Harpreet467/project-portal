@@ -14,7 +14,7 @@ export class AppConfig {
   // Role
   public static readonly ROLE_API = AppConfig.API + 'role';
 
-  // ProjectModel
+  // Project
   public static readonly PROPOSAL_AUTHOR_API = AppConfig.API + 'proposal-author';
   public static readonly PROJECT_CATEGORY_API = AppConfig.API + 'project-category';
   public static readonly PROJECT_API = AppConfig.API + 'project';
@@ -23,6 +23,9 @@ export class AppConfig {
 
   // ProjectComment
   public static readonly COMMENT_API = AppConfig.API + 'comment';
+
+  // Student
+  public static readonly STUDENT_API = AppConfig.API + 'student';
 
   // System Profile
   public static readonly SYSTEM_PROFILE_API = 'system-profiler';
@@ -44,6 +47,10 @@ export class AppConfig {
   public static readonly PROJECT_PROPOSAL = '/project-proposal';
   public static readonly PROPOSAL_AUTHOR = '/proposal-author';
   public static readonly PROJECT = '/project';
+
+  // Student
+  public static readonly STUDENT = '/student/';
+  public static readonly STUDENT_PROPOSAL = '/student-proposal';
 
   // Category
   public static readonly CATEGORY = '/category';

@@ -14,11 +14,18 @@ import {AlertModule} from '../layout/alert/alert.module';
 import {SpinnerModule} from '../layout/spinner/spinner.module';
 import {ChangePasswordComponent} from './change-password/change-password.component';
 import {MatDialogModule} from "@angular/material/dialog";
+import {ViewProfileDetailModalComponent} from "./view-profile-detail-modal/view-profile-detail-modal.component";
+import {MatListModule} from "@angular/material/list";
+import {MatIconModule} from "@angular/material/icon";
+import {StaffService} from "../protected/staff/staff.service";
+import {EditProfileModalComponent} from "./edit-profile-modal/edit-profile-modal.component";
 
 @NgModule({
   declarations: [
     LoginComponent,
-    ChangePasswordComponent
+    ChangePasswordComponent,
+    ViewProfileDetailModalComponent,
+    EditProfileModalComponent
   ],
   imports: [
     RouterModule.forChild(accountRoute),
@@ -32,13 +39,18 @@ import {MatDialogModule} from "@angular/material/dialog";
     FlexModule,
     AlertModule,
     SpinnerModule,
-    MatDialogModule
+    MatDialogModule,
+    MatListModule,
+    MatIconModule
   ],
   entryComponents: [
-    ChangePasswordComponent
+    ChangePasswordComponent,
+    ViewProfileDetailModalComponent,
+    EditProfileModalComponent
   ],
   providers: [
-    LoginService
+    LoginService,
+    StaffService
   ]
 })
 export class AccountModule {

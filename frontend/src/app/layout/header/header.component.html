@@ -21,9 +21,14 @@
         <span class="text-grey font-size-1"> {{ userName | titlecase }} </span>
       </button>
 
-      <button mat-menu-item>
+      <button mat-menu-item (click)="openViewProfileModel()">
         <mat-icon>account_circle</mat-icon>
         <span>View Profile</span>
+      </button>
+
+      <button mat-menu-item (click)="openEditProfileModel()">
+        <mat-icon>edit</mat-icon>
+        <span>Edit Profile</span>
       </button>
 
       <button mat-menu-item (click)="openChangePasswordModel()">

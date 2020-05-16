@@ -7,6 +7,8 @@ import {Subscription} from 'rxjs';
 import {Constant} from "../../shared/constant";
 import {MatDialog} from "@angular/material/dialog";
 import {ChangePasswordComponent} from "../../account/change-password/change-password.component";
+import {ViewProfileDetailModalComponent} from "../../account/view-profile-detail-modal/view-profile-detail-modal.component";
+import {EditProfileModalComponent} from "../../account/edit-profile-modal/edit-profile-modal.component";
 
 @Component({
   selector: 'app-header',
@@ -42,6 +44,18 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   toggleSideNav() {
     this.sideNavToggleEvent.emit();
+  }
+
+  openViewProfileModel() {
+    this.dialog.open(ViewProfileDetailModalComponent, {
+      width: Constant.MODAL_WIDTH,
+    });
+  }
+
+  openEditProfileModel() {
+    this.dialog.open(EditProfileModalComponent, {
+      width: Constant.MODAL_WIDTH,
+    });
   }
 
   openChangePasswordModel() {

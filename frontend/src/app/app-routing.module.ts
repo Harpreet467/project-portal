@@ -20,6 +20,10 @@ const routes: Routes = [
     loadChildren: () => import('./project-proposal/project-proposal.module').then(m => m.ProjectProposalModule)
   },
   {
+    path: 'student-proposal',
+    loadChildren: () => import('./student-proposal/student-proposal.module').then(m => m.StudentProposalModule)
+  },
+  {
     path: '',
     canActivate: [AuthGuardService],
     children: [
@@ -44,6 +48,12 @@ const routes: Routes = [
         canActivate: [AuthGuardService, RoleGuardService],
         data: {roles: [Roles.ROLE_ADMIN, Roles.THIRD_LEVEL, Roles.SECOND_LEVEL, Roles.FIRST_LEVEL]},
         loadChildren: () => import('./protected/project/project.module').then(m => m.ProjectModule)
+      },
+      {
+        path: 'student',
+        canActivate: [AuthGuardService, RoleGuardService],
+        data: {roles: [Roles.ROLE_ADMIN, Roles.THIRD_LEVEL, Roles.SECOND_LEVEL, Roles.FIRST_LEVEL]},
+        loadChildren: () => import('./protected/student/student.module').then(m => m.StudentModule)
       },
       {
         path: 'category',

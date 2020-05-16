@@ -18,8 +18,10 @@ export class Constant {
   public static readonly PROJECT = 'project';
   public static readonly PROJECTS = 'projects';
   public static readonly PROPOSAL_AUTHORS = 'proposal_authors';
+  public static readonly STUDENTS = 'students';
   public static readonly CATEGORY = 'category';
   public static readonly UPDATED_AT = 'updated_at';
+
   public static readonly PROJECT_STATUS = {
     PROPOSED: 'PROPOSED',
     APPROVED: 'APPROVED',
@@ -27,6 +29,12 @@ export class Constant {
     DEFERRED: 'DEFERRED',
     WITHDRAWN: 'WITHDRAWN',
     SKIPPED: 'SKIPPED'
+  }
+
+  public static readonly STUDENT_STATUS = {
+    INTERESTED: 'INTERESTED',
+    APPROVED: 'APPROVED',
+    DECLINED: 'DECLINED'
   }
 }
 

@@ -10,6 +10,7 @@ import {Router} from '@angular/router';
 })
 export class HomeComponent implements OnInit {
   project_proposal_url = AppConfig.PROJECT_PROPOSAL;
+  student_proposal_url = AppConfig.STUDENT_PROPOSAL;
 
   constructor(
     private storageService: StorageService,
