@@ -15,11 +15,11 @@ staff_api = api_manager.create_api_blueprint(
     validation_exceptions=[ValidationError],
     preprocessors=dict(
         POST=[auth_func, role_admin],
-        GET_SINGLE=[auth_func, role_admin],
+        GET_SINGLE=[auth_func],
         GET_MANY=[auth_func, role_admin],
-        PUT_SINGLE=[auth_func, role_admin],
+        PUT_SINGLE=[auth_func],
         PUT_MANY=[auth_func, role_admin],
-        PATCH_SINGLE=[auth_func, role_admin],
+        PATCH_SINGLE=[auth_func],
         PATCH_MANY=[auth_func, role_admin]
     )
 )

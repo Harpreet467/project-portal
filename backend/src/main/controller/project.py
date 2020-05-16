@@ -15,7 +15,6 @@ project_api = api_manager.create_api_blueprint(
     validation_exceptions=[ValidationError],
     preprocessors=dict(
         GET_SINGLE=[auth_func, role_first_level],
-        GET_MANY=[auth_func, role_first_level],
         PUT_SINGLE=[auth_func, role_second_level],
         PUT_MANY=[auth_func, role_second_level],
         PATCH_SINGLE=[auth_func, role_admin],

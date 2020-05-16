@@ -6,3 +6,4 @@ def load_controller():
     import src.main.controller.project
     import src.main.controller.project_category
     import src.main.controller.comment
+    import src.main.controller.student
