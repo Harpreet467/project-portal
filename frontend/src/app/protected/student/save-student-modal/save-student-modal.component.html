@@ -1,0 +1,73 @@
+<h1 mat-dialog-title>Edit Student</h1>
+
+<div mat-dialog-content>
+
+  <app-alert></app-alert>
+
+  <form #authorForm="ngForm">
+    <mat-form-field>
+      <label>
+        <input type="text" matInput placeholder="Name" name="name" [(ngModel)]="student.name" #name="ngModel" required>
+      </label>
+      <mat-error *ngIf="name.touched && name.invalid">
+        <small class="mat-text-warn" *ngIf="name?.errors.required">Name is required.</small>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <label>
+        <input type="email" matInput placeholder="Email" name="email" [(ngModel)]="student.email" #email="ngModel"
+               required>
+      </label>
+      <mat-error *ngIf="email.touched && email.invalid">
+        <small class="mat-text-warn" *ngIf="email?.errors.required">Email is required.</small>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <label>
+        <input type="tel" matInput placeholder="Phone Number" name="phone_number" [(ngModel)]="student.phone_number">
+      </label>
+    </mat-form-field>
+
+    <mat-form-field>
+      <label>
+        <textarea matInput placeholder="Enter proposal" name="description" [(ngModel)]="student.description"
+                  #description="ngModel" required></textarea>
+      </label>
+      <mat-error *ngIf="description.touched && description.invalid">
+        <small class="mat-text-warn" *ngIf="description?.errors.required">Proposal is required.</small>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <label>
+        <input type="text" matInput placeholder="City" name="city" [(ngModel)]="student.city" #city="ngModel"
+               required>
+      </label>
+      <mat-error *ngIf="city.touched && city.invalid">
+        <small class="mat-text-warn" *ngIf="city?.errors.required">City is required.</small>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <label>
+        <input type="text" matInput placeholder="Country" name="country" [(ngModel)]="student.country" #country="ngModel"
+               required>
+      </label>
+      <mat-error *ngIf="country.touched && country.invalid">
+        <small class="mat-text-warn" *ngIf="country?.errors.required">Country is required.</small>
+      </mat-error>
+    </mat-form-field>
+
+  </form>
+</div>
+
+<div mat-dialog-actions fxLayoutAlign="end">
+  <button mat-flat-button (click)="closeModal()">Cancel</button>
+  <button color="primary" mat-raised-button (click)="saveStudent()"
+          [ngClass]="authorForm.form.invalid ? 'cursor-not-allowed' : 'cursor-pointer'"
+          [disabled]="authorForm.form.invalid || isDisableBtn">
+    Submit
+  </button>
+</div>

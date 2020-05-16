@@ -1,0 +1,173 @@
+<mat-card class="mat-elevation-z1 m-auto w-90 mt-2 p-2">
+  <mat-card-header fxLayout="row" fxLayoutAlign="space-between center" class="mb-1">
+    <mat-card-title class="m-auto">Student Proposal</mat-card-title>
+  </mat-card-header>
+
+  <mat-divider></mat-divider>
+
+  <mat-horizontal-stepper labelPosition="bottom" linear #stepper>
+
+    <mat-step [completed]="projectSelectStep">
+      <div fxLayout="row column" fxLayoutAlign="space-evenly center">
+        <ng-template matStepLabel>Select Project</ng-template>
+        <mat-card class="mat-elevation-z0 m-auto w-100">
+
+          <mat-form-field class="mt-1">
+            <label>
+              <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+            </label>
+          </mat-form-field>
+
+          <div class="pos-relative overflow-auto">
+            <div class="table-spinner" *ngIf="spinnerService.visibility | async">
+              <app-spinner></app-spinner>
+            </div>
+
+            <table mat-table class="mt-1 overflow-auto" [dataSource]="dataSource" matSort
+                   [matSortActive]="displayedColumns[5]"
+                   matSortDirection="desc">
+
+              <ng-container [matColumnDef]="displayedColumns[0]">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Title</th>
+                <td mat-cell *matCellDef="let row"> {{row.title}} </td>
+              </ng-container>
+
+              <ng-container [matColumnDef]="displayedColumns[1]">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Description</th>
+                <td mat-cell *matCellDef="let row"> {{row.description}} </td>
+              </ng-container>
+
+              <ng-container [matColumnDef]="displayedColumns[2]">
+                <th mat-header-cell *matHeaderCellDef> Category</th>
+                <td mat-cell *matCellDef="let row">
+                  <mat-chip-list aria-label="categories">
+                    <mat-chip disableRipple *ngFor="let c of row.category">{{c.name}}</mat-chip>
+                  </mat-chip-list>
+                </td>
+              </ng-container>
+
+              <ng-container [matColumnDef]="displayedColumns[3]">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Updated At</th>
+                <td mat-cell *matCellDef="let row"> {{row.updated_at | date}} </td>
+              </ng-container>
+
+              <ng-container [matColumnDef]="displayedColumns[4]" stickyEnd>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Action</th>
+                <td mat-cell *matCellDef="let row">
+                  <button mat-icon-button matTooltip="Project Files" (click)="downloadFile(row)" [disabled]="!row?.file_name">
+                    <mat-icon>get_app</mat-icon>
+                  </button>
+                  <button mat-icon-button matTooltip="select" (click)="selectProject(stepper, row)">
+                    <mat-icon>arrow_forward</mat-icon>
+                  </button>
+                </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+
+            <div *ngIf="dataSource?.data.length === 0">
+              <h3 class="mat-card-subtitle text-center mt-1">No data found.</h3>
+            </div>
+
+            <mat-paginator [pageSizeOptions]="pageSize"></mat-paginator>
+          </div>
+        </mat-card>
+      </div>
+    </mat-step>
+
+    <mat-step [completed]="studentDetailsStep" [editable]="false">
+      <div fxLayout="row column" fxLayoutAlign="space-evenly center">
+        <form #proposalStudentFrom="ngForm">
+          <ng-template matStepLabel>Fill out your details</ng-template>
+          <h1 class="text-center mt-1">
+            {{selectedProjectName}}
+            <button type="button" mat-flat-button (click)="stepper.previous()">Change</button>
+          </h1>
+          <mat-form-field appearance="outline">
+            <mat-label>Name</mat-label>
+            <label>
+              <input matInput placeholder="name" name="name" [(ngModel)]="student.name" #name="ngModel" required>
+            </label>
+            <mat-error *ngIf="name.touched && name.invalid">
+              <small class="mat-text-warn" *ngIf="name?.errors.required">Name is required.</small>
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Email</mat-label>
+            <label>
+              <input matInput placeholder="email" name="email" [(ngModel)]="student.email" #email="ngModel" required>
+            </label>
+            <mat-error *ngIf="email.touched && email.invalid">
+              <small class="mat-text-warn" *ngIf="email?.errors.required">Email is required.</small>
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Phone Number</mat-label>
+            <label>
+              <input matInput placeholder="phone_number" name="phone_number" [(ngModel)]="student.phone_number">
+            </label>
+          </mat-form-field>
+
+          <div fxLayout="row">
+            <mat-form-field appearance="outline" class="mr-1">
+              <mat-label>City</mat-label>
+              <label>
+                <input matInput placeholder="City" name="city" [(ngModel)]="student.city" #city="ngModel" required>
+              </label>
+              <mat-error *ngIf="city.touched && city.invalid">
+                <small class="mat-text-warn" *ngIf="city?.errors.required">City is required.</small>
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Country</mat-label>
+              <label>
+                <input matInput placeholder="Country" name="country" [(ngModel)]="student.country" #country="ngModel"
+                       required>
+              </label>
+              <mat-error *ngIf="country.touched && country.invalid">
+                <small class="mat-text-warn" *ngIf="country?.errors.required">Country is required.</small>
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div>
+            <button mat-stroked-button color="primary" class="f-right" type="button"
+                    (click)="studentDetails(stepper)" [disabled]="proposalStudentFrom.form.invalid">
+              Next
+            </button>
+          </div>
+        </form>
+      </div>
+    </mat-step>
+
+    <mat-step [editable]="false">
+      <div fxLayout="row column" fxLayoutAlign="space-evenly center">
+        <form #projectFrom="ngForm" class="w-90 mt-2">
+          <ng-template matStepLabel>Fill out project proposal</ng-template>
+          <mat-form-field appearance="outline">
+            <mat-label>Proposal write up</mat-label>
+            <label>
+              <textarea matInput placeholder="Enter proposal" name="description" [(ngModel)]="student.description"
+                        #description="ngModel" required></textarea>
+            </label>
+            <mat-error *ngIf="description.touched && description.invalid">
+              <small class="mat-text-warn" *ngIf="description?.errors.required">Description is required.</small>
+            </mat-error>
+          </mat-form-field>
+          <div>
+            <button mat-stroked-button color="primary" class="f-right" type="submit"
+                    (click)="saveStudent()" [disabled]="projectFrom.form.invalid">
+              Submit
+              <app-spinner *ngIf="spinnerService.visibility | async" class="d-inline-block ml-1"
+                           [diameter]="15"></app-spinner>
+            </button>
+          </div>
+        </form>
+      </div>
+    </mat-step>
+
+  </mat-horizontal-stepper>
+
+</mat-card>

@@ -1,0 +1,70 @@
+<h1 mat-dialog-title>Details of {{data.name}}</h1>
+
+<div mat-dialog-content>
+  <mat-nav-list>
+    <mat-list-item>
+      <mat-icon mat-list-icon>person</mat-icon>
+      <span mat-line><b>Name</b></span>
+      <span mat-line>{{data.name || 'Not available'}}</span>
+    </mat-list-item>
+
+    <mat-list-item>
+      <mat-icon mat-list-icon>email</mat-icon>
+      <span mat-line><b>Email</b></span>
+      <span mat-line>{{data.email || 'Not available'}}</span>
+    </mat-list-item>
+
+    <mat-list-item>
+      <mat-icon mat-list-icon>assignment</mat-icon>
+      <span mat-line><b>Project Name</b></span>
+      <span mat-line>{{data.projects.title || 'Not available'}}</span>
+    </mat-list-item>
+
+    <mat-list-item>
+      <mat-icon mat-list-icon>notes</mat-icon>
+      <span mat-line><b>Project Proposal</b></span>
+      <span mat-line>{{data.description || 'Not available'}}</span>
+    </mat-list-item>
+
+    <mat-list-item>
+      <mat-icon mat-list-icon>call</mat-icon>
+      <span mat-line><b>Phone Number</b></span>
+      <span mat-line>{{data.phone_number || 'Not available'}}</span>
+    </mat-list-item>
+
+    <mat-list-item>
+      <mat-icon mat-list-icon>call</mat-icon>
+      <span mat-line><b>Is in team</b></span>
+      <span mat-line>{{data.is_in_team || 'Not available'}}</span>
+    </mat-list-item>
+
+    <mat-list-item>
+      <mat-icon mat-list-icon>place</mat-icon>
+      <span mat-line><b>Location</b></span>
+      <span mat-line>{{(data.city + ', ' + data.country) || 'Not available'}}</span>
+    </mat-list-item>
+
+    <mat-list-item>
+      <mat-icon mat-list-icon>event</mat-icon>
+      <span mat-line><b>Created At</b></span>
+      <span mat-line>{{(data.created_at | date: 'long') || 'Not available'}}</span>
+    </mat-list-item>
+
+    <mat-list-item>
+      <mat-icon mat-list-icon>event</mat-icon>
+      <span mat-line><b>Last Updated At</b></span>
+      <span mat-line>{{(data.updated_at | date: 'long') || 'Not available'}}</span>
+    </mat-list-item>
+
+    <mat-list-item>
+      <mat-icon mat-list-icon>how_to_reg</mat-icon>
+      <span mat-line><b>Last Updated by</b></span>
+      <span mat-line>{{data.last_updated_by || 'Not available'}}</span>
+    </mat-list-item>
+
+  </mat-nav-list>
+</div>
+
+<div mat-dialog-actions fxLayoutAlign="end">
+  <button mat-flat-button (click)="closeModal()">Cancel</button>
+</div>
