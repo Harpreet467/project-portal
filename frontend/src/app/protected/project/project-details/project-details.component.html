@@ -99,7 +99,17 @@
       </mat-card>
 
       <mat-card class="mat-elevation-z0">
-        <mat-card-subtitle class="font-size-20px">Project Author (Client)</mat-card-subtitle>
+        <a mat-raised-button class="w-100 mb-1 approve" [routerLink]="[STUDENT_URL]"
+           [queryParams]="getStudentsForProjectID(project.id, STUDENT_STATUS.APPROVED)">
+          <mat-icon>school</mat-icon>
+          View Approved Students
+        </a>
+        <a mat-stroked-button color="primary" class="w-100 mb-1" [routerLink]="[STUDENT_URL]"
+           [queryParams]="getStudentsForProjectID(project.id, STUDENT_STATUS.INTERESTED)">
+          <mat-icon>school</mat-icon>
+          View Interested Students
+        </a>
+        <mat-card-subtitle class="font-size-20px mt-1">Project Author (Client)</mat-card-subtitle>
 
         <mat-list>
           <mat-list-item matTooltip="Name" disableRipple>
@@ -178,10 +188,21 @@
               {{(projectComment?.created_at | dateAgo) || 'Not available'}}
             </mat-card-subtitle>
             <mat-chip-list aria-label="status" *ngIf="projectComment?.project_status">
-              <mat-chip class="mr-1" [ngClass]="statusClassConditions(projectComment?.project_status)">
+              <mat-chip class="mr-1" disableRipple [ngClass]="statusClassConditions(projectComment?.project_status)">
+                <mat-chip-avatar *ngIf="projectComment.student">
+                  <mat-icon>school</mat-icon>
+                </mat-chip-avatar>
+                <mat-chip-avatar *ngIf="projectComment.project && !projectComment.student">
+                  <mat-icon>assignment</mat-icon>
+                </mat-chip-avatar>
                 {{projectComment?.project_status | titlecase}}
               </mat-chip>
             </mat-chip-list>
+            <a class="text-link-color" mat-flat-button *ngIf="projectComment.students"
+               [routerLink]="STUDENT_URL"
+               [queryParams]="getStudentsForID(projectComment?.students?.id)">
+              {{projectComment?.students?.name}}
+            </a>
           </mat-card-header>
           <mat-card-content>
             <p>{{projectComment?.text}}</p>

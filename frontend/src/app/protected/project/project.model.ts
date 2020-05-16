@@ -2,6 +2,7 @@ import {Category} from '../category/category.model';
 import {PageableModel} from '../../shared/model/pageable.model';
 import {ProposalAuthor} from '../proposal-author/proposal-author.model';
 import {Staff} from "../staff/staff.model";
+import {Student} from "../student/student.model";
 
 
 export class ProjectModel extends PageableModel {
@@ -39,6 +40,8 @@ export class CommentModel extends PageableModel {
 export class ProjectComment {
   id: number;
   project: number;
+  student: number;
+  students: Student;
   text: string;
   staffs: Staff;
   project_status: string;

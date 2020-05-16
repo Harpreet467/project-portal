@@ -16,6 +16,10 @@ export class StaffService {
     return this.http.get(AppConfig.STAFF_API);
   }
 
+  getStaff(id: number) {
+    return this.http.get(AppConfig.STAFF_API + '/' + id);
+  }
+
   getFilteredStaffs(filter: FilterModel) {
     return this.http.get(AppConfig.STAFF_API, {params: new HttpParams().set('q', JSON.stringify(filter))});
   }

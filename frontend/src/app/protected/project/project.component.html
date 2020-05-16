@@ -79,6 +79,14 @@
               <mat-icon>assignment_ind</mat-icon>
               <span>View Project Author</span>
             </a>
+            <a mat-menu-item [routerLink]="[STUDENT_URL]" [queryParams]="getStudentsForID(row.id, STUDENT_STATUS.INTERESTED)">
+              <mat-icon>school</mat-icon>
+              <span>View Interested Students</span>
+            </a>
+            <a mat-menu-item [routerLink]="[STUDENT_URL]" [queryParams]="getStudentsForID(row.id, STUDENT_STATUS.APPROVED)">
+              <mat-icon>school</mat-icon>
+              <span>View Approved Students</span>
+            </a>
           </mat-menu>
         </td>
       </ng-container>

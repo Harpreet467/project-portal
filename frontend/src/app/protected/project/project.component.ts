@@ -13,8 +13,6 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {Filter, FilterModel, OrderBy} from "../../shared/model/filter.model";
 import {RolesModel} from "../../shared/model/roles.model";
 import {SharedService} from "../../shared/service/shared.service";
-import {ProposalAuthor} from "../proposal-author/proposal-author.model";
-import {SaveAuthorModalComponent} from "../proposal-author/save-author-modal/save-author-modal.component";
 import {MatDialog} from "@angular/material/dialog";
 import {SaveProjectModalComponent} from "./save-project-modal/save-project-modal.component";
 
@@ -34,6 +32,8 @@ export class ProjectComponent implements OnInit, OnDestroy {
   displayedColumns = projectDisplayedColumns;
   pageSize = Constant.PAGE_SIZE_LIST;
   PROPOSAL_AUTHOR_URL = AppConfig.PROPOSAL_AUTHOR;
+  STUDENT_URL = AppConfig.STUDENT;
+  STUDENT_STATUS = Constant.STUDENT_STATUS;
   isFiltered = false;
 
   constructor(
@@ -96,6 +96,15 @@ export class ProjectComponent implements OnInit, OnDestroy {
     return {q: JSON.stringify(new Filter(
         Constant.PROJECTS, Constant.ANY, new Filter(Constant.ID, Constant.EQ, id)
       ))};
+  }
+
+  getStudentsForID(id: number, status: string) {
+    const filterModel: FilterModel = new FilterModel();
+    filterModel.filters.push(new Filter(
+      Constant.PROJECTS, Constant.HAS, new Filter(Constant.ID, Constant.EQ, id)
+    ));
+    filterModel.filters.push(new Filter(Constant.STATUS, Constant.EQ, status));
+    return {q: JSON.stringify(filterModel)};
   }
 
   openProjectModal(project: Project = null) {

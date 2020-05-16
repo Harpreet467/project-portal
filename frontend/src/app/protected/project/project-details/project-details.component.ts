@@ -31,6 +31,8 @@ export class ProjectDetailsComponent implements OnInit, OnDestroy {
   loggedInRoles: RolesModel = new RolesModel();
   project: Project = new Project();
   PROJECT_STATUS = Constant.PROJECT_STATUS;
+  STUDENT_STATUS = Constant.STUDENT_STATUS;
+  STUDENT_URL = AppConfig.STUDENT;
   STAFF_URL = AppConfig.STAFF;
   isDisableBtn = false;
   projectId: number;
@@ -133,6 +135,21 @@ export class ProjectDetailsComponent implements OnInit, OnDestroy {
         this.getProjectDetails();
       }
     });
+  }
+
+  getStudentsForProjectID(id: number, status: string) {
+    const filterModel: FilterModel = new FilterModel();
+    filterModel.filters.push(new Filter(
+      Constant.PROJECTS, Constant.HAS, new Filter(Constant.ID, Constant.EQ, id)
+    ));
+    filterModel.filters.push(new Filter(Constant.STATUS, Constant.EQ, status));
+    return {q: JSON.stringify(filterModel)};
+  }
+
+  getStudentsForID(id: number) {
+    const filterModel: FilterModel = new FilterModel();
+    filterModel.filters.push(new Filter(Constant.ID, Constant.EQ, id));
+    return {q: JSON.stringify(filterModel)};
   }
 
   ngOnDestroy(): void {
