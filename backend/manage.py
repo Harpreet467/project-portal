@@ -36,3 +36,5 @@ def before_first_request():
 
 if __name__ == '__main__':
     manager.run()
+
+# celery worker -A app.celery --loglevel=info

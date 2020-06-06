@@ -4,6 +4,8 @@ BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 
 
 class Config(object):
+    APPLICATION_NAME = 'Capstone Project Portal'
+    TEMPLATE_FOLDER = BASE_DIR + '/template/'
     DEBUG = True
     SECRET_KEY = 'secret'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
@@ -17,7 +19,7 @@ class Config(object):
     SQLALCHEMY_DATABASE_URI = f'mysql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}'
 
     # Redis Configuration
-    REDIS_URL = 'redis://localhost:6379'
+    REDIS_URL = 'redis://localhost:6379/0'
     CELERY_BROKER_URL = REDIS_URL
     CELERY_RESULT_BACKEND = REDIS_URL
 
@@ -40,8 +42,9 @@ class Config(object):
     WTF_CSRF_ENABLED = False
 
     # Email config
-    MAIL_SERVER = ''
+    MAIL_SERVER = 'smtp.gmail.com'
     MAIL_PORT = 465
     MAIL_USE_SSL = True
+    MAIL_DEFAULT_SENDER = 'Capstone Project Portal'
     MAIL_USERNAME = ''
     MAIL_PASSWORD = ''

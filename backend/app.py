@@ -19,7 +19,7 @@ from src.main.service import load_service
 from src.main.util import load_utils
 from src.resources.config import Config, BASE_DIR
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder=Config.TEMPLATE_FOLDER)
 app.config.from_object(Config())
 
 # CORS

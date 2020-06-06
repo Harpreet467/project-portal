@@ -1,6 +1,9 @@
 werkzeug
 flask
+future
+redis
 celery
+flower
 mysqlclient
 bcrypt
 PyJWT
