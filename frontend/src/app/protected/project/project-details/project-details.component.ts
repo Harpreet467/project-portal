@@ -1,9 +1,16 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {Subscription} from "rxjs";
-import {ActivatedRoute, Router} from "@angular/router";
+import {ActivatedRoute} from "@angular/router";
 import {Constant} from "../../../shared/constant";
 import {ProjectService} from "../project.service";
-import {CommentModel, Project, ProjectComment} from "../project.model";
+import {
+  CommentModel,
+  EmailLog,
+  emailLogDisplayedColumns,
+  EmailLogModel,
+  Project,
+  ProjectComment
+} from "../project.model";
 import {Location} from '@angular/common';
 import {environment} from "../../../../environments/environment";
 import {AppConfig} from "../../../app.config";
@@ -15,6 +22,11 @@ import {StorageService} from "../../../shared/service/storage.service";
 import {RolesModel} from "../../../shared/model/roles.model";
 import {SharedService} from "../../../shared/service/shared.service";
 import {SaveProjectModalComponent} from "../save-project-modal/save-project-modal.component";
+import {Student} from "../../student/student.model";
+import {SentEmailModalComponent} from "./sent-email-modal/sent-email-modal.component";
+import {MatTableDataSource} from "@angular/material/table";
+import {MatPaginator} from "@angular/material/paginator";
+import {MatSort} from "@angular/material/sort";
 
 
 @Component({
@@ -23,6 +35,8 @@ import {SaveProjectModalComponent} from "../save-project-modal/save-project-moda
   styleUrls: ['./project-details.component.scss']
 })
 export class ProjectDetailsComponent implements OnInit, OnDestroy {
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
 
   projectComment: ProjectComment = new ProjectComment();
   subscription: Subscription = new Subscription();
@@ -30,10 +44,15 @@ export class ProjectDetailsComponent implements OnInit, OnDestroy {
   filterModel: FilterModel = new FilterModel();
   loggedInRoles: RolesModel = new RolesModel();
   project: Project = new Project();
+  dataSource: MatTableDataSource<EmailLog>;
+  displayedColumns = emailLogDisplayedColumns;
   PROJECT_STATUS = Constant.PROJECT_STATUS;
   STUDENT_STATUS = Constant.STUDENT_STATUS;
+  pageSize = Constant.PAGE_SIZE_LIST;
   STUDENT_URL = AppConfig.STUDENT;
   STAFF_URL = AppConfig.STAFF;
+  approvedStudentCount = 0;
+  interestedStudentCount = 0;
   isDisableBtn = false;
   projectId: number;
 
@@ -60,12 +79,23 @@ export class ProjectDetailsComponent implements OnInit, OnDestroy {
       this.filterModel.order_by.push(new OrderBy(Constant.UPDATED_AT, Constant.DESC));
       this.getProjectDetails();
       this.getComments();
+      this.getEmailLogs();
     }));
   }
 
   getProjectDetails(): void {
+    this.approvedStudentCount = 0;
+    this.interestedStudentCount = 0;
     this.subscription.add(this.projectService.getProjectById(this.projectId).subscribe((res: Project) => {
       this.project = res;
+
+      this.project.students.forEach((student: Student) => {
+        if (student.status === Constant.STUDENT_STATUS.APPROVED) {
+          this.approvedStudentCount++;
+        } else if (student.status === Constant.STUDENT_STATUS.INTERESTED) {
+          this.interestedStudentCount++;
+        }
+      });
     }));
   }
 
@@ -86,6 +116,16 @@ export class ProjectDetailsComponent implements OnInit, OnDestroy {
     }));
   }
 
+  getEmailLogs(): void {
+    this.subscription.add(
+      this.projectService.getFilteredEmailLogs(this.filterModel).subscribe((res: EmailLogModel) => {
+        this.dataSource = new MatTableDataSource(res.objects);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+      })
+    );
+  }
+
   downloadFile() {
     window.location.href = environment.HOST + AppConfig.PROJECT_DOWNLOAD_API + this.project.file_name;
   }
@@ -102,11 +142,13 @@ export class ProjectDetailsComponent implements OnInit, OnDestroy {
       if (result) {
         this.getProjectDetails();
         this.getComments();
+        this.getEmailLogs();
       }
     });
   }
 
   saveComment() {
+    this.alertService.close();
     this.isDisableBtn = true;
     this.projectComment.last_updated_by = this.storageService.getUserName();
     this.projectComment.commented_by = Number(this.storageService.getUserId());
@@ -150,6 +192,17 @@ export class ProjectDetailsComponent implements OnInit, OnDestroy {
     const filterModel: FilterModel = new FilterModel();
     filterModel.filters.push(new Filter(Constant.ID, Constant.EQ, id));
     return {q: JSON.stringify(filterModel)};
+  }
+
+  openSentEmailModal() {
+    this.dialog.open(SentEmailModalComponent, {
+      width: Constant.MODAL_WIDTH,
+      data: this.project
+    }).afterClosed().subscribe(result => {
+      if (result) {
+        this.getEmailLogs();
+      }
+    });
   }
 
   ngOnDestroy(): void {

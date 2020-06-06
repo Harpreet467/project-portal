@@ -1,4 +1,4 @@
-<mat-card class="mat-elevation-z1 m-auto w-90 mt-2 p-2">
+<mat-card class="mat-elevation-z1 m-auto w-90 mt-2 mb-1 p-2">
   <mat-card-header fxLayout="row" fxLayoutAlign="space-between center" class="mb-1">
     <mat-card-title fxLayout="row" fxLayoutAlign="start center" class="m-auto">
       <button mat-icon-button matTooltip="projects" class="mr-1" (click)="location.back()">
@@ -98,16 +98,20 @@
         </div>
       </mat-card>
 
-      <mat-card class="mat-elevation-z0">
+      <mat-card class="mat-elevation-z0" fxFlex="35">
+        <button mat-raised-button color="primary" class="w-100 mb-1" (click)="openSentEmailModal()"
+                *ngIf="loggedInRoles.isAdmin || loggedInRoles.isSecondLevel || loggedInRoles.isThirdLevel">
+          Send an email <mat-icon>send</mat-icon>
+        </button>
         <a mat-raised-button class="w-100 mb-1 approve" [routerLink]="[STUDENT_URL]"
            [queryParams]="getStudentsForProjectID(project.id, STUDENT_STATUS.APPROVED)">
           <mat-icon>school</mat-icon>
-          View Approved Students
+          View Approved Students ({{approvedStudentCount}})
         </a>
         <a mat-stroked-button color="primary" class="w-100 mb-1" [routerLink]="[STUDENT_URL]"
            [queryParams]="getStudentsForProjectID(project.id, STUDENT_STATUS.INTERESTED)">
           <mat-icon>school</mat-icon>
-          View Interested Students
+          View Interested Students ({{interestedStudentCount}})
         </a>
         <mat-card-subtitle class="font-size-20px mt-1">Project Author (Client)</mat-card-subtitle>
 
@@ -134,12 +138,12 @@
 
           <mat-list-item matTooltip="Created at" disableRipple>
             <mat-icon mat-list-icon>event</mat-icon>
-            <span mat-line>{{(project?.proposal_authors?.created_at | date: 'long') || 'Not available'}}</span>
+            <span mat-line>{{(project?.proposal_authors?.created_at | dateAgo) || 'Not available'}}</span>
           </mat-list-item>
 
           <mat-list-item matTooltip="Updated at" disableRipple>
             <mat-icon mat-list-icon>event</mat-icon>
-            <span mat-line>{{(project?.proposal_authors?.updated_at | date: 'long') || 'Not available'}}</span>
+            <span mat-line>{{(project?.proposal_authors?.updated_at | dateAgo) || 'Not available'}}</span>
           </mat-list-item>
 
           <mat-list-item matTooltip="Last updated by" disableRipple>
@@ -151,68 +155,122 @@
       </mat-card>
     </div>
 
-    <div fxLayout="row" fxLayoutAlign="space-between start" class="w-100 mt-2">
-      <mat-card class="mat-elevation-z0 w-100">
-        <mat-card-subtitle class="font-size-20px">Comments</mat-card-subtitle>
-
-        <app-alert></app-alert>
-        <form #actionForm="ngForm" (ngSubmit)="saveComment()"
-              *ngIf="loggedInRoles.isAdmin || loggedInRoles.isSecondLevel || loggedInRoles.isThirdLevel">
-          <mat-form-field appearance="outline">
-            <mat-label>Add your comment</mat-label>
-            <label>
+    <div fxLayout="row" fxLayoutAlign="space-between start" class="w-100 mt-1">
+      <mat-tab-group mat-stretch-tabs class="w-100">
+        <mat-tab label="Comments">
+          <div class="p-1">
+            <mat-card class="mat-elevation-z0 w-auto">
+              <app-alert></app-alert>
+              <form #actionForm="ngForm" (ngSubmit)="saveComment()"
+                    *ngIf="loggedInRoles.isAdmin || loggedInRoles.isSecondLevel || loggedInRoles.isThirdLevel">
+                <mat-form-field appearance="outline">
+                  <mat-label>Add your comment</mat-label>
+                  <label>
               <textarea matInput placeholder="Add your comment" name="comment"
                         [(ngModel)]="projectComment.text" #comment="ngModel" required>
               </textarea>
-            </label>
-            <mat-error *ngIf="comment.touched && comment.invalid">
-              <small class="mat-text-warn" *ngIf="comment?.errors.required">Comment is required.</small>
-            </mat-error>
-          </mat-form-field>
-          <button color="primary" mat-raised-button (click)="saveComment()"
-                  [ngClass]="actionForm.form.invalid ? 'cursor-not-allowed' : 'cursor-pointer'"
-                  [disabled]="actionForm.form.invalid || isDisableBtn">
-            Submit
-          </button>
-        </form>
+                  </label>
+                  <mat-error *ngIf="comment.touched && comment.invalid">
+                    <small class="mat-text-warn" *ngIf="comment?.errors.required">Comment is required.</small>
+                  </mat-error>
+                </mat-form-field>
+                <button color="primary" mat-raised-button (click)="saveComment()"
+                        [ngClass]="actionForm.form.invalid ? 'cursor-not-allowed' : 'cursor-pointer'"
+                        [disabled]="actionForm.form.invalid || isDisableBtn">
+                  Submit
+                </button>
+              </form>
 
-        <mat-card class="w-100 mt-1" *ngFor="let projectComment of commentModel.objects">
-          <mat-card-header>
-            <div mat-card-avatar class="comment-header-image"></div>
-            <mat-card-title class="cursor-pointer text-link-color" [matTooltip]="projectComment?.staffs.email"
-                            [routerLink]="!loggedInRoles.isAdmin? [] : STAFF_URL"
-                            [queryParams]="!loggedInRoles.isAdmin? {} : getStaffURLForID(projectComment?.staffs.id)">
-              {{projectComment?.staffs.name | titlecase}}
-            </mat-card-title>
-            <mat-card-subtitle matTooltip="commented at">
-              {{(projectComment?.created_at | dateAgo) || 'Not available'}}
-            </mat-card-subtitle>
-            <mat-chip-list aria-label="status" *ngIf="projectComment?.project_status">
-              <mat-chip class="mr-1" disableRipple [ngClass]="statusClassConditions(projectComment?.project_status)">
-                <mat-chip-avatar *ngIf="projectComment.student">
-                  <mat-icon>school</mat-icon>
-                </mat-chip-avatar>
-                <mat-chip-avatar *ngIf="projectComment.project && !projectComment.student">
-                  <mat-icon>assignment</mat-icon>
-                </mat-chip-avatar>
-                {{projectComment?.project_status | titlecase}}
-              </mat-chip>
-            </mat-chip-list>
-            <a class="text-link-color" mat-flat-button *ngIf="projectComment.students"
-               [routerLink]="STUDENT_URL"
-               [queryParams]="getStudentsForID(projectComment?.students?.id)">
-              {{projectComment?.students?.name}}
-            </a>
-          </mat-card-header>
-          <mat-card-content>
-            <p>{{projectComment?.text}}</p>
-          </mat-card-content>
-        </mat-card>
+              <mat-card class="mt-1" *ngFor="let projectComment of commentModel.objects">
+                <mat-card-header>
+                  <div mat-card-avatar class="comment-header-image"></div>
+                  <mat-card-title class="cursor-pointer text-link-color" [matTooltip]="projectComment?.staffs.email"
+                                  [routerLink]="!loggedInRoles.isAdmin? [] : STAFF_URL"
+                                  [queryParams]="!loggedInRoles.isAdmin? {} : getStaffURLForID(projectComment?.staffs.id)">
+                    {{projectComment?.staffs.name | titlecase}}
+                  </mat-card-title>
+                  <mat-card-subtitle matTooltip="commented at">
+                    {{(projectComment?.created_at | dateAgo) || 'Not available'}}
+                  </mat-card-subtitle>
+                  <mat-chip-list aria-label="status" *ngIf="projectComment?.project_status">
+                    <mat-chip class="mr-1" disableRipple [ngClass]="statusClassConditions(projectComment?.project_status)">
+                      <mat-chip-avatar *ngIf="projectComment.student">
+                        <mat-icon>school</mat-icon>
+                      </mat-chip-avatar>
+                      <mat-chip-avatar *ngIf="projectComment.project && !projectComment.student">
+                        <mat-icon>assignment</mat-icon>
+                      </mat-chip-avatar>
+                      {{projectComment?.project_status | titlecase}}
+                    </mat-chip>
+                  </mat-chip-list>
+                  <mat-icon matTooltip="Email sent" *ngIf="projectComment.sent_email">mark_email_read</mat-icon>
+                  <a class="text-link-color" mat-flat-button *ngIf="projectComment.students"
+                     [routerLink]="STUDENT_URL"
+                     [queryParams]="getStudentsForID(projectComment?.students?.id)">
+                    {{projectComment?.students?.name}}
+                  </a>
+                </mat-card-header>
+                <mat-card-content>
+                  <p>{{projectComment?.text}}</p>
+                </mat-card-content>
+              </mat-card>
 
-        <div *ngIf="commentModel?.objects?.length === 0">
-          <h3 class="mat-card-subtitle text-center"> No comments.</h3>
-        </div>
-      </mat-card>
+              <div *ngIf="commentModel?.objects?.length === 0">
+                <h3 class="mat-card-subtitle text-center"> No comments.</h3>
+              </div>
+            </mat-card>
+          </div>
+        </mat-tab>
+
+        <mat-tab label="Email Logs">
+
+          <table mat-table class="mt-1 overflow-auto" [dataSource]="dataSource" matSort
+                 [matSortActive]="displayedColumns[5]" matSortDirection="desc">
+            <ng-container [matColumnDef]="displayedColumns[0]">
+              <th mat-header-cell *matHeaderCellDef> </th>
+              <td mat-cell *matCellDef="let row">
+                <mat-icon *ngIf="row?.student" matTooltip="Student">school</mat-icon>
+                <mat-icon *ngIf="row?.proposal_author" matTooltip="Project author">assignment_ind</mat-icon>
+              </td>
+            </ng-container>
+
+            <ng-container [matColumnDef]="displayedColumns[1]">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Sent to </th>
+              <td mat-cell *matCellDef="let row"> {{row?.email_to}} </td>
+            </ng-container>
+
+            <ng-container [matColumnDef]="displayedColumns[2]">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Sent by </th>
+              <td mat-cell *matCellDef="let row" [matTooltip]="row?.staffs?.email"> {{row?.staffs?.name}} </td>
+            </ng-container>
+
+            <ng-container [matColumnDef]="displayedColumns[3]">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Subject </th>
+              <td mat-cell *matCellDef="let row"> {{row?.subject}}</td>
+            </ng-container>
+
+            <ng-container [matColumnDef]="displayedColumns[4]">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Body </th>
+              <td mat-cell *matCellDef="let row"> {{row?.body}} </td>
+            </ng-container>
+
+            <ng-container [matColumnDef]="displayedColumns[5]">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Created At </th>
+              <td mat-cell *matCellDef="let row"> {{row?.created_at | dateAgo}} </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+
+          <div *ngIf="dataSource?.data.length === 0">
+            <h3 class="mat-card-subtitle text-center mt-1">No email found.</h3>
+          </div>
+
+          <mat-paginator [pageSizeOptions]="pageSize"></mat-paginator>
+        </mat-tab>
+      </mat-tab-group>
+
     </div>
   </div>
 

@@ -23,6 +23,7 @@ import {MatMenuModule} from "@angular/material/menu";
 import {MatPaginatorModule} from "@angular/material/paginator";
 import {ActionModalComponent} from "./action-modal/action-modal.component";
 import {MatSelectModule} from "@angular/material/select";
+import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 
 
 
@@ -33,26 +34,27 @@ import {MatSelectModule} from "@angular/material/select";
     SaveStudentModalComponent,
     ActionModalComponent
   ],
-  imports: [
-    RouterModule.forChild(studentRoutes),
-    CommonModule,
-    MatDialogModule,
-    AlertModule,
-    MatFormFieldModule,
-    MatInputModule,
-    FormsModule,
-    FlexModule,
-    MatButtonModule,
-    MatListModule,
-    MatIconModule,
-    MatCardModule,
-    SpinnerModule,
-    MatTableModule,
-    MatSortModule,
-    MatMenuModule,
-    MatPaginatorModule,
-    MatSelectModule
-  ],
+    imports: [
+        RouterModule.forChild(studentRoutes),
+        CommonModule,
+        MatDialogModule,
+        AlertModule,
+        MatFormFieldModule,
+        MatInputModule,
+        FormsModule,
+        FlexModule,
+        MatButtonModule,
+        MatListModule,
+        MatIconModule,
+        MatCardModule,
+        SpinnerModule,
+        MatTableModule,
+        MatSortModule,
+        MatMenuModule,
+        MatPaginatorModule,
+        MatSelectModule,
+        MatSlideToggleModule
+    ],
   providers: [
     StudentService
   ]

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {AppConfig} from '../../app.config';
-import {Project, ProjectComment} from "./project.model";
+import {EmailLog, Project, ProjectComment} from "./project.model";
 import {FilterModel} from "../../shared/model/filter.model";
 
 
@@ -34,6 +34,14 @@ export class ProjectService {
 
   createComment(projectComment: ProjectComment) {
     return this.http.post(AppConfig.COMMENT_API, projectComment);
+  }
+
+  getFilteredEmailLogs(filter: FilterModel) {
+    return this.http.get(AppConfig.EMAIL_LOG_API, {params: new HttpParams().set('q', JSON.stringify(filter))});
+  }
+
+  createEmailLog(emailLog: EmailLog) {
+    return this.http.post(AppConfig.EMAIL_LOG_API, emailLog);
   }
 
 }

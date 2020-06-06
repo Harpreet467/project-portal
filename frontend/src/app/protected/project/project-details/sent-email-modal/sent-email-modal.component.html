@@ -1,0 +1,77 @@
+<h1 mat-dialog-title>Send an email</h1>
+
+<div mat-dialog-content>
+
+  <app-alert></app-alert>
+
+  <form #sentEmailForm="ngForm" (ngSubmit)="sendEmail()">
+    <mat-form-field>
+      <mat-label>Select the recipient</mat-label>
+      <mat-select placeholder="Select the recipient" name="isAuthor" [(ngModel)]="isAuthor" #recipient="ngModel"
+                  required>
+        <mat-option [value]="true">Project Author</mat-option>
+        <mat-option [value]="false">Student</mat-option>
+      </mat-select>
+      <mat-error *ngIf="recipient.touched && recipient.invalid">
+        <small class="mat-text-warn" *ngIf="recipient?.errors.required">Recipient is required.</small>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field *ngIf="isAuthor">
+      <mat-label>Select the Author</mat-label>
+      <mat-select placeholder="Select the Author" name="projectAuthor" [(ngModel)]="projectAuthor"
+                  #author="ngModel" required>
+        <mat-option [value]="data.proposal_authors">
+          {{data.proposal_authors.name}} &nbsp;
+          <i>({{data.proposal_authors.email}})</i>
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="author.touched && author.invalid">
+        <small class="mat-text-warn" *ngIf="author?.errors.required">Author is required.</small>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field *ngIf="!isAuthor">
+      <mat-label>Select the Student</mat-label>
+      <mat-select placeholder="Select the Student" name="student" [(ngModel)]="student"
+                  #student_="ngModel" required>
+        <mat-option *ngFor="let s of data.students" [value]="s">
+          {{s.name}} &nbsp;
+          <i>({{s.email}})</i>
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="student_.touched && student_.invalid">
+        <small class="mat-text-warn" *ngIf="student_?.errors.required">Student is required.</small>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <label>
+        <input matInput placeholder="Email Subject" name="subject" [(ngModel)]="emailLog.subject" #subject="ngModel"
+               required>
+      </label>
+      <mat-error *ngIf="subject.touched && subject.invalid">
+        <small class="mat-text-warn" *ngIf="subject?.errors.required">Subject is required.</small>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <label>
+        <textarea matInput placeholder="Email Body" name="body" [(ngModel)]="emailLog.body" #body="ngModel" required>
+        </textarea>
+      </label>
+      <mat-error *ngIf="body.touched && body.invalid">
+        <small class="mat-text-warn" *ngIf="body?.errors.required">Body is required.</small>
+      </mat-error>
+    </mat-form-field>
+  </form>
+</div>
+
+<div mat-dialog-actions fxLayoutAlign="end">
+  <button mat-flat-button (click)="closeModal()">Cancel</button>
+  <button color="primary" mat-raised-button (click)="sendEmail()"
+          [ngClass]="sentEmailForm.form.invalid ? 'cursor-not-allowed' : 'cursor-pointer'"
+          [disabled]="sentEmailForm.form.invalid || isDisableBtn">
+    Send
+  </button>
+</div>

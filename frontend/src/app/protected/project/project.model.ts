@@ -23,6 +23,7 @@ export class Project {
   platform: string;
   city: string;
   country: string;
+  students: Array<Student>;
   status: string;
   created_at: string;
   updated_at: string;
@@ -45,8 +46,31 @@ export class ProjectComment {
   text: string;
   staffs: Staff;
   project_status: string;
+  sent_email: boolean;
   commented_by: number;
   status: string;
+  created_at: string;
+  updated_at: string;
+  last_updated_by: string;
+}
+
+export class EmailLogModel extends PageableModel {
+  objects: Array<EmailLog>;
+}
+
+export class EmailLog {
+  id: number;
+  body: string;
+  email_to: string;
+  subject: string;
+  project: number;
+  proposal_author: number;
+  proposal_authors: ProposalAuthor;
+  sent_by: number;
+  staffs: Staff;
+  student: number;
+  students: Student;
+  status: boolean;
   created_at: string;
   updated_at: string;
   last_updated_by: string;
@@ -60,4 +84,13 @@ export const projectDisplayedColumns = [
   'status',
   'updated_at',
   'action'
+];
+
+export const emailLogDisplayedColumns = [
+  'icon',
+  'email_to',
+  'sent_by',
+  'subject',
+  'body',
+  'created_at'
 ];

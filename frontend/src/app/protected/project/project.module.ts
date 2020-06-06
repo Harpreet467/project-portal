@@ -30,6 +30,8 @@ import {MatSelectModule} from "@angular/material/select";
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatNativeDateModule} from "@angular/material/core";
 import {MatMenuModule} from "@angular/material/menu";
+import { SentEmailModalComponent } from './project-details/sent-email-modal/sent-email-modal.component';
+import {MatTabsModule} from "@angular/material/tabs";
 
 
 
@@ -39,34 +41,36 @@ import {MatMenuModule} from "@angular/material/menu";
     ProjectDetailsComponent,
     DateAgoPipe,
     ActionModalComponent,
-    SaveProjectModalComponent
+    SaveProjectModalComponent,
+    SentEmailModalComponent
   ],
-  imports: [
-    RouterModule.forChild(projectRoute),
-    CommonModule,
-    MatCardModule,
-    FlexModule,
-    MatButtonModule,
-    MatDividerModule,
-    MatFormFieldModule,
-    MatInputModule,
-    SpinnerModule,
-    MatTableModule,
-    MatSortModule,
-    MatSlideToggleModule,
-    MatTooltipModule,
-    MatIconModule,
-    MatPaginatorModule,
-    MatChipsModule,
-    MatListModule,
-    MatDialogModule,
-    AlertModule,
-    FormsModule,
-    MatSelectModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    MatMenuModule
-  ],
+    imports: [
+        RouterModule.forChild(projectRoute),
+        CommonModule,
+        MatCardModule,
+        FlexModule,
+        MatButtonModule,
+        MatDividerModule,
+        MatFormFieldModule,
+        MatInputModule,
+        SpinnerModule,
+        MatTableModule,
+        MatSortModule,
+        MatSlideToggleModule,
+        MatTooltipModule,
+        MatIconModule,
+        MatPaginatorModule,
+        MatChipsModule,
+        MatListModule,
+        MatDialogModule,
+        AlertModule,
+        FormsModule,
+        MatSelectModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        MatMenuModule,
+        MatTabsModule
+    ],
   providers: [
     ProjectService
   ]
