@@ -7,3 +7,4 @@ def load_controller():
     import src.main.controller.project_category
     import src.main.controller.comment
     import src.main.controller.student
+    import src.main.controller.email_log

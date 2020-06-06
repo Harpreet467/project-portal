@@ -12,6 +12,7 @@ proposal_author_api = api_manager.create_api_blueprint(
     collection_name='proposal-author',
     methods=['GET', 'POST', 'PUT', 'PATCH'],
     validation_exceptions=[ValidationError],
+    allow_functions=True,
     preprocessors=dict(
         GET_SINGLE=[auth_func, role_first_level],
         GET_MANY=[auth_func, role_first_level],

@@ -7,6 +7,7 @@ class Comment(Entity, db.Model):
     student = db.Column(db.Integer, db.ForeignKey('student.id'), nullable=True)
     text = db.Column(db.Text)
     project_status = db.Column(db.String(50), nullable=True)
+    sent_email = db.Column(db.BOOLEAN, default=False)
     status = db.Column(db.Boolean, default=True)
     commented_by = db.Column(db.Integer, db.ForeignKey('staff.id'), nullable=False)
 
@@ -16,4 +17,5 @@ class Comment(Entity, db.Model):
         self.project = kwargs.get('project', None)
         self.student = kwargs.get('student', None)
         self.project_status = kwargs.get('project_status', None)
+        self.sent_email = kwargs.get('sent_email', False)
         self.commented_by = kwargs['commented_by']

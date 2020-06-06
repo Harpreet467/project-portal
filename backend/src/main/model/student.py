@@ -13,6 +13,7 @@ class Student(Entity, db.Model):
     status = db.Column(db.String(15), default='INTERESTED')
     project = db.Column(db.Integer, db.ForeignKey('project.id'), nullable=False)
     comments = db.relationship('Comment', backref='students', lazy=True)
+    email_logs = db.relationship('EmailLog', backref='students', lazy=True)
 
     def __init__(self, last_updated_by='system', **kwargs):
         super().__init__(last_updated_by)

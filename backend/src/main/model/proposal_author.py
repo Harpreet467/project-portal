@@ -9,6 +9,7 @@ class ProposalAuthor(Entity, db.Model):
     organisation_name = db.Column(db.String(255), nullable=True)
     status = db.Column(db.Boolean, default=True)
     projects = db.relationship('Project', backref='proposal_authors', lazy=True)
+    email_logs = db.relationship('EmailLog', backref='proposal_authors', lazy=True)
 
     def __init__(self, last_updated_by='system', **kwargs):
         super().__init__(last_updated_by)

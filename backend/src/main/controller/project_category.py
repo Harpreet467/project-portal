@@ -13,6 +13,7 @@ project_category_api = api_manager.create_api_blueprint(
     methods=['GET', 'POST', 'PUT', 'PATCH'],
     validation_exceptions=[ValidationError],
     exclude_columns=exclude_columns(),
+    allow_functions=True,
     preprocessors=dict(
         POST=[auth_func],
         PUT_SINGLE=[auth_func],

@@ -15,6 +15,7 @@ def load_model():
     import src.main.model.project_to_category
     import src.main.model.comment
     import src.main.model.student
+    import src.main.model.email_log
 
 
 def db_user_data_store():
