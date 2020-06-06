@@ -1,9 +1,81 @@
-<mat-card class="mat-elevation-z1 m-auto w-90 mt-2 p-2">
-  <p>Dashboard</p>
-  <button mat-raised-button color="primary" [routerLink]="project_proposal_url" class="text-center mr-1">
-    Submit Project Proposal
-  </button>
-  <button mat-raised-button color="primary" [routerLink]="student_proposal_url" class="text-center ml-1">
-    Submit Student Proposal
-  </button>
+<mat-card class="mat-elevation-z1 m-auto w-90 mt-2 mb-1 p-2">
+  <mat-card-header fxLayout="row" fxLayoutAlign="space-between center" class="mb-1">
+    <mat-card-title class="m-auto">Dashboard</mat-card-title>
+    <div>
+      <button color="primary" mat-stroked-button [routerLink]="project_proposal_url" class="text-center mr-1">
+        Submit a Project Proposal
+      </button>
+      <button color="primary" mat-stroked-button [routerLink]="student_proposal_url" class="text-center">
+        Submit a Student Proposal
+      </button>
+    </div>
+  </mat-card-header>
+
+  <mat-divider></mat-divider>
+
+  <div fxLayout="column" fxLayoutAlign="space-around start">
+    <div fxLayout="row" fxLayoutAlign="space-between start" class="w-100 mt-1">
+      <mat-card class="w-auto">
+        <mat-card-header fxLayout="row" fxLayoutAlign="space-between center" class="mb-1">
+          <mat-card-title fxLayout="row" fxLayoutAlign="start center" class="m-auto">
+            <mat-icon class="mr-1">assignment</mat-icon>
+            Projects
+          </mat-card-title>
+        </mat-card-header>
+        <div class="count-text">
+          <ng9-odometer [number]="projectCount" [config]="{ }"></ng9-odometer>
+        </div>
+      </mat-card>
+      <mat-card class="w-auto">
+        <mat-card-header fxLayout="row" fxLayoutAlign="space-between center" class="mb-1">
+          <mat-card-title fxLayout="row" fxLayoutAlign="start center" class="m-auto">
+            <mat-icon class="mr-1">assignment_ind</mat-icon>
+            Authors
+          </mat-card-title>
+        </mat-card-header>
+        <div class="count-text">
+          <ng9-odometer [number]="projectAuthorCount" [config]="{ }"></ng9-odometer>
+        </div>
+      </mat-card>
+      <mat-card class="w-auto">
+        <mat-card-header fxLayout="row" fxLayoutAlign="space-between center" class="mb-1">
+          <mat-card-title fxLayout="row" fxLayoutAlign="start center" class="m-auto">
+            <mat-icon class="mr-1">school</mat-icon>
+            Students
+          </mat-card-title>
+        </mat-card-header>
+        <div class="count-text">
+          <ng9-odometer [number]="studentCount" [config]="{ }"></ng9-odometer>
+        </div>
+      </mat-card>
+      <mat-card class="w-auto">
+        <mat-card-header fxLayout="row" fxLayoutAlign="space-between center" class="mb-1">
+          <mat-card-title fxLayout="row" fxLayoutAlign="start center" class="m-auto">
+            <mat-icon class="mr-1">people</mat-icon>
+            Staffs
+          </mat-card-title>
+        </mat-card-header>
+        <div class="count-text">
+          <ng9-odometer [number]="staffCount" [config]="{ }"></ng9-odometer>
+        </div>
+      </mat-card>
+      <mat-card class="w-auto">
+        <mat-card-header fxLayout="row" fxLayoutAlign="space-between center" class="mb-1">
+          <mat-card-title fxLayout="row" fxLayoutAlign="start center" class="m-auto">
+            <mat-icon class="mr-1">category</mat-icon>
+            Category
+          </mat-card-title>
+        </mat-card-header>
+        <div class="count-text">
+          <ng9-odometer [number]="categoryCount" [config]="{ }"></ng9-odometer>
+        </div>
+      </mat-card>
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="center start" class="w-100 mt-2">
+      <div class="w-50" [chart]="pieChart"></div>
+      <div class="w-50" [chart]="lineChart"></div>
+    </div>
+  </div>
+
 </mat-card>

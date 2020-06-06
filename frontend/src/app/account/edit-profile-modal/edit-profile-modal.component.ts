@@ -16,7 +16,6 @@ import {SpinnerService} from "../../shared/service/spinner.service";
 export class EditProfileModalComponent implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
   staff: Staff = new Staff();
-  isEdit = false;
   isDisableBtn = false;
 
   constructor(
