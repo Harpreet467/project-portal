@@ -91,7 +91,7 @@ export class StudentProposalComponent implements OnInit, OnDestroy {
     this.subscription.add(
       this.studentService.createStudent(this.student).subscribe(() => {
         this.snackBar.open('Successfully submitted');
-        this.router.navigate([AppConfig.HOME]).then();
+        this.router.navigate([AppConfig.THANK_YOU]).then();
         this.spinnerService.hide();
       }, (error) => {
         this.snackBar.open(error.error.message);

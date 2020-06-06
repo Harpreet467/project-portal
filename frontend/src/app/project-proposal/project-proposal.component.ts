@@ -33,6 +33,7 @@ export class ProjectProposalComponent implements OnInit, OnDestroy {
   progress = 0;
   proposalAuthorStep = false;
   projectStep = false;
+  termAndCondition = false;
 
   uploadFile = new FormGroup({
     file: new FormControl(null,
@@ -128,7 +129,7 @@ export class ProjectProposalComponent implements OnInit, OnDestroy {
 
   successFn() {
     this.snackBar.open('Successfully submitted');
-    this.router.navigate([AppConfig.HOME]).then();
+    this.router.navigate([AppConfig.THANK_YOU]).then();
   }
 
   ngOnDestroy(): void {

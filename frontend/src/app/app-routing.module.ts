@@ -4,6 +4,7 @@ import {HomeComponent} from './home/home.component';
 import {AuthGuardService} from './shared/service/auth-guard.service';
 import {RoleGuardService} from './shared/service/role-guard.service';
 import {Roles} from './shared/constant';
+import {ThankYouComponent} from "./thank-you/thank-you.component";
 
 
 const routes: Routes = [
@@ -22,6 +23,10 @@ const routes: Routes = [
   {
     path: 'student-proposal',
     loadChildren: () => import('./student-proposal/student-proposal.module').then(m => m.StudentProposalModule)
+  },
+  {
+    path: 'thank-you',
+    component: ThankYouComponent
   },
   {
     path: '',

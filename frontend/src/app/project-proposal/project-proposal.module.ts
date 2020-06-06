@@ -18,31 +18,33 @@ import {AlertModule} from '../layout/alert/alert.module';
 import {FileUploadModule} from '../layout/file-upload/file-upload.module';
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatNativeDateModule} from "@angular/material/core";
+import {MatCheckboxModule} from "@angular/material/checkbox";
 
 
 @NgModule({
   declarations: [
     ProjectProposalComponent
   ],
-  imports: [
-    RouterModule.forChild(projectProposalRoutes),
-    CommonModule,
-    MatCardModule,
-    MatStepperModule,
-    MatFormFieldModule,
-    MatDividerModule,
-    FlexModule,
-    ReactiveFormsModule,
-    MatInputModule,
-    MatButtonModule,
-    FormsModule,
-    MatSelectModule,
-    SpinnerModule,
-    AlertModule,
-    FileUploadModule,
-    MatDatepickerModule,
-    MatNativeDateModule
-  ],
+    imports: [
+        RouterModule.forChild(projectProposalRoutes),
+        CommonModule,
+        MatCardModule,
+        MatStepperModule,
+        MatFormFieldModule,
+        MatDividerModule,
+        FlexModule,
+        ReactiveFormsModule,
+        MatInputModule,
+        MatButtonModule,
+        FormsModule,
+        MatSelectModule,
+        SpinnerModule,
+        AlertModule,
+        FileUploadModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        MatCheckboxModule
+    ],
   providers: [
     ProposalAuthorService
   ]

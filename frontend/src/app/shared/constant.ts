@@ -13,7 +13,9 @@ export class Constant {
   public static readonly EQ = 'eq';
   public static readonly HAS = 'has';
   public static readonly ANY = 'any';
+  public static readonly COUNT = 'count';
   public static readonly EMAIL = 'email';
+  public static readonly NAME = 'name';
   public static readonly STATUS = 'status';
   public static readonly PROJECT = 'project';
   public static readonly PROJECTS = 'projects';

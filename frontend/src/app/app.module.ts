@@ -25,6 +25,8 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
 import {NgxWebstorageModule} from 'ngx-webstorage';
 import { SidenavComponent } from './layout/sidenav/sidenav.component';
+import {MatTabsModule} from "@angular/material/tabs";
+import { ThankYouComponent } from './thank-you/thank-you.component';
 
 
 @NgModule({
@@ -32,31 +34,33 @@ import { SidenavComponent } from './layout/sidenav/sidenav.component';
     AppComponent,
     HeaderComponent,
     HomeComponent,
-    SidenavComponent
+    SidenavComponent,
+    ThankYouComponent
   ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    HttpClientModule,
-    NgxWebstorageModule.forRoot({prefix: '', separator: ''}),
-    FormsModule,
-    FlexLayoutModule,
-    AppRoutingModule,
-    MatInputModule,
-    MatFormFieldModule,
-    MatCardModule,
-    MatButtonModule,
-    AccountModule,
-    MatToolbarModule,
-    MatProgressBarModule,
-    MatSnackBarModule,
-    MatIconModule,
-    MatMenuModule,
-    MatTooltipModule,
-    MatSidenavModule,
-    MatListModule,
-    MatProgressSpinnerModule
-  ],
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        HttpClientModule,
+        NgxWebstorageModule.forRoot({prefix: '', separator: ''}),
+        FormsModule,
+        FlexLayoutModule,
+        AppRoutingModule,
+        MatInputModule,
+        MatFormFieldModule,
+        MatCardModule,
+        MatButtonModule,
+        AccountModule,
+        MatToolbarModule,
+        MatProgressBarModule,
+        MatSnackBarModule,
+        MatIconModule,
+        MatMenuModule,
+        MatTooltipModule,
+        MatSidenavModule,
+        MatListModule,
+        MatProgressSpinnerModule,
+        MatTabsModule
+    ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,

@@ -1,6 +1,7 @@
 <mat-card class="mat-elevation-z1 m-auto w-90 mt-2 p-2">
   <mat-card-header fxLayout="row" fxLayoutAlign="space-between center" class="mb-1">
-    <mat-card-title class="m-auto">Project Proposal</mat-card-title>
+    <mat-card-title>Project Proposal</mat-card-title>
+    <h4 class="mat-card-subtitle">Thanks for choosing to send us your project idea!</h4>
   </mat-card-header>
 
   <mat-divider></mat-divider>
@@ -8,13 +9,14 @@
   <mat-horizontal-stepper labelPosition="bottom" linear #stepper>
 
     <mat-step [completed]="proposalAuthorStep" [editable]="false">
-      <div fxLayout="row column" fxLayoutAlign="space-evenly center">
-        <form #proposalAuthorFrom="ngForm">
+      <div fxLayout="row" fxLayoutAlign="space-around start">
+        <form #proposalAuthorFrom="ngForm" class="mr-1">
           <ng-template matStepLabel>Fill out your details</ng-template>
           <mat-form-field appearance="outline">
             <mat-label>Name</mat-label>
             <label>
-              <input matInput placeholder="name" name="name" [(ngModel)]="proposalAuthorModel.name" #name="ngModel" required>
+              <input matInput placeholder="name" name="name" [(ngModel)]="proposalAuthorModel.name" #name="ngModel"
+                     required>
             </label>
             <mat-error *ngIf="name.touched && name.invalid">
               <small class="mat-text-warn" *ngIf="name?.errors.required">Name is required.</small>
@@ -23,7 +25,8 @@
           <mat-form-field appearance="outline">
             <mat-label>Email</mat-label>
             <label>
-              <input matInput placeholder="email" name="email" [(ngModel)]="proposalAuthorModel.email" #email="ngModel" required>
+              <input matInput placeholder="email" name="email" [(ngModel)]="proposalAuthorModel.email" #email="ngModel"
+                     required>
             </label>
             <mat-error *ngIf="email.touched && email.invalid">
               <small class="mat-text-warn" *ngIf="email?.errors.required">Email is required.</small>
@@ -32,13 +35,15 @@
           <mat-form-field appearance="outline">
             <mat-label>Phone Number</mat-label>
             <label>
-              <input matInput placeholder="phone_number" name="phone_number" [(ngModel)]="proposalAuthorModel.phone_number">
+              <input matInput placeholder="phone_number" name="phone_number"
+                     [(ngModel)]="proposalAuthorModel.phone_number">
             </label>
           </mat-form-field>
           <mat-form-field appearance="outline">
             <mat-label>Organisation Name</mat-label>
             <label>
-              <input matInput placeholder="organisation_name" name="organisation_name" [(ngModel)]="proposalAuthorModel.organisation_name">
+              <input matInput placeholder="organisation_name" name="organisation_name"
+                     [(ngModel)]="proposalAuthorModel.organisation_name">
             </label>
           </mat-form-field>
           <div>
@@ -47,16 +52,27 @@
                     [ngClass]="proposalAuthorFrom.form.invalid ? 'cursor-not-allowed' : 'cursor-pointer'"
                     [disabled]="proposalAuthorFrom.form.invalid">
               Next
-              <app-spinner *ngIf="spinnerService.visibility | async" class="d-inline-block ml-1" [diameter]="15"></app-spinner>
+              <app-spinner *ngIf="spinnerService.visibility | async" class="d-inline-block ml-1"
+                           [diameter]="15"></app-spinner>
             </button>
           </div>
         </form>
+
+        <div fxFlex="20" class="ml-1">
+          <h1 class="text-center mat-typography">Using your details</h1>
+          <h4 class="mat-typography">We will get in touch to let you know whether your project
+            has been approved or not.
+          </h4>
+          <h4 class="mat-typography">If it is assigned to a team, your contact details will be passed
+            on to the students, who will be responsible for managing the project.
+          </h4>
+        </div>
       </div>
     </mat-step>
 
     <mat-step [completed]="projectStep" [editable]="false">
-      <div fxLayout="row column" fxLayoutAlign="space-evenly center">
-        <form #projectFrom="ngForm">
+      <div fxLayout="row column" fxLayoutAlign="space-around start">
+        <form #projectFrom="ngForm" class="mr-1">
           <ng-template matStepLabel>Fill out your project proposal</ng-template>
           <mat-form-field appearance="outline">
             <mat-label>Title</mat-label>
@@ -70,7 +86,8 @@
           <mat-form-field appearance="outline">
             <mat-label>Description</mat-label>
             <label>
-              <textarea matInput placeholder="Description" name="description" [(ngModel)]="project.description" #description="ngModel" required></textarea>
+              <textarea matInput placeholder="Description" name="description" [(ngModel)]="project.description"
+                        #description="ngModel" required></textarea>
             </label>
             <mat-error *ngIf="description.touched && description.invalid">
               <small class="mat-text-warn" *ngIf="description?.errors.required">Description is required.</small>
@@ -90,29 +107,38 @@
               <small class="mat-text-warn" *ngIf="category?.errors.required">Category is required.</small>
             </mat-error>
           </mat-form-field>
-          <mat-form-field appearance="outline">
+          <mat-form-field appearance="outline" class="mb-1">
             <mat-label>Target Platform and language</mat-label>
             <label>
               <input matInput placeholder="Platform" name="platform" [(ngModel)]="project.platform" #platform="ngModel">
             </label>
+            <mat-hint>If you have a specific set of technology requirements, please include them here.</mat-hint>
           </mat-form-field>
-          <div fxLayout="row">
+          <div fxLayout="row" class="mb-2">
             <mat-form-field appearance="outline" class="mr-1">
               <mat-label>Required completion date</mat-label>
               <label for="deadline"></label>
-              <input id="deadline" matInput [matDatepicker]="fDate" (focus)="fDate.open()" (click)="fDate.open()" name="deadline" [(ngModel)]="project.deadline">
+              <input id="deadline" matInput [matDatepicker]="fDate" (focus)="fDate.open()" (click)="fDate.open()"
+                     name="deadline" [(ngModel)]="project.deadline">
               <mat-datepicker-toggle matSuffix [for]="fDate"></mat-datepicker-toggle>
               <mat-datepicker #fDate></mat-datepicker>
+              <mat-hint>If there are concrete limits on when this project needs to be completed,
+                please describe them briefly.
+              </mat-hint>
             </mat-form-field>
             <mat-form-field appearance="outline">
               <mat-label>Availability</mat-label>
               <label>
-                <input matInput placeholder="Weekdays, business hours" name="availability" [(ngModel)]="project.availability">
+                <input matInput placeholder="Weekdays, business hours" name="availability"
+                       [(ngModel)]="project.availability">
               </label>
+              <mat-hint>Please be aware that most student projects will be completed by the end of the second
+                semester each year, typically around November.
+              </mat-hint>
             </mat-form-field>
           </div>
 
-          <div fxLayout="row">
+          <div fxLayout="row" class="mb-2">
             <mat-form-field appearance="outline" class="mr-1">
               <mat-label>City</mat-label>
               <label>
@@ -121,15 +147,24 @@
               <mat-error *ngIf="city.touched && city.invalid">
                 <small class="mat-text-warn" *ngIf="city?.errors.required">City is required.</small>
               </mat-error>
+              <mat-hint>
+                Federation University Australia student projects are run all around Australia, online,
+                and at partner institutions.
+              </mat-hint>
             </mat-form-field>
             <mat-form-field appearance="outline">
               <mat-label>Country</mat-label>
               <label>
-                <input matInput placeholder="Country" name="country" [(ngModel)]="project.country" #country="ngModel" required>
+                <input matInput placeholder="Country" name="country" [(ngModel)]="project.country" #country="ngModel"
+                       required>
               </label>
               <mat-error *ngIf="country.touched && country.invalid">
                 <small class="mat-text-warn" *ngIf="country?.errors.required">Country is required.</small>
               </mat-error>
+              <mat-hint>
+                Where possible we will assign a local project team, so you
+                get face-to-face contact, however remote teams are often suitable for many projects.
+              </mat-hint>
             </mat-form-field>
           </div>
           <div>
@@ -138,24 +173,52 @@
                     [ngClass]="projectFrom.form.invalid ? 'cursor-not-allowed' : 'cursor-pointer'"
                     [disabled]="projectFrom.form.invalid">
               Next
-              <app-spinner *ngIf="spinnerService.visibility | async" class="d-inline-block ml-1" [diameter]="15"></app-spinner>
+              <app-spinner *ngIf="spinnerService.visibility | async" class="d-inline-block ml-1"
+                           [diameter]="15"></app-spinner>
             </button>
           </div>
         </form>
+
+        <div fxFlex="20" class="ml-1">
+          <h1 class="text-center mat-typography">Guidelines</h1>
+          <h4 class="mat-typography">
+            Project teams are 4 or 5 students, and will work for almost two full semesters.
+          </h4>
+          <h4 class="mat-typography">Federation University Australia can only supply basic computer
+            equipment, and a limited set of software to teams. You may need to supply any software
+            or hardware your project requires, including any smartphone or tablet hardware.
+          </h4>
+          <h4 class="mat-typography">As student projects are occasionally unsuccessful, prefer
+            proposals that are not critical to the ongoing success of your business.
+          </h4>
+          <h4 class="mat-typography">For IT projects, web applications or products are great,
+            however basic brochure-style websites are unlikely to be approved.
+          </h4>
+        </div>
       </div>
     </mat-step>
 
     <mat-step [optional]="true">
       <div fxLayout="row column" fxLayoutAlign="space-evenly center">
-        <form [formGroup]="uploadFile">
-          <ng-template matStepLabel>Upload files</ng-template>
-          <app-alert></app-alert>
-          <app-file-upload formControlName="file" [progress]="progress"></app-file-upload>
-          <ng-template class="d-none" *ngIf="hasError('file', 'requiredFileType')">🤡</ng-template>
-          <div>
-            <button mat-stroked-button color="primary" class="f-right mt-1" (click)="fileUpload()">Done</button>
+        <div>
+          <form [formGroup]="uploadFile">
+            <ng-template matStepLabel>Upload files</ng-template>
+            <app-alert></app-alert>
+            <app-file-upload formControlName="file" [progress]="progress"></app-file-upload>
+            <ng-template class="d-none" *ngIf="hasError('file', 'requiredFileType')">🤡</ng-template>
+          </form>
+          <div class="mt-1 mb-1">
+            <mat-checkbox color="primary" name="t&c" [(ngModel)]="termAndCondition">
+              I agree all the terms and conditions.
+            </mat-checkbox>
           </div>
-        </form>
+          <div>
+            <button mat-stroked-button color="primary" class="f-right mt-1" (click)="fileUpload()"
+                    [disabled]="!termAndCondition">
+              Done
+            </button>
+          </div>
+        </div>
       </div>
     </mat-step>
 

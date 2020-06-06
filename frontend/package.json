@@ -24,6 +24,7 @@
     "@angular/router": "~9.1.0",
     "angular-highcharts": "^9.0.9",
     "highcharts": "^8.0.4",
+    "ng9-odometer": "^2.1.0",
     "ngx-webstorage": "^5.0.0",
     "rxjs": "~6.5.5",
     "tslib": "^1.10.0",

@@ -1,9 +1,101 @@
-<mat-card class="mat-elevation-z1 m-auto w-90 mt-2 p-2">
-  <p>Homepage for the client and the student</p>
-  <button mat-raised-button color="primary" [routerLink]="project_proposal_url" class="text-center mr-1">
-    Submit Project Proposal
-  </button>
-  <button mat-raised-button color="primary" [routerLink]="student_proposal_url" class="text-center ml-1">
-    Submit Student Proposal
-  </button>
+<mat-card class="mat-elevation-z1 m-auto w-90 mt-2 mb-1 p-2">
+  <mat-tab-group mat-stretch-tabs>
+    <mat-tab label="Project Author Corner">
+      <div class="p-2">
+        <h1 class="text-center mat-typography"><b>We're looking for partners</b></h1>
+        <h3 class="mat-typography text-center">Students in the final year of a number of Federation University Australia
+          courses take part in industry-based student projects, creating real products for real customers.</h3>
+        <p class="mat-typography text-center">The students engage in the full project management and
+          development life cycle with guidance from a supervisor within the School.</p>
+        <p class="mat-typography text-center">For students, it's an opportunity to showcase their skills, gain
+          experience working with clients, and deliver genuine value to their community.</p>
+
+        <div fxLayout="row" fxLayoutAlign="space-around center" class="mb-1">
+          <img src="assets/image/undraw_ideas_s70l.png" alt="idea-img" class="img-undraw">
+          <button mat-raised-button color="primary" [routerLink]="project_proposal_url"
+                  class="text-center mr-1 submit-btn">
+            Submit a Proposal
+          </button>
+        </div>
+
+        <div fxLayout="row" fxLayoutAlign="space-around start">
+          <div class="mr-1">
+            <h2 class="text-center mat-typography">What's involved?</h2>
+            <h4 class="mat-typography">As a client for a student project, you will need to:</h4>
+
+            <ul>
+              <li>Develop a project brief to allow Federation University Australia staff to assess your project;</li>
+              <li>Have a clear idea of the project goals, but be willing to work with your team to set the
+                scope and size of the project
+              </li>
+              <li>Make yourself available to your student team for feedback and planning, at least once every 1-2
+                weeks
+              </li>
+              <li>Local face-to-face contact is always valuable, however online meetings are also an option.
+                If you have specific requirements either way, please let us know
+              </li>
+            </ul>
+
+            <h2 class="text-center mat-typography mt-2">What's it cost?</h2>
+            <h4 class="mat-typography"><b>For many projects, it costs nothing!</b></h4>
+
+            <h4 class="mat-typography">However, if your project requires specialist equipment, software
+              licenses or access to commercial tools that are not available to Federation University Australia
+              students, then you may need to provide these resources for the duration of the project.
+              For IT projects, it is often possible for students to use free, open source software to
+              develop your system.
+            </h4>
+
+            <h4 class="mat-typography">Federation University Australia cannot provide maintenance or
+              support for projects after project completion. We can also provide no guarantees that the
+              final project will meet your requirements. If the final delivered project needs additional
+              work then you will need to engage other developers (or members of your project team) at
+              your own cost.
+            </h4>
+          </div>
+
+          <div class="ml-1 side-card">
+            <h2 class="text-center mat-typography">What sort of projects?</h2>
+            <h4 class="mat-typography">Our students have successfully developed projects for schools,
+              small and large businesses, and charities
+            </h4>
+
+            <h4 class="mat-typography">Some examples include:</h4>
+
+            <ul>
+              <li>Administrative software for a veterinary practice</li>
+              <li>Educational games for schools</li>
+              <li>Networking systems</li>
+              <li>Management software for an accountancy practice</li>
+              <li>Fitness class scheduling systems</li>
+              <li>HR and Customer Management systems</li>
+              <li>Due to the nature of student projects, we prefer proposals that are not critical
+                to the success of your business.</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </mat-tab>
+
+    <mat-tab label="Student Corner">
+      <div class="p-2">
+        <h1 class="text-center mat-typography"><b>Explore the world of real projects!</b></h1>
+        <h3 class="mat-typography text-center">Students in the final year of a number of Federation University Australia
+          courses take part in industry-based student projects, creating real products for real customers.</h3>
+        <p class="mat-typography text-center">The students engage in the full project management and
+          development life cycle with guidance from a supervisor within the School.</p>
+        <p class="mat-typography text-center">For students, it's an opportunity to showcase their skills, gain
+          experience working with clients, and deliver genuine value to their community.</p>
+
+        <div fxLayout="row" fxLayoutAlign="space-around center" class="mb-1 mt-1">
+          <img src="assets/image/undraw_mobile_wireframe_euf4.png" alt="idea-img" class="img-undraw">
+          <button mat-raised-button color="primary" [routerLink]="student_proposal_url"
+                  class="text-center ml-1 submit-btn">
+            Submit Student Proposal
+          </button>
+        </div>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
 </mat-card>
